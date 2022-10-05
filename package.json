@@ -1,0 +1,29 @@
+{
+  "name": "messenger",
+  "version": "1.0.0",
+  "description": "Yandex Praktikum Middle Frontend Developer Course Project",
+  "scripts": {
+    "test": "mocha",
+    "dev": "parcel index.hbs",
+    "build": "parcel build index.hbs"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/el-mariachi/messenger.git"
+  },
+  "keywords": [
+    "messenger",
+    "yandex"
+  ],
+  "author": "Dmitri Sokolov",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/el-mariachi/messenger/issues"
+  },
+  "homepage": "https://github.com/el-mariachi/messenger#readme",
+  "devDependencies": {
+    "@anikin/parcel-transformer-handlebars": "^1.0.9",
+    "handlebars": "^4.7.7",
+    "parcel": "^2.7.0"
+  }
+}
