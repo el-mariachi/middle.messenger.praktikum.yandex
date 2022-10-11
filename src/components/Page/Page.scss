@@ -33,6 +33,13 @@ body {
     justify-content: center;
 }
 
+.Page_type_index {
+    font-size: 1.5em;
+    flex-direction: column;
+    padding-left: 48px;
+    padding-top: 32px;
+}
+
 @media screen and (min-width: 640px) {
     .Page_type_chatlist .ChatArea {
         display: flex;

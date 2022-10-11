@@ -4,8 +4,9 @@
   "description": "Yandex Praktikum Middle Frontend Developer Course Project",
   "scripts": {
     "test": "mocha",
-    "dev": "parcel index.hbs",
-    "build": "parcel build index.hbs"
+    "dev": "parcel static/index.hbs",
+    "build": "rm -rf dist && parcel build static/index.hbs",
+    "start": "node src/server/index.ts"
   },
   "repository": {
     "type": "git",
@@ -26,5 +27,8 @@
     "@parcel/transformer-sass": "^2.7.0",
     "handlebars": "^4.7.7",
     "parcel": "^2.7.0"
+  },
+  "dependencies": {
+    "express": "^4.18.2"
   }
 }
