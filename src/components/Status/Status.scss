@@ -1,0 +1,31 @@
+@use '/static/styles/vars.scss';
+
+/* Status */
+
+.Status {
+    font-size: 10px;
+    line-height: 1.6;
+    color: vars.$greyText;
+}
+.Status::before {
+    display: inline-block;
+    width: 12px;
+    height: 12px;
+    background: url(images/icon_sprites.svg) no-repeat;
+    background-position: -25px;
+    background-size: 75px auto;
+    vertical-align: middle;
+    margin-right: 2px;
+}
+.Status_state_sent::before {
+    content: "";
+    background-position: 0 -352px;
+}
+.Status_state_delivered::before {
+    content: "";
+    background-position: 0 -402px;
+}
+.Status_state_read::before {
+    content: "";
+    background-position: -50px -402px;
+}

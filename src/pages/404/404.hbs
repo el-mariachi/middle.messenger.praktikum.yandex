@@ -4,15 +4,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Messenger. 404</title>
-    {{!-- <link rel="stylesheet" href="styles.css"> --}}
+    {{!-- <link rel="stylesheet" href="404.scss"> --}}
+    <script src="./404.ts" type="module"></script>
 </head>
 <body>
     <main class="Page Page_type_not-found">
-        <h1 class="OutlineHeader">myMessenger</h1>
-        <div class="PageNotFound">
-            <p class="PageNotFound-ErrNo">404</p>
-            <h2 class="PageNotFound-ErrDesc">Страница не найдена</h2>
-            {{!-- <a class="Link PageLink PageLink_to_login" href="chat_list.html">Назад к чатам</a> --}}
+        <h5 class="OutlineHeader">myMessenger</h5>
+        <div class="ErrorPage">
+            <p class="ErrorPage-ErrNo">404</p>
+            <h1 class="ErrorPage-ErrDesc">Страница не найдена</h1>
+            <a class="Link PageLink PageLink_to_login" href="/src/pages/chat_list/chat_list.hbs">Назад к чатам</a>
         </div>
     </main>
 </body>

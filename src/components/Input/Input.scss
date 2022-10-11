@@ -1,0 +1,64 @@
+@use '/static/styles/vars.scss';
+
+/* Input */
+
+.Input {
+    color: vars.$greyInput;
+    border: none;
+    line-height: 2rem;
+}
+
+.Input:focus {
+    font-size: 1.4em;
+    outline: none;
+}
+
+.Input:focus::placeholder {
+    color: transparent;
+}
+
+.Input_theme_grey {
+    background-color: vars.$grFill1;
+}
+
+.Input-Group {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    border-bottom: 1px solid vars.$greyLine;
+    margin-top: 8px;
+}
+
+.Input-Label {
+    font-size: 1.2em;
+    font-weight: 100;
+    color: vars.$black;
+}
+
+.Input-Error {
+    font-size: 1.2em;
+    font-weight: 300;
+    color: vars.$errMsg;
+    visibility: hidden;
+}
+
+.Input_errorvisible {
+    visibility: visible;
+}
+
+@media screen and (min-width: 376px) {
+    /* Input */
+
+    .Input-Label {
+        order: 1;
+        font-size: 1.6em;
+        flex: 2;
+    }
+    
+    .Input-Error {
+        width: 100%;
+        justify-self: flex-end;
+        text-align: right;
+        order: 0;
+    }
+}

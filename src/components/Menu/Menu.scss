@@ -1,0 +1,125 @@
+/* Menu */
+
+.Menu {
+    box-sizing: border-box;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    position: relative;
+  }
+  
+  .Menu-Dot {
+    display: flex;
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    background-color: #828282;
+  }
+  
+  .Menu-Dot::before,
+  .Menu-Dot::after {
+    content: "";
+    display: flex;
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    background-color: #828282;
+    position: absolute;
+  }
+  
+  .Menu-Dot::before {
+    transform: translateY(-7px);
+  }
+  
+  .Menu-Dot::after {
+    transform: translateY(7px);
+  }
+  
+  .Menu_active, .Menu:hover {
+    background-color: #efefef;
+  }
+  
+  .Menu_active .Menu-Dot,
+  .Menu_active .Menu-Dot::before,
+  .Menu_active .Menu-Dot::after {
+    background-color: #2f80ed;
+  }
+  
+  .Menu-Body {
+    position: absolute;
+    z-index: 1;
+    list-style: none;
+    padding: 10px 15px;
+    margin: 0;
+    background-color: #fff;
+    border-radius: 12px;
+    box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.15);
+  }
+  
+  .Menu-Item {
+    display: block;
+    width: max-content;
+  }
+  
+  .Menu-Link {
+    font-size: 1.4em;
+    line-height: 3;
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+  }
+  
+  .Menu-Link::before {
+    content: "";
+    display: inline-block;
+    vertical-align: middle;
+    width: 24px;
+    height: 24px;
+    margin-right: 1em;
+    background: url("/static/images/icon_sprites.svg");
+    background-size: 150px auto;
+  }
+  
+  .Menu_bodytype_chat {
+    top: 50px;
+    right: 9999em;
+  }
+  
+  .Menu_active .Menu_bodytype_chat {
+    right: 0;
+  }
+  
+  .Menu_bodytype_attach {
+    bottom: 50px;
+    left: -9999em;
+  }
+  
+  .Menu_active .Menu_bodytype_attach {
+    left: -10px;
+  }
+  
+  .Menu_linktype_edit::before {
+    background-position-x: -100px;
+    background-position-y: -300px;
+  }
+  
+  .Menu_linktype_delete::before {
+    background-position-x: -100px;
+    background-position-y: -100px;
+  }
+  
+  .Menu_linktype_photo::before {
+    background-position-x: -100px;
+    background-position-y: -400px;
+  }
+  
+  .Menu_linktype_file::before {
+    background-position-x: -100px;
+    background-position-y: -200px;
+  }
+  

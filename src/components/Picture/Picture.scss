@@ -1,0 +1,21 @@
+@use '/static/styles/vars.scss';
+
+/* Picture */
+
+.Picture {
+    display: block;
+    width: 47px;
+    height: 47px;
+    border-radius: 50%;
+    background-color: vars.$grFill1;
+}
+
+.Picture_for_header {
+    width: 34px;
+    height: 34px;
+}
+.Picture_for_profile {
+    width: 130px;
+    height: 130px;
+    margin: 0 auto;
+}

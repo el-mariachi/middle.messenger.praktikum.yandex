@@ -9,7 +9,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/el-mariachi/messenger.git"
+    "url": "git+https://github.com/el-mariachi/middle.messenger.praktikum.yandex.git"
   },
   "keywords": [
     "messenger",
@@ -18,11 +18,12 @@
   "author": "Dmitri Sokolov",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/el-mariachi/messenger/issues"
+    "url": "https://github.com/el-mariachi/middle.messenger.praktikum.yandex/issues"
   },
-  "homepage": "https://github.com/el-mariachi/messenger#readme",
+  "homepage": "https://github.com/el-mariachi/middle.messenger.praktikum.yandex#readme",
   "devDependencies": {
     "@anikin/parcel-transformer-handlebars": "^1.0.9",
+    "@parcel/transformer-sass": "^2.7.0",
     "handlebars": "^4.7.7",
     "parcel": "^2.7.0"
   }
