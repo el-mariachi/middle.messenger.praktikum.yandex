@@ -72,6 +72,9 @@
     color: #000;
     text-decoration: none;
     cursor: pointer;
+    &:hover {
+      text-decoration: underline;
+    }
   }
   
   .Menu-Link::before {
@@ -86,21 +89,35 @@
   }
   
   .Menu_bodytype_chat {
-    top: 50px;
+    top: 40px;
     right: 9999em;
+  }
+  
+  .Menu_bodytype_chatlist {
+    top: 40px;
+    left: 9999em;
   }
   
   .Menu_active .Menu_bodytype_chat {
     right: 0;
   }
   
+  .Menu_active .Menu_bodytype_chatlist {
+    left: 0;
+  }
+  
   .Menu_bodytype_attach {
-    bottom: 50px;
+    bottom: 36px;
     left: -9999em;
   }
   
   .Menu_active .Menu_bodytype_attach {
     left: -10px;
+  }
+  
+  .Menu_linktype_add::before {
+    background-position-x: -100px;
+    background-position-y: -900px;
   }
   
   .Menu_linktype_edit::before {

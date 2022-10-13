@@ -6,14 +6,18 @@
     <title>Messenger. Chat List</title>
 </head>
 <body>
-    <main class="Page Page_type_chatlist">
+    <div class="Page Page_type_chatlist">
         <h5 class="OutlineHeader">myMessenger</h5>
-        <section class="ChatList">
+        <aside class="ChatList">
             <h1 class="OutlineHeader">Выбор чата</h1>
             <div class="ChatListHeader">
-                <nav class="Menu ChatListHeader-Menu">
+                <nav class="Menu ChatListHeader-Menu Menu_active">
                     <h2 class="OutlineHeader">Главное меню</h2>
                     <div class="Menu-Dot"></div>
+                    <ul class="Menu-Body Menu_bodytype_chatlist">
+                        <li class="Menu-Item"><a class="Menu-Link Menu_linktype_edit" href="">Переименовать</a></li>
+                        <li class="Menu-Item"><a class="Menu-Link Menu_linktype_delete" href="/src/pages/modal_del/del_chat.hbs">Удалить чат</a></li>
+                    </ul>
                 </nav>
                 <button class="NewChat ChatListHeader-NewChat Icon Icon_type_newchat"></button>
                 <a class="PageLink Link PageLink_to_profile" href="/src/pages/edit_profile/edit_profile.hbs">Профиль</a>
@@ -122,12 +126,12 @@
                     </li>
                 </ul>
             </section>
-        </section>
-        <section class="ChatArea">
+        </aside>
+        <main class="ChatArea">
             <h1 class="OutlineHeader">Выбранный чат</h1>
             <p class="Hint">Выберите чат</p>
-        </section>
-    </main>
+        </main>
+    </div>
     <script src="./chat_list.ts" type="module"></script>
 </body>
 </html>

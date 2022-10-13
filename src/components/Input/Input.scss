@@ -42,8 +42,27 @@
     visibility: hidden;
 }
 
+.Input-Avatar {
+    text-align: center;
+    // text-decoration: underline;
+    cursor: pointer;
+    color: vars.$siteBlue;
+    font-weight: 400;
+    &:hover {
+        text-decoration: underline;
+    }
+}
+
+.Input-File {
+    display: none;
+}
+
 .Input_errorvisible {
     visibility: visible;
+}
+
+.Input_labelhidden {
+    visibility: hidden;
 }
 
 @media screen and (min-width: 376px) {

@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Messenger. Chat</title>
+    <title>Messenger. Chat List</title>
 </head>
 <body>
-    <div class="Page Page_type_chat">
+    <div class="Page Page_type_chatlist">
         <h5 class="OutlineHeader">myMessenger</h5>
         <aside class="ChatList">
             <h1 class="OutlineHeader">Выбор чата</h1>
@@ -14,6 +14,10 @@
                 <nav class="Menu ChatListHeader-Menu">
                     <h2 class="OutlineHeader">Главное меню</h2>
                     <div class="Menu-Dot"></div>
+                    <ul class="Menu-Body Menu_bodytype_chatlist">
+                        <li class="Menu-Item"><a class="Menu-Link Menu_linktype_edit" href="">Переименовать</a></li>
+                        <li class="Menu-Item"><a class="Menu-Link Menu_linktype_delete" href="">Удалить чат</a></li>
+                    </ul>
                 </nav>
                 <button class="NewChat ChatListHeader-NewChat Icon Icon_type_newchat"></button>
                 <a class="PageLink Link PageLink_to_profile" href="/src/pages/edit_profile/edit_profile.hbs">Профиль</a>
@@ -123,57 +127,25 @@
                 </ul>
             </section>
         </aside>
-        <section class="ChatArea">
-            <div class="ChatArea-Header">
-                <img class="Chat-Picture Picture Picture_for_header" src="/static/images/chat_avatar.png" alt="">
-                <div class="ChatArea-Info">
-                    <h2 class="Chat-Title">Александр Новиков</h2>
-                    <span class="LastSeen">Был 30 минут назад</span>
-                </div>
-                <nav class="Menu ChatArea-Menu Menu_active">
-                    <h3 class="OutlineHeader">Меню чата</h3> 
-                    <div class="Menu-Dot"></div>
-                    <ul class="Menu-Body Menu_bodytype_chat">
-                        <li class="Menu-Item"><a class="Menu-Link Menu_linktype_add" href="">Добавить пользователя</a></li>
-                        <li class="Menu-Item"><a class="Menu-Link Menu_linktype_delete" href="">Удалить пользователя</a></li>
-                    </ul>
-                </nav>
-            </div>            <main class="ChatArea-Content">
-                <div class="ChatArea-Date">28 августа</div>
-                <div class="Message ChatArea-Message Message_type_incoming">
-                    <div class="Message-Bubble">
-                        <div class="Message-Body Message_type_image">
-                            <img class="Message-Image" src="/static/images/chat_pic.png" alt="">
-                            <span class="Status Message-Status">15:44</span>
-                        </div>
-                        <p class="Message-Body Message_type_text">Gent. Incieni maioren derumen dicate pa solum apit eate poribus quossin ciaero omnima ne sit, cusandundae magnatis reicabo repudae qui aut fugit quae verunt ea suntiis citist vero et lamet at autecat emquia cus.<span class="Status Message-Status">15:44</span></p>
-                        
-                    </div>
-                </div>
-                <div class="Message ChatArea-Message Message_type_outgoing">
-                    <div class="Message-Bubble">
-                        <p class="Message-Body Message_type_text">Rlga asdofygls asyg<span class="Status Message-Status Status_state_read">15:47</span></p>
-                    </div>
-                </div>
-                <div class="Message ChatArea-Message Message_type_incoming">
-                    <div class="Message-Bubble">
-                        <p class="Message-Body Message_type_text">Gia acestibusam il invelest, tent maximin ctotat.<span class="Status Message-Status">15:48</span></p>
-                    </div>
-                </div>
-            </main>
-            <div class="Compose">
-                <div class="Compose-Menu Menu Icon Icon_type_attach Menu_active">
-                    <h3 class="OutlineHeader">Меню вложений</h3>
-                    <ul class="Menu-Body Menu_bodytype_attach">
-                        <li class="Menu-Item"><a class="Menu-Link Menu_linktype_photo" href="">Фото/видео</a></li>
-                        <li class="Menu-Item"><a class="Menu-Link Menu_linktype_file" href="">Файл</a></li>
-                    </ul>
-                </div>
-                <input class="NewMessage Input Input_theme_grey" type="text" name="message" placeholder="Сообщение">
-                <button class="Button Send Compose-Send Icon Icon_type_send"></button>
-            </div>
-        </section>
+        <main class="ChatArea">
+            <h1 class="OutlineHeader">Выбранный чат</h1>
+            <p class="Hint">Выберите чат</p>
+        </main>
     </div>
-    <script src="./chat.ts" type="module"></script>
+    <div class="Modal Modal_visible">
+        <div class="Modal-Dialog">
+            <p class="Modal-Head">Создать чат</p>
+            <form action="#" class="Form Modal-Form">
+                <div class="Input-Group">
+                    <label class="Input-Label Input_labelhidden" for="login">Логин</label>
+                    <span class="Input-Error">Неверный логин</span>
+                    <input class="Input Form-Input" type="text" name="login" id="login" placeholder="Логин">
+                </div>
+            </form>
+            <button class="Modal-Button Modal_type_cancel"><a class="tempLink" href="/src/pages/chat_list/chat_list.hbs">Отменить</a></button>
+            <button class="Modal-Button Modal_type_ok"><a class="tempLink" href="/src/pages/chat_list/chat_list.hbs">Создать</a></button>
+        </div>
+    </div>
+    <script src="./chat_list.ts" type="module"></script>
 </body>
 </html>
