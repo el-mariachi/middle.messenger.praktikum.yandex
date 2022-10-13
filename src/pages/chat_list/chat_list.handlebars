@@ -11,16 +11,16 @@
         <aside class="ChatList">
             <h1 class="OutlineHeader">Выбор чата</h1>
             <div class="ChatListHeader">
-                <nav class="Menu ChatListHeader-Menu">
+                <nav class="Menu ChatListHeader-Menu Menu_active">
                     <h2 class="OutlineHeader">Главное меню</h2>
                     <div class="Menu-Dot"></div>
                     <ul class="Menu-Body Menu_bodytype_chatlist">
                         <li class="Menu-Item"><a class="Menu-Link Menu_linktype_edit" href="">Переименовать</a></li>
-                        <li class="Menu-Item"><a class="Menu-Link Menu_linktype_delete" href="">Удалить чат</a></li>
+                        <li class="Menu-Item"><a class="Menu-Link Menu_linktype_delete" href="/src/pages/modal_del/del_chat.handlebars">Удалить чат</a></li>
                     </ul>
                 </nav>
                 <button class="NewChat ChatListHeader-NewChat Icon Icon_type_newchat"></button>
-                <a class="PageLink Link PageLink_to_profile" href="/src/pages/edit_profile/edit_profile.hbs">Профиль</a>
+                <a class="PageLink Link PageLink_to_profile" href="/src/pages/edit_profile/edit_profile.handlebars">Профиль</a>
             </div>
             <div class="Search">
                 <input class="Search-Input Input Input_theme_grey" type="search" name="search" id="search" placeholder="Поиск">
@@ -131,20 +131,6 @@
             <h1 class="OutlineHeader">Выбранный чат</h1>
             <p class="Hint">Выберите чат</p>
         </main>
-    </div>
-    <div class="Modal Modal_visible">
-        <div class="Modal-Dialog">
-            <p class="Modal-Head">Создать чат</p>
-            <form action="#" class="Form Modal-Form">
-                <div class="Input-Group">
-                    <label class="Input-Label Input_labelhidden" for="login">Логин</label>
-                    <span class="Input-Error">Неверный логин</span>
-                    <input class="Input Form-Input" type="text" name="login" id="login" placeholder="Логин">
-                </div>
-            </form>
-            <button class="Modal-Button Modal_type_cancel"><a class="tempLink" href="/src/pages/chat_list/chat_list.hbs">Отменить</a></button>
-            <button class="Modal-Button Modal_type_ok"><a class="tempLink" href="/src/pages/chat_list/chat_list.hbs">Создать</a></button>
-        </div>
     </div>
     <script src="./chat_list.ts" type="module"></script>
 </body>

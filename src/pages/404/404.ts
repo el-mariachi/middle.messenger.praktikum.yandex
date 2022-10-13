@@ -1,8 +1,8 @@
 import './404.scss';
-import { compile } from 'handlebars';
 import { renderPage } from '../../utils/renderPage';
 
-import ErrorPage from 'bundle-text:../../components/ErrorPage/ErrorPage.hbs';
+import ErrorPage from '../../components/ErrorPage/ErrorPage.hbs';
+
 console.log(ErrorPage);
 
 const pageData = {
@@ -10,6 +10,4 @@ const pageData = {
   errorMessage: 'Страница не найдена',
 };
 
-const template = compile(ErrorPage);
-
-renderPage('#app', template(pageData));
+renderPage('#app', ErrorPage(pageData));

@@ -6,5 +6,5 @@
 # “publish” is the directory to publish (relative to the root of your repo).
 
 [build]
-  command = "parcel build static/index.hbs"
+  command = "parcel build static/index.handlebars"
   publish = "dist"

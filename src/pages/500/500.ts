@@ -1,14 +1,13 @@
 import './500.scss';
-import { compile } from "handlebars";
-import { renderPage } from "../../utils/renderPage";
+import { renderPage } from '../../utils/renderPage';
 
-import {errorPage} from "../../components/ErrorPage/ErrorPage.tmpl";
+import ErrorPage from '../../components/ErrorPage/ErrorPage.hbs';
+
+console.log(ErrorPage);
 
 const pageData = {
-    errorCode: 500,
-    errorMessage: 'Ошибка сервера'
+  errorCode: 500,
+  errorMessage: 'Ошибка сервера',
 };
 
-const template = compile(errorPage);
-
-renderPage('#app', template(pageData));
+renderPage('#app', ErrorPage(pageData));
