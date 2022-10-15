@@ -21,3 +21,5 @@
 - `npm run build` сборка проекта
 - `npm start` запуск сервера для раздачи статики (после сборки)
 - `npm run start:local` запуск ts-исходника express-сервера
+
+[Pull request Sprint 1](https://github.com/el-mariachi/middle.messenger.praktikum.yandex/pull/1#issue-1408122811)
