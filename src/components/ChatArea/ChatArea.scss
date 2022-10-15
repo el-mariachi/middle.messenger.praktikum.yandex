@@ -1,0 +1,69 @@
+@use '/static/styles/vars.scss';
+@use '/src/components/Hint/Hint.scss';
+@use '/src/components/Picture/Picture.scss';
+@use '/src/components/LastSeen/LastSeen.scss';
+@use '/src/components/Menu/Menu.scss';
+@use '/src/components/Message/Message.scss';
+@use '/src/components/Compose/Compose.scss';
+@use '/src/components/Input/Input.scss';
+@use '/src/components/Icon/Icon.scss';
+@use '/src/components/Button/Button.scss';
+@use '/src/components/NewMessage/NewMessage.scss';
+
+/* ChatArea */
+
+.ChatArea {
+  background-color: vars.$white;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.ChatArea-Header {
+  display: flex;
+  justify-content: space-between;
+  box-sizing: border-box;
+  width: 100%;
+  // height: 54px;
+  border-bottom: 1px solid vars.$greyLine;
+  padding: 10px 20px;
+}
+
+.ChatArea-Menu {
+  margin: 3px 0 0;
+}
+
+.ChatArea-Info {
+  flex: 1 0 100px;
+  padding: 2px 2px 0 0;
+}
+
+.ChatArea-Content {
+  flex: 1 0 200px;
+  padding: 0 20px;
+  overflow-y: auto;
+  // height: calc(100vh - 102px);
+}
+
+.ChatArea-Date {
+  font-size: 1.2em;
+  line-height: 1.4rem;
+  color: vars.$white;
+  background-color: vars.$dateOfMess;
+  width: max-content;
+  box-sizing: border-box;
+  padding: 0 16px;
+  display: flex;
+  align-self: center;
+  margin: 30px auto;
+  border-radius: 11px;
+}
+
+@media screen and (min-width: 640px) {
+  /* ChatArea */
+  .ChatArea {
+    width: calc(60% - 1px);
+  }
+}

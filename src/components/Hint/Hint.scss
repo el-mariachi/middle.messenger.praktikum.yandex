@@ -1,0 +1,12 @@
+@use '/static/styles/vars.scss';
+
+/* Hint */
+
+.Hint {
+    margin: 0;
+    font-weight: 300;
+    font-size: 1.4em;
+    color: vars.$greyText;
+    text-align: center;
+    width: 100%;
+}

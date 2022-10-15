@@ -1,0 +1,33 @@
+@use '/src/components/Link/Link.scss';
+
+.ErrorPage {
+    margin: 0 auto;
+    text-align: center;
+}
+.ErrorPage-ErrNo {
+    font-size: 4.8em;
+    font-weight: 500;
+    margin-bottom: 0;
+}
+.ErrorPage-ErrDesc {
+    font-size: 2.4em;
+    line-height: 2;
+    margin-bottom: 4em;
+}
+
+/* PageNotFound */
+
+.PageNotFound {
+    margin: 0 auto;
+    text-align: center;
+}
+.PageNotFound-ErrNo {
+    font-size: 4.8em;
+    font-weight: 500;
+    margin-bottom: 0;
+}
+.PageNotFound-ErrDesc {
+    font-size: 2.4em;
+    line-height: 2;
+    margin-bottom: 4em;
+}

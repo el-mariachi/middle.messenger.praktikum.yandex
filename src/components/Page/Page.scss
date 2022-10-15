@@ -1,0 +1,53 @@
+@use '/src/components/Modal/Modal.scss';
+
+body {
+    margin: 0;
+    font-size: 62.5%;
+}
+
+.Page {
+    font-family: lato, sans-serif;
+    font-weight: 300;
+    height: 100vh;
+    display: flex;
+    position: relative;
+}
+
+.OutlineHeader {
+    position: absolute;
+    left: -9999em;
+}
+
+.Page_type_chatlist .ChatArea{
+    display: none;
+}
+
+.Page_type_chat .ChatList {
+    display: none;
+}
+
+.Page_type_profile{
+    display: block;
+}
+
+.Page_type_not-found {
+    flex-direction: column;
+    justify-content: center;
+}
+
+.Page_type_index {
+    font-size: 1.5em;
+    flex-direction: column;
+    padding-left: 48px;
+    padding-top: 32px;
+}
+
+@media screen and (min-width: 640px) {
+    .Page_type_chatlist .ChatArea {
+        display: flex;
+    }
+    
+    .Page_type_chat .ChatList {
+        display: flex;
+    }
+}

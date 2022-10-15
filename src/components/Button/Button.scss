@@ -1,0 +1,14 @@
+/* Button */
+
+.Button {
+    appearance: none;
+    width: 24px;
+    height: 24px;
+    background-color: transparent;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+}
+.Button:focus {
+    outline: none;
+}

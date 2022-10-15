@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Messenger. Sign Up</title>
+</head>
+<body>
+    <main class="Page Page_type_profile">
+        <h5 class="OutlineHeader">myMessenger</h5>
+        <section class="Profile SignUp">
+            <form class="Form Profile-Form" action="#" onsubmit="logForm(this); return false;">
+                <h1 class="Form-Name">Регистрация</h1>
+                <div class="Input-Group">
+                    <label class="Input-Label" for="first_name">Имя</label>
+                    <span class= "Input-Error Input_errorvisible">Поле не может быть пустым</span>
+                    <input class="Input Form-Input" type="text" name="first_name" id="first_name" placeholder="Имя">
+                </div>
+                <div class="Input-Group">
+                    <label class="Input-Label" for="second_name">Фамилия</label>
+                    <span class= "Input-Error Input_errorvisible">Поле не может быть пустым</span>
+                    <input class="Input Form-Input" type="text" name="second_name" id="second_name" placeholder="Фамилия">
+                </div>
+                <div class="Input-Group">
+                    <label class="Input-Label" for="login">Логин</label>
+                    <span class= "Input-Error Input_errorvisible">Такой логин уже занят</span>
+                    <input class="Input Form-Input" type="text" name="login" id="login" placeholder="Логин">
+                </div>
+                <div class="Input-Group">
+                    <label class="Input-Label" for="email">Email</label>
+                    <span class= "Input-Error Input_errorvisible">Некорректный email</span>
+                    <input class="Input Form-Input" type="email" name="email" id="email" placeholder="Email">
+                </div>
+                <div class="Input-Group">
+                    <label class="Input-Label" for="phone">Телефон</label>
+                    <span class= "Input-Error Input_errorvisible">Некорректный телефон</span>
+                    <input class="Input Form-Input" type="tel" name="phone" id="phone" placeholder="Телефон">
+                </div>
+                <div class="Input-Group">
+                    <label class="Input-Label" for="password">Пароль</label>
+                    <span class= "Input-Error Input_errorvisible">Пароль слишком простой</span>
+                    <input class="Input Form-Input" type="password" name="password" id="password" placeholder="Пароль">
+                </div>
+                <div class="Input-Group">
+                    <label class="Input-Label" for="password2">Повторите пароль</label>
+                    <span class= "Input-Error Input_errorvisible">Пароли не совпадают</span>
+                    <input class="Input Form-Input" type="password" name="password2" id="password2" placeholder="Повторите пароль">
+                </div>
+                <input class="Submit Form-Submit" type="submit" name="submit" id="submit" value="Зарегистрироваться">
+                <a class="Link PageLink PageLink_to_login" href="/src/pages/login/login.handlebars">Вход</a>
+            </form>
+        </section>
+    </main>
+    <script src="./sign_up.ts" type="module"></script>
+</body>
+</html>
