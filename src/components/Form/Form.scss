@@ -57,6 +57,7 @@
 
 .Form-Input:focus {
     font-size: 1.6em;
+    border-bottom: 1px solid vars.$siteBlue;
 }
 
 .Form-Submit {
@@ -65,7 +66,6 @@
 
 .Form_type_general {
     flex-direction: column;
-    
 }
 
 /* Submit */
@@ -87,7 +87,7 @@
 }
 
 .Submit:focus {
-    outline: none;
+    outline: 1px solid vars.$black;
 }
 
 .Edit {

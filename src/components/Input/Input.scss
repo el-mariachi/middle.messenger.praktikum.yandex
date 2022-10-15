@@ -10,7 +10,7 @@
 
 .Input:focus {
     font-size: 1.4em;
-    outline: none;
+    outline: transparent;
 }
 
 .Input:focus::placeholder {
@@ -44,7 +44,6 @@
 
 .Input-Avatar {
     text-align: center;
-    // text-decoration: underline;
     cursor: pointer;
     color: vars.$siteBlue;
     font-weight: 400;
@@ -73,7 +72,7 @@
         font-size: 1.6em;
         flex: 2;
     }
-    
+
     .Input-Error {
         width: 100%;
         justify-self: flex-end;

@@ -1,3 +1,4 @@
+@use '/static/styles/vars.scss';
 /* Search */
 
 .Search {
@@ -21,6 +22,7 @@
 .Search-Input:focus {
     background-image: none;
     padding-left: 16px;
+    outline: 1px solid vars.$greyInput;
 }
 
 // .NewMessage {

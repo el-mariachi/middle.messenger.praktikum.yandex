@@ -32,6 +32,9 @@
 
 .ChatListHeader-Menu {
     margin: 0 12px 0 9px;
+    &:focus {
+        outline: 1px solid vars.$siteBlue;
+    }
 }
 
 .ChatListHeader-NewChat {
@@ -42,7 +45,7 @@
 }
 
 .ChatListHeader-NewChat:focus {
-    outline: none;
+    outline: 1px solid vars.$siteBlue;
 }
 
 .ChatList-Frame {
@@ -118,7 +121,7 @@
 }
 
 .Chat-Sender::after {
-    content: ": ";
+    content: ': ';
 }
 
 .Chat-UnreadCount {

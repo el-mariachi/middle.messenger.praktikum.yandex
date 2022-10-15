@@ -1,3 +1,4 @@
+@use '/static/styles/vars.scss';
 /* Button */
 
 .Button {
@@ -10,5 +11,6 @@
     cursor: pointer;
 }
 .Button:focus {
-    outline: none;
+    outline: 1px solid vars.$siteBlue;
+    outline-offset: 2px;
 }

@@ -69,7 +69,7 @@
 }
 
 .Modal-Button:focus {
-    outline: none;
+    outline: 1px solid vars.$black;
 }
 
 /* TODO remove following style */
