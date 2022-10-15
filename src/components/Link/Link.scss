@@ -3,49 +3,49 @@
 /* Link */
 
 .Link {
-    text-decoration: none;
-    font-family: lato, sans-serif;
-    color: vars.$greyText;
-    cursor: pointer;
+  text-decoration: none;
+  font-family: lato, sans-serif;
+  color: vars.$greyText;
+  cursor: pointer;
 }
 
 /* PageLink */
 
 .PageLink {
-    font-weight: 500;
-    font-size: 1.3em;
-    line-height: 1.85;
+  font-weight: 500;
+  font-size: 1.3em;
+  line-height: 1.85;
 }
 
 .PageLink_to_profile::after {
-    content: "";
-    display: inline-block;
-    width: 6px;
-    height: 6px;
-    border-style: solid;
-    border-width: 2px;
-    border-color: transparent;
-    border-right-color: vars.$greyText;
-    border-top-color: vars.$greyText;
-    transform: rotate(45deg);
-    margin-left: 0.4em;
+  content: '';
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  border-style: solid;
+  border-width: 2px;
+  border-color: transparent;
+  border-right-color: vars.$greyText;
+  border-top-color: vars.$greyText;
+  transform: rotate(45deg);
+  margin-left: 0.4em;
 }
 
 .PageLink_to_list::before {
-    content: "";
-    display: inline-block;
-    width: 6px;
-    height: 6px;
-    border-style: solid;
-    border-width: 2px;
-    border-color: transparent;
-    border-right-color: vars.$greyText;
-    border-top-color: vars.$greyText;
-    transform: rotate(-135deg);
-    margin-right: 0.4em;
+  content: '';
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  border-style: solid;
+  border-width: 2px;
+  border-color: transparent;
+  border-right-color: vars.$greyText;
+  border-top-color: vars.$greyText;
+  transform: rotate(-135deg);
+  margin-right: 0.4em;
 }
 
 .PageLink_to_login {
-    color: vars.$siteBlue;
-    text-align: center;
+  color: vars.$siteBlue;
+  text-align: center;
 }

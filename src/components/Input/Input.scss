@@ -3,80 +3,80 @@
 /* Input */
 
 .Input {
-    color: vars.$greyInput;
-    border: none;
-    line-height: 2rem;
+  color: vars.$greyInput;
+  border: none;
+  line-height: 2rem;
 }
 
 .Input:focus {
-    font-size: 1.4em;
-    outline: transparent;
+  font-size: 1.4em;
+  outline: transparent;
 }
 
 .Input:focus::placeholder {
-    color: transparent;
+  color: transparent;
 }
 
 .Input_theme_grey {
-    background-color: vars.$grFill1;
+  background-color: vars.$grFill1;
 }
 
 .Input-Group {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    border-bottom: 1px solid vars.$greyLine;
-    margin-top: 8px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  border-bottom: 1px solid vars.$greyLine;
+  margin-top: 8px;
 }
 
 .Input-Label {
-    font-size: 1.2em;
-    font-weight: 100;
-    color: vars.$black;
+  font-size: 1.2em;
+  font-weight: 100;
+  color: vars.$black;
 }
 
 .Input-Error {
-    font-size: 1.2em;
-    font-weight: 300;
-    color: vars.$errMsg;
-    visibility: hidden;
+  font-size: 1.2em;
+  font-weight: 300;
+  color: vars.$errMsg;
+  visibility: hidden;
 }
 
 .Input-Avatar {
-    text-align: center;
-    cursor: pointer;
-    color: vars.$siteBlue;
-    font-weight: 400;
-    &:hover {
-        text-decoration: underline;
-    }
+  text-align: center;
+  cursor: pointer;
+  color: vars.$siteBlue;
+  font-weight: 400;
+  &:hover {
+    text-decoration: underline;
+  }
 }
 
 .Input-File {
-    display: none;
+  display: none;
 }
 
 .Input_errorvisible {
-    visibility: visible;
+  visibility: visible;
 }
 
 .Input_labelhidden {
-    visibility: hidden;
+  visibility: hidden;
 }
 
 @media screen and (min-width: 376px) {
-    /* Input */
+  /* Input */
 
-    .Input-Label {
-        order: 1;
-        font-size: 1.6em;
-        flex: 2;
-    }
+  .Input-Label {
+    order: 1;
+    font-size: 1.6em;
+    flex: 2;
+  }
 
-    .Input-Error {
-        width: 100%;
-        justify-self: flex-end;
-        text-align: right;
-        order: 0;
-    }
+  .Input-Error {
+    width: 100%;
+    justify-self: flex-end;
+    text-align: right;
+    order: 0;
+  }
 }

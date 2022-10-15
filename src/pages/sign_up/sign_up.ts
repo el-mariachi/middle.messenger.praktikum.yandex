@@ -1,1 +1,1 @@
-import './sign_up.scss'
+import './sign_up.scss';

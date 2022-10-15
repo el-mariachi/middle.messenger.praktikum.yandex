@@ -1,36 +1,34 @@
 /* Icon */
 
 .Icon {
-    background-image: url("/static/images/icon_sprites.svg");
-    background-repeat: no-repeat;
-    background-size: 150px auto;
-    border: 0;
-    width: 24px;
-    background-color: transparent;
-  }
-  
-  .Icon_type_newchat {
-    background-position-y: -500px;
-  }
-  
-  .Icon_type_newchat:hover {
-    background-position-x: -100px;
-  }
-  
-  .Icon_type_attach {
-    background-position: 1px 0px;
-  }
-  
-  .Icon_type_attach:hover {
-    background-position: -99px 0px;
-  }
-  
-  .Icon_type_send {
-    background-position-y: -600px;
-  }
-  
-  .Icon_type_send:hover {
-    background-position-x: -100px;
-  }
-  
-  
+  background-image: url('/static/images/icon_sprites.svg');
+  background-repeat: no-repeat;
+  background-size: 150px auto;
+  border: 0;
+  width: 24px;
+  background-color: transparent;
+}
+
+.Icon_type_newchat {
+  background-position-y: -500px;
+}
+
+.Icon_type_newchat:hover {
+  background-position-x: -100px;
+}
+
+.Icon_type_attach {
+  background-position: 1px 0px;
+}
+
+.Icon_type_attach:hover {
+  background-position: -99px 0px;
+}
+
+.Icon_type_send {
+  background-position-y: -600px;
+}
+
+.Icon_type_send:hover {
+  background-position-x: -100px;
+}

@@ -9,139 +9,139 @@
 /* ChatList */
 
 .ChatList {
-    background-color: vars.$lightGrey;
-    width: 100%;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    overflow-x: hidden;
-    overflow-y: auto;
+  background-color: vars.$lightGrey;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  overflow-x: hidden;
+  overflow-y: auto;
 }
 
 /* ChatListHeader */
 
 .ChatListHeader {
-    display: flex;
-    justify-content: space-between;
-    width: 100%;
-    height: 54px;
-    box-sizing: border-box;
-    padding: 16px 10px;
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  height: 54px;
+  box-sizing: border-box;
+  padding: 16px 10px;
 }
 
 .ChatListHeader-Menu {
-    margin: 0 12px 0 9px;
-    &:focus {
-        outline: 1px solid vars.$siteBlue;
-    }
+  margin: 0 12px 0 9px;
+  &:focus {
+    outline: 1px solid vars.$siteBlue;
+  }
 }
 
 .ChatListHeader-NewChat {
-    margin: 0 auto 0 0;
-    appearance: none;
-    background-color: transparent;
-    cursor: pointer;
+  margin: 0 auto 0 0;
+  appearance: none;
+  background-color: transparent;
+  cursor: pointer;
 }
 
 .ChatListHeader-NewChat:focus {
-    outline: 1px solid vars.$siteBlue;
+  outline: 1px solid vars.$siteBlue;
 }
 
 .ChatList-Frame {
-    width: 100%;
-    box-sizing: border-box;
-    padding: 0;
-    flex: 1;
-    overflow-x: hidden;
-    overflow-y: auto;
+  width: 100%;
+  box-sizing: border-box;
+  padding: 0;
+  flex: 1;
+  overflow-x: hidden;
+  overflow-y: auto;
 }
 
 .ChatList-Selector {
-    list-style: none;
-    padding: 0;
-    margin: 0;
+  list-style: none;
+  padding: 0;
+  margin: 0;
 }
 
 /* Chat */
 
 .Chat {
-    display: flex;
-    justify-content: space-between;
-    box-sizing: border-box;
-    width: 100%;
-    height: 72px;
-    background-color: transparent;
-    padding: 10px;
-    border-top: 1px solid vars.$greyLine;
+  display: flex;
+  justify-content: space-between;
+  box-sizing: border-box;
+  width: 100%;
+  height: 72px;
+  background-color: transparent;
+  padding: 10px;
+  border-top: 1px solid vars.$greyLine;
 }
 
 .Chat_selected {
-    background-color: vars.$lightBlue;
+  background-color: vars.$lightBlue;
 }
 
 .Chat-Picture {
-    margin: 2px 10px 3px 0;
-    border-radius: 50%;
+  margin: 2px 10px 3px 0;
+  border-radius: 50%;
 }
 .Chat-Info {
-    flex: 1;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
+  flex: 1;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
 }
 
 .Chat-Header {
-    display: flex;
-    justify-content: space-between;
-    width: 100%;
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
 }
 
 .Chat-Title {
-    margin: 0 0 4px;
-    font-size: 1.3em;
-    line-height: 1.15;
-    font-weight: 400;
-    color: vars.$black;
+  margin: 0 0 4px;
+  font-size: 1.3em;
+  line-height: 1.15;
+  font-weight: 400;
+  color: vars.$black;
 }
 
 .Chat-Preview {
-    font-size: 1.3em;
-    line-height: 1.15;
-    flex: 1 1 100px;
-    color: vars.$greyText;
-    height: 30px;
-    overflow: hidden;
-    hyphens: auto;
+  font-size: 1.3em;
+  line-height: 1.15;
+  flex: 1 1 100px;
+  color: vars.$greyText;
+  height: 30px;
+  overflow: hidden;
+  hyphens: auto;
 }
 
 .Chat-Sender {
-    font-weight: 400;
-    color: vars.$black;
+  font-weight: 400;
+  color: vars.$black;
 }
 
 .Chat-Sender::after {
-    content: ': ';
+  content: ': ';
 }
 
 .Chat-UnreadCount {
-    display: flex;
-    width: 20px;
-    height: 20px;
-    border-radius: 50%;
-    background-color: vars.$siteBlue;
-    align-items: center;
-    justify-content: center;
-    font-size: 1.2em;
-    font-weight: 500;
-    color: vars.$white;
-    margin: 3px 0 3px 4px;
+  display: flex;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background-color: vars.$siteBlue;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2em;
+  font-weight: 500;
+  color: vars.$white;
+  margin: 3px 0 3px 4px;
 }
 
 @media screen and (min-width: 640px) {
-    .ChatList {
-        width: 40%;
-        min-width: 260px;
-        border-right: 1px solid vars.$greyLine;
-    }
+  .ChatList {
+    width: 40%;
+    min-width: 260px;
+    border-right: 1px solid vars.$greyLine;
+  }
 }

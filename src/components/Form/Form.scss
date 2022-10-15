@@ -2,129 +2,129 @@
 /* Form */
 
 .Form {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  position: relative;
 }
 
 .Form-Name {
-    color: vars.$black;
-    font-size: 1.8em;
-    line-height: 1;
-    font-weight: 500;
-    text-align: center;
-    margin: 20px auto 40px;
+  color: vars.$black;
+  font-size: 1.8em;
+  line-height: 1;
+  font-weight: 500;
+  text-align: center;
+  margin: 20px auto 40px;
 }
 
 .Form-Input {
-    width: 100%;
-    padding: 0;
-    font-size: 1.6em;
-    box-sizing: border-box;
+  width: 100%;
+  padding: 0;
+  font-size: 1.6em;
+  box-sizing: border-box;
 }
 
 .Form-ImageInput {
+  display: block;
+  width: max-content;
+  margin: 0 auto;
+  cursor: pointer;
+  background-color: vars.$greyInput;
+  border-radius: 50%;
+  &::after {
+    content: 'Поменять\Aаватар';
+    white-space: pre-wrap;
+    display: none;
+    width: 130px;
+    height: 130px;
+    font-size: 1.6em;
+    color: vars.$white;
+    line-height: 18px;
+    box-sizing: border-box;
+    padding: 43px 0;
+    text-align: center;
+    position: absolute;
+    top: 0;
+  }
+  &:hover::after {
     display: block;
-    width: max-content;
-    margin: 0 auto;
-    cursor: pointer;
-    background-color: vars.$greyInput;
-    border-radius: 50%;
-    &::after {
-        content: 'Поменять\Aаватар';
-        white-space: pre-wrap;
-        display: none;
-        width: 130px;
-        height: 130px;
-        font-size: 1.6em;
-        color: vars.$white;
-        line-height: 18px;
-        box-sizing: border-box;
-        padding: 43px 0;
-        text-align: center;
-        position: absolute;
-        top: 0;
-    }
-    &:hover::after {
-        display: block;
-    }
+  }
 }
 
 .Form-ImageInput:hover .Picture {
-    opacity: 0.5;
+  opacity: 0.5;
 }
 
 .Form-Input:focus {
-    font-size: 1.6em;
-    border-bottom: 1px solid vars.$siteBlue;
+  font-size: 1.6em;
+  border-bottom: 1px solid vars.$siteBlue;
 }
 
 .Form-Submit {
-    margin: 40px auto 16px;
+  margin: 40px auto 16px;
 }
 
 .Form_type_general {
-    flex-direction: column;
+  flex-direction: column;
 }
 
 /* Submit */
 
 .Submit {
-    -webkit-appearance: none;
-    appearance: none;
-    border: 0;
-    background-color: vars.$siteBlue;
-    font-size: 1.5em;
-    line-height: 2.5;
-    font-weight: 500;
-    color: vars.$white;
-    border-radius: 12px;
-    box-sizing: border-box;
-    padding: 0 66px;
-    min-width: 280px;
-    cursor: pointer;
+  -webkit-appearance: none;
+  appearance: none;
+  border: 0;
+  background-color: vars.$siteBlue;
+  font-size: 1.5em;
+  line-height: 2.5;
+  font-weight: 500;
+  color: vars.$white;
+  border-radius: 12px;
+  box-sizing: border-box;
+  padding: 0 66px;
+  min-width: 280px;
+  cursor: pointer;
 }
 
 .Submit:focus {
-    outline: 1px solid vars.$black;
+  outline: 1px solid vars.$black;
 }
 
 .Edit {
-    justify-content: space-between;
+  justify-content: space-between;
 }
 
 /* Signup */
 
 .SignUp {
-    justify-content: center;
+  justify-content: center;
 }
 
 /* Login */
 
 .Login {
-    justify-content: center;
+  justify-content: center;
 }
 
 .Login .Submit {
-    margin-top: 156px;
+  margin-top: 156px;
 }
 
 .Login .Form-Name {
-    margin-bottom: 100px;
+  margin-bottom: 100px;
 }
 
 @media screen and (min-width: 376px) {
-    /* Form */
+  /* Form */
 
-    .Form-Input {
-        width: auto;
-        order: 2;
-        text-align: right;
-        flex: 3;
-    }
+  .Form-Input {
+    width: auto;
+    order: 2;
+    text-align: right;
+    flex: 3;
+  }
 
-    .Form-Input::placeholder {
-        // color: transparent;
-    }
+  .Form-Input::placeholder {
+    // color: transparent;
+  }
 }

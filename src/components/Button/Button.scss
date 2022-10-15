@@ -2,15 +2,15 @@
 /* Button */
 
 .Button {
-    appearance: none;
-    width: 24px;
-    height: 24px;
-    background-color: transparent;
-    border: none;
-    padding: 0;
-    cursor: pointer;
+  appearance: none;
+  width: 24px;
+  height: 24px;
+  background-color: transparent;
+  border: none;
+  padding: 0;
+  cursor: pointer;
 }
 .Button:focus {
-    outline: 1px solid vars.$siteBlue;
-    outline-offset: 2px;
+  outline: 1px solid vars.$siteBlue;
+  outline-offset: 2px;
 }
