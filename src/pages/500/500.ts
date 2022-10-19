@@ -3,8 +3,6 @@ import { renderPage } from '../../utils/renderPage';
 
 import ErrorPage from '../../components/ErrorPage/ErrorPage.hbs';
 
-console.log(ErrorPage);
-
 const pageData = {
   errorCode: 500,
   errorMessage: 'Ошибка сервера',
