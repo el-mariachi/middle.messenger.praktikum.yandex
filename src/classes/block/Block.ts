@@ -1,4 +1,5 @@
 import { EventBus } from '../../controllers/EventBus/EventBus';
+import { v4 as uniqueID } from 'uuid';
 
 interface IEventBusGetter {
   (): EventBus;
@@ -10,6 +11,10 @@ type EventsProp = {
 export interface IProps {
   [k: string]: unknown;
   events?: EventsProp;
+  settings?: {
+    [k: string]: unknown;
+    hasID?: boolean;
+  };
 }
 export abstract class Block {
   static EVENTS = {
@@ -24,6 +29,7 @@ export abstract class Block {
   protected eventBus: IEventBusGetter;
   protected _newPropsCount = 0;
   protected _propsChanged = false;
+  protected _id: string; // use it if you like, but it's always there (UUID)
 
   constructor(public tagName = 'div', public props: IProps = {}) {
     const eventBus = new EventBus();
@@ -33,7 +39,9 @@ export abstract class Block {
       props,
     };
 
-    this.props = this._makePropsProxy(props);
+    this._id = uniqueID();
+
+    this.props = this._makePropsProxy({ ...props, __id: this._id });
 
     this.eventBus = () => eventBus;
 
@@ -180,7 +188,12 @@ export abstract class Block {
 
   _createDocumentElement(tagName: string) {
     // Можно сделать метод, который через фрагменты в цикле создаёт сразу несколько блоков
-    return document.createElement(tagName);
+    const element = document.createElement(tagName);
+    const needsId = this.props.settings?.hasID ? true : false;
+    if (needsId) {
+      element.setAttribute('data-id', this._id);
+    }
+    return element;
   }
 
   show() {
