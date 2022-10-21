@@ -19,6 +19,8 @@ export abstract class Block {
   protected _element!: HTMLElement; // Using Definite assignment here because this._element is definitely assigned during init.
   protected _meta: { tagName: string; props?: object };
   protected eventBus: IEventBusGetter;
+  protected _newPropsCount = 0;
+  protected _propsChanged = false;
 
   constructor(public tagName = 'div', public props: IProps = {}) {
     const eventBus = new EventBus();
@@ -72,6 +74,7 @@ export abstract class Block {
   }
 
   componentDidUpdate(oldProps: IProps, newProps: IProps): boolean {
+    // this method if overridden can cancel render by returning false
     1 && oldProps && newProps;
     return true;
   }
@@ -80,7 +83,10 @@ export abstract class Block {
     if (!nextProps || Object.keys(nextProps).length === 0) {
       return;
     }
-
+    this._newPropsCount = Object.keys(nextProps).length;
+    if (this._newPropsCount === 0) {
+      return;
+    }
     Object.assign(this.props, nextProps);
   };
 
@@ -118,12 +124,18 @@ export abstract class Block {
       },
       set: (target: IProps, prop: string, value: unknown): boolean => {
         if (prop.indexOf('_') === 0) {
+          this._newPropsCount = 0; // reset incoming props count. change this if throw is removed
           throw new Error('Access denied');
         } else {
           if (target[prop] !== value) {
             target[prop] = value;
-            this.eventBus().emit(Block.EVENTS.FLOW_CDU, this._meta.props, target);
+            this._propsChanged = true;
           }
+        }
+        if (--this._newPropsCount === 0 && this._propsChanged) {
+          // emit CDU only after all new props have been examined and at least one was changed
+          this.eventBus().emit(Block.EVENTS.FLOW_CDU, this._meta.props, target);
+          this._propsChanged = false; // reset flag
         }
         return true;
       },
