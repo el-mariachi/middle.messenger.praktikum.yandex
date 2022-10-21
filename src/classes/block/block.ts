@@ -4,7 +4,7 @@ interface IEventBusGetter {
   (): EventBus;
 }
 
-interface IProps {
+export interface IProps {
   [k: string]: unknown;
 }
 
@@ -57,14 +57,18 @@ export abstract class Block {
     this.componentDidMount();
   }
 
-  abstract componentDidMount(oldProps?: IProps): void;
+  componentDidMount(): void {
+    // should be overridden in descendatns
+  }
 
   dispatchComponentDidMount() {
     this.eventBus().emit(Block.EVENTS.FLOW_CDM);
   }
 
   _componentDidUpdate(oldProps: IProps, newProps: IProps): void {
-    this.componentDidUpdate(oldProps, newProps);
+    if (this.componentDidUpdate(oldProps, newProps)) {
+      this._render();
+    }
   }
 
   componentDidUpdate(oldProps: IProps, newProps: IProps): boolean {
@@ -73,7 +77,7 @@ export abstract class Block {
   }
 
   setProps = (nextProps: IProps) => {
-    if (!nextProps) {
+    if (!nextProps || Object.keys(nextProps).length === 0) {
       return;
     }
 
@@ -93,8 +97,8 @@ export abstract class Block {
     this._element.innerHTML = block;
   }
 
-  // Переопределяется пользователем. Необходимо вернуть разметку
   render(): string {
+    // Should be overridden in descendatns. Returns markup.
     return '';
   }
 
