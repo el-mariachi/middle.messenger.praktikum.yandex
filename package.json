@@ -4,7 +4,7 @@
   "description": "Yandex Praktikum Middle Frontend Developer Course Project",
   "scripts": {
     "test": "mocha",
-    "dev": "parcel static/index.handlebars",
+    "dev": "parcel \"static/entries/*.handlebars\"",
     "clean:dist": "rimraf dist",
     "build": "npm run clean:dist && parcel build static/index.handlebars && tsc --project tsconfig.netlify.json",
     "start": "node dist/server",
