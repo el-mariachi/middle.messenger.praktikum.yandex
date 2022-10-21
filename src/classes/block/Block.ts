@@ -4,10 +4,13 @@ interface IEventBusGetter {
   (): EventBus;
 }
 
+type EventsProp = {
+  [k: string]: (event: Event) => unknown;
+};
 export interface IProps {
   [k: string]: unknown;
+  events?: EventsProp;
 }
-
 export abstract class Block {
   static EVENTS = {
     INIT: 'init',
@@ -87,6 +90,8 @@ export abstract class Block {
     if (this._newPropsCount === 0) {
       return;
     }
+    // ! if some prop's value is an object literal, CDU will be triggered
+    // even if the contents are identical
     Object.assign(this.props, nextProps);
   };
 
@@ -94,13 +99,34 @@ export abstract class Block {
     return this._element;
   }
 
+  _addEvents() {
+    const { events } = this.props;
+    if (!events) {
+      return;
+    }
+    Object.keys(events).forEach((eventName) => {
+      if (!(typeof events[eventName] === 'function')) {
+        throw new Error(`Event handler for event ${eventName} in ${this.constructor.name}`);
+      }
+      this._element.addEventListener(eventName, events[eventName]);
+    });
+  }
+
+  _removeEvents() {
+    const { events } = this.props;
+    if (!events) {
+      return;
+    }
+    Object.keys(events).forEach((eventName) => {
+      this._element.removeEventListener(eventName, events[eventName]);
+    });
+  }
+
   _render() {
     const block = this.render();
-    // Это небезопасный метод для упрощения логики
-    // Используйте шаблонизатор из npm или напишите свой безопасный
-    // Нужно компилировать не в строку (или делать это правильно),
-    // либо сразу превращать в DOM-элементы и возвращать из compile DOM-ноду
+    this._removeEvents();
     this._element.innerHTML = block;
+    this._addEvents();
   }
 
   render(): string {
@@ -124,7 +150,7 @@ export abstract class Block {
       },
       set: (target: IProps, prop: string, value: unknown): boolean => {
         if (prop.indexOf('_') === 0) {
-          this._newPropsCount = 0; // reset incoming props count. change this if throw is removed
+          this._newPropsCount = 0; // ! reset incoming props count. change this if throw is removed
           throw new Error('Access denied');
         } else {
           if (target[prop] !== value) {
