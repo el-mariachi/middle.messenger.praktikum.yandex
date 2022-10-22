@@ -114,15 +114,20 @@ export abstract class Block {
     return true;
   }
 
-  setProps = (nextProps: IProps) => {
-    if (!nextProps || Object.keys(nextProps).length === 0) {
+  setProps = (nextPropsAndChildren: IProps) => {
+    if (!nextPropsAndChildren || Object.keys(nextPropsAndChildren).length === 0) {
       return;
     }
+    // separate props from children like in the constructor
+    const { children: nextChildren, props: nextProps } = this._getChildren(nextPropsAndChildren);
+
     this._newPropsCount = Object.keys(nextProps).length;
     if (this._newPropsCount === 0) {
       return;
     }
-    // ! if some prop's value is an object literal, CDU will be triggered
+    // blindly updating children with new ones
+    Object.assign(this.children, nextChildren);
+    // if some prop's value is an object literal, CDU will be triggered
     // even if the contents are identical
     Object.assign(this.props, nextProps);
     Object.assign(this._meta.props, nextProps);

@@ -13,6 +13,9 @@ const button = new Button({
 const button2 = new Button({
   className: 'new-class',
   title: 'Button 2',
+  settings: {
+    hasID: true,
+  },
 });
 
 const profilePage = new Page({
