@@ -80,7 +80,7 @@ export abstract class Block {
 
   _componentDidUpdate(oldProps: IProps, newProps: IProps): void {
     if (this.componentDidUpdate(oldProps, newProps)) {
-      this._render();
+      this.eventBus().emit(Block.EVENTS.FLOW_RENDER);
     }
   }
 
@@ -100,7 +100,7 @@ export abstract class Block {
     }
     // ! if some prop's value is an object literal, CDU will be triggered
     // even if the contents are identical
-    Object.assign(this.props, nextProps);
+    this._meta.props = Object.assign(this.props, nextProps);
   };
 
   get element(): HTMLElement {
@@ -180,6 +180,9 @@ export abstract class Block {
           delete target[prop];
           return true;
         }
+      },
+      ownKeys(target: IProps) {
+        return Object.keys(target).filter((key) => !key.startsWith('_'));
       },
     };
 
