@@ -6,7 +6,7 @@ export default class Button extends Block {
     super('button', props);
   }
 
-  render(): string {
-    return template(this.props);
+  render() {
+    return this.insertChildren(template, this.props);
   }
 }

@@ -1,6 +1,6 @@
 import { EventBus } from '../../controllers/EventBus/EventBus';
 import { v4 as uniqueID } from 'uuid';
-
+import { TemplateDelegate } from 'handlebars';
 interface IEventBusGetter {
   (): EventBus;
 }
@@ -8,6 +8,9 @@ interface IEventBusGetter {
 type EventsProp = {
   [k: string]: (event: Event) => unknown;
 };
+interface IChildren {
+  [k: string]: Block;
+}
 export interface IProps {
   [k: string]: unknown;
   events?: EventsProp;
@@ -25,13 +28,17 @@ export abstract class Block {
   };
 
   protected _element!: HTMLElement; // Using Definite assignment here because this._element is definitely assigned during init.
-  protected _meta: { tagName: string; props?: object };
+  protected _meta: { tagName: string; props?: IProps };
   protected eventBus: IEventBusGetter;
   protected _newPropsCount = 0;
   protected _propsChanged = false;
   protected _id: string; // use it if you like, but it's always there (UUID)
+  public children: IChildren;
+  public props: IProps;
 
-  constructor(public tagName = 'div', public props: IProps = {}) {
+  constructor(public tagName = 'div', public allProps: IProps = {}) {
+    const { children, props } = this._getChildren(allProps);
+    this.children = children;
     const eventBus = new EventBus();
 
     this._meta = {
@@ -47,6 +54,20 @@ export abstract class Block {
 
     this._registerEvents(eventBus);
     eventBus.emit(Block.EVENTS.INIT);
+  }
+
+  _getChildren(propsAndChildren: IProps) {
+    const children: IChildren = {};
+    const props: IProps = {};
+
+    Object.entries(propsAndChildren).forEach(([propName, propValue]) => {
+      if (propValue instanceof Block) {
+        children[propName] = propValue;
+      } else {
+        props[propName] = propValue;
+      }
+    });
+    return { children, props };
   }
 
   _registerEvents(eventBus: EventBus): void {
@@ -68,6 +89,9 @@ export abstract class Block {
 
   _componentDidMount(): void {
     this.componentDidMount();
+    Object.values(this.children).forEach((child) => {
+      child.dispatchComponentDidMount();
+    });
   }
 
   componentDidMount(): void {
@@ -100,7 +124,8 @@ export abstract class Block {
     }
     // ! if some prop's value is an object literal, CDU will be triggered
     // even if the contents are identical
-    this._meta.props = Object.assign(this.props, nextProps);
+    Object.assign(this.props, nextProps);
+    Object.assign(this._meta.props, nextProps);
   };
 
   get element(): HTMLElement {
@@ -130,16 +155,51 @@ export abstract class Block {
     });
   }
 
-  _render() {
+  // we will generate markup in this method and then call it from render()
+  insertChildren(template: TemplateDelegate, props: IProps): DocumentFragment {
+    const stubbedProps = { ...props }; // make a copy of props. we'll modify that object
+    // iterate over children and create props for each child
+    // prop name is child name, prop value is a string
+    // containing markup (a <div> with the child's id)
+    // to be replaced soon
+    Object.entries(this.children).forEach(([childName, child]) => {
+      stubbedProps[childName] = `<div data-id="${child._id}"></div>`;
+    });
+    // Create wrapper element to render into, a 'template' element.
+    // It has a 'DocumentFragment' as a root element
+    // which we can extract and insert into DOM later.
+    // And, unlike 'DocumentFragment', 'template' has 'innerHTML' for us to write into.
+    const fragment = document.createElement('template');
+    // insert our markup with unique divs (instead of children) into wrapper
+    fragment.innerHTML = template(stubbedProps);
+    // TODO if we want to get rid of the wrapper element in the constructor
+    // TODO and have all the block's markup be defined in the template,
+    // TODO we need to add _id to fragment.content.children[0] here
+    // TODO instead of this._createDocumentElement() method
+    // iterate over children and locate stubs inside fragment DOM nodes
+    Object.values(this.children).forEach((child) => {
+      const stub = fragment.content.querySelector(`[data-id="${child._id}"]`);
+      // finally replace stub with chlid element
+      stub?.replaceWith(child.getContent());
+    });
+    // then we render the component's template and return markup
+    // dont't forget to use {{{ }}} for child placeholders
+    return fragment.content;
+  }
+
+  _render(): void {
     const block = this.render();
     this._removeEvents();
-    this._element.innerHTML = block;
+    this._element.innerHTML = ''; // clear out old markup
+    this._element.appendChild(block);
     this._addEvents();
   }
 
-  render(): string {
-    // Should be overridden in descendatns. Returns markup.
-    return '';
+  render(): DocumentFragment {
+    // Should be overridden in descendatns. Returns DocumentFragment.
+    const template = () => '';
+    return this.insertChildren(template, this.props);
+    // return document.createDocumentFragment();
   }
 
   getContent() {

@@ -1,3 +1,4 @@
+import Page from './test_page';
 import Button from './test_button';
 import { renderDOM } from '../../src/utils/renderDOM';
 
@@ -6,11 +7,21 @@ const button = new Button({
   title: 'Clickkkk',
   settings: {
     hasEmail: false,
-    hasID: true,
   },
 });
 
-renderDOM('#app', button);
+const button2 = new Button({
+  className: 'new-class',
+  title: 'Button 2',
+});
+
+const profilePage = new Page({
+  userName: 'Vasili Pupkin',
+  button,
+  buttonTitle: 'Inner Butt',
+});
+
+renderDOM('#app', profilePage);
 
 setTimeout(() => {
   button.setProps({
@@ -23,3 +34,10 @@ setTimeout(() => {
     newFunctionProp: () => 'blah',
   });
 }, 1000);
+
+setTimeout(() => {
+  profilePage.setProps({
+    button: button2,
+    buttonTitle: 'Inner Buttonnn',
+  });
+}, 3000);

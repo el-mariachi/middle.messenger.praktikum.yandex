@@ -1,4 +1,6 @@
 declare module '*.hbs' {
-  const value: (arg: object) => string;
+  interface CompiledTemplate {
+    value: import('handlebars').TemplateDelegate;
+  }
   export default value;
 }
