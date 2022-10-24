@@ -1,4 +1,4 @@
-import { EventBus } from '../../controllers/EventBus/EventBus';
+import { EventBus } from '../../controllers/EventBus/EventBusExt';
 import { v4 as uniqueID } from 'uuid';
 import { TemplateDelegate } from 'handlebars';
 interface IEventBusGetter {
