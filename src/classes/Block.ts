@@ -11,9 +11,15 @@ type EventsProp = {
 interface IChildren {
   [k: string]: Block;
 }
+
+interface IAttributes {
+  [k: string]: string | boolean;
+}
 export interface IProps {
   [k: string]: unknown;
   events?: EventsProp;
+  classList?: string[];
+  attributes?: IAttributes;
   settings?: {
     [k: string]: unknown;
     hasID?: boolean;
@@ -32,11 +38,16 @@ export abstract class Block {
   protected eventBus: IEventBusGetter;
   protected _newPropsCount = 0;
   protected _propsChanged = false;
-  protected _id: string; // use it if you like, but it's always there (UUID)
+  protected _id?: string;
+  protected _attributes?: IAttributes;
+  protected _classList?: string[];
   public children: IChildren;
   public props: IProps;
 
   constructor(public tagName = 'div', public allProps: IProps = {}) {
+    const { attributes, classList } = allProps;
+    this._attributes = attributes && Object.keys(attributes).length !== 0 ? attributes : undefined;
+    this._classList = classList && classList.length !== 0 ? classList : undefined;
     const { children, props } = this._getChildren(allProps);
     this.children = children;
     const eventBus = new EventBus();
@@ -45,10 +56,13 @@ export abstract class Block {
       tagName,
       props,
     };
-
-    this._id = uniqueID();
-
-    this.props = this._makePropsProxy({ ...props, __id: this._id });
+    const needsId = props.settings?.hasID ? true : false;
+    if (needsId) {
+      this._id = uniqueID();
+      this.props = this._makePropsProxy({ ...props, __id: this._id });
+    } else {
+      this.props = this._makePropsProxy({ ...props });
+    }
 
     this.eventBus = () => eventBus;
 
@@ -79,7 +93,7 @@ export abstract class Block {
 
   _createResources(): void {
     const { tagName } = this._meta;
-    this._element = this._createDocumentElement(tagName);
+    this._element = this._createDocumentElement(tagName, this._classList, this._attributes);
   }
 
   init(): void {
@@ -177,10 +191,6 @@ export abstract class Block {
     const fragment = document.createElement('template');
     // insert our markup with unique divs (instead of children) into wrapper
     fragment.innerHTML = template(stubbedProps);
-    // TODO if we want to get rid of the wrapper element in the constructor
-    // TODO and have all the block's markup be defined in the template,
-    // TODO we need to add _id to fragment.content.children[0] here
-    // TODO instead of this._createDocumentElement() method
     // iterate over children and locate stubs inside fragment DOM nodes
     Object.values(this.children).forEach((child) => {
       const stub = fragment.content.querySelector(`[data-id="${child._id}"]`);
@@ -193,7 +203,7 @@ export abstract class Block {
   }
 
   _render(): void {
-    const block = this.render();
+    const block = this.render(); // DocumentFragment
     this._removeEvents();
     this._element.innerHTML = ''; // clear out old markup
     this._element.appendChild(block);
@@ -254,13 +264,17 @@ export abstract class Block {
     return new Proxy(props, proxyDescriptor);
   }
 
-  _createDocumentElement(tagName: string) {
+  _createDocumentElement(tagName: string, classList?: string[], attributes?: IAttributes): HTMLElement {
     // Можно сделать метод, который через фрагменты в цикле создаёт сразу несколько блоков
     const element = document.createElement(tagName);
-    const needsId = this.props.settings?.hasID ? true : false;
-    if (needsId) {
-      element.setAttribute('data-id', this._id);
-    }
+    classList && element.classList.add(...classList);
+    attributes &&
+      Object.entries(attributes).forEach(([attrName, attrVal]) => {
+        if (typeof attrVal === 'boolean') {
+          attrVal = attrName;
+        }
+        element.setAttribute(attrName, attrVal);
+      });
     return element;
   }
 
