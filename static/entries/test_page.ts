@@ -1,4 +1,4 @@
-import { Block, IProps } from '../../src/classes/block/Block';
+import { Block, IProps } from '../../src/classes/Block';
 import template from './test_page.hbs';
 import Button from './test_button';
 
