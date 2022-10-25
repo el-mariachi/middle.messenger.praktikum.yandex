@@ -1,11 +1,12 @@
-import './404.scss';
-import { renderPage } from '../../utils/renderPage';
+import { Block, IProps } from '../../classes/Block';
+import ErrorPageTemplate from '../../components/ErrorPage/ErrorPage.hbs';
 
-import ErrorPage from '../../components/ErrorPage/ErrorPage.hbs';
+export class Page404 extends Block {
+  constructor(props: IProps) {
+    super('div', props);
+  }
 
-const pageData = {
-  errorCode: 404,
-  errorMessage: 'Страница не найдена',
-};
-
-renderPage('#app', ErrorPage(pageData));
+  render(): DocumentFragment {
+    return this.insertChildren(ErrorPageTemplate, this.props);
+  }
+}
