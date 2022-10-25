@@ -1,5 +1,5 @@
 import { Block, IProps } from '../../classes/Block';
-import ErrorPageTemplate from '../../components/ErrorPage/ErrorPageInner.hbs';
+import ErrorPageTemplate from '../../components/ErrorPage/ErrorPage.hbs';
 
 export class Page404 extends Block {
   constructor(props: IProps) {
