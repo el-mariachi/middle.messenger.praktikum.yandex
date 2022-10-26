@@ -12,7 +12,7 @@ interface IChildren {
   [k: string]: Block | Block[];
 }
 
-interface IAttributes {
+export interface IAttributes {
   [k: string]: string | boolean;
 }
 export interface IProps {

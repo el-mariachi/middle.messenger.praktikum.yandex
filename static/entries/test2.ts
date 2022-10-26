@@ -30,11 +30,11 @@ setTimeout(() => {
   button.setProps({
     className: 'my-class',
     title: 'Click me Please!',
-    newStringProp: 'asdf',
-    newObjectProp: {
-      name: 'Vasya',
-    },
-    newFunctionProp: () => 'blah',
+    // newStringProp: 'asdf',
+    // newObjectProp: {
+    //   name: 'Vasya',
+    // },
+    // newFunctionProp: () => 'blah',
   });
 }, 1000);
 

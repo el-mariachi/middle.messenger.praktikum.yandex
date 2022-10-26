@@ -23,6 +23,7 @@
   padding: 0;
   font-size: 1.6em;
   box-sizing: border-box;
+  border-bottom: 1px solid transparent;
 }
 
 .Form-ImageInput {
@@ -60,7 +61,7 @@
 
 .Form-Input:focus {
   font-size: 1.6em;
-  border-bottom: 1px solid vars.$siteBlue;
+  border-bottom-color: vars.$siteBlue;
 }
 
 .Form-Submit {
