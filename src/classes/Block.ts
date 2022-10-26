@@ -9,7 +9,7 @@ type EventsProp = {
   [k: string]: (event: Event) => unknown;
 };
 interface IChildren {
-  [k: string]: Block;
+  [k: string]: Block | Block[];
 }
 
 interface IAttributes {
@@ -70,12 +70,17 @@ export abstract class Block {
     eventBus.emit(Block.EVENTS.INIT);
   }
 
+  _isBlock = (prop: unknown): prop is Block => prop instanceof Block;
+
   _getChildren(propsAndChildren: IProps) {
     const children: IChildren = {};
     const props: IProps = {};
 
     Object.entries(propsAndChildren).forEach(([propName, propValue]) => {
-      if (propValue instanceof Block) {
+      if (this._isBlock(propValue)) {
+        children[propName] = propValue;
+      } else if (Array.isArray(propValue) && propValue.every(this._isBlock)) {
+        // propValue is a pure children array
         children[propName] = propValue;
       } else {
         props[propName] = propValue;
@@ -104,7 +109,13 @@ export abstract class Block {
   _componentDidMount(): void {
     this.componentDidMount();
     Object.values(this.children).forEach((child) => {
-      child.dispatchComponentDidMount();
+      if (Array.isArray(child)) {
+        child.forEach((inner) => {
+          inner.dispatchComponentDidMount();
+        });
+      } else {
+        child.dispatchComponentDidMount();
+      }
     });
   }
 
@@ -128,7 +139,7 @@ export abstract class Block {
     return true;
   }
 
-  setProps = (nextPropsAndChildren: IProps) => {
+  setProps(nextPropsAndChildren: IProps): void {
     if (!nextPropsAndChildren || Object.keys(nextPropsAndChildren).length === 0) {
       return;
     }
@@ -136,16 +147,25 @@ export abstract class Block {
     const { children: nextChildren, props: nextProps } = this._getChildren(nextPropsAndChildren);
 
     this._newPropsCount = Object.keys(nextProps).length;
+
+    // Update children with new ones before updating props
+    if (Object.keys(nextChildren).length > 0) {
+      Object.assign(this.children, nextChildren);
+      if (this._newPropsCount === 0) {
+        // No other props were updated - emit and return. If count > 0, CDU gets trigd anyway.
+        this.eventBus().emit(Block.EVENTS.FLOW_CDU);
+        return;
+      }
+    }
+
     if (this._newPropsCount === 0) {
       return;
     }
-    // blindly updating children with new ones
-    Object.assign(this.children, nextChildren);
     // if some prop's value is an object literal, CDU will be triggered
     // even if the contents are identical
     Object.assign(this.props, nextProps);
     Object.assign(this._meta.props, nextProps);
-  };
+  }
 
   get element(): HTMLElement {
     return this._element;
@@ -177,12 +197,16 @@ export abstract class Block {
   // we will generate markup in this method and then call it from render()
   insertChildren(template: TemplateDelegate, props: IProps): DocumentFragment {
     const stubbedProps = { ...props }; // make a copy of props. we'll modify that object
-    // iterate over children and create props for each child
-    // prop name is child name, prop value is a string
-    // containing markup (a <div> with the child's id)
-    // to be replaced soon
+    // Iterate over children and create props for each child.
+    // Prop name is child name, prop value is a string containing markup,
+    // (a <div> with the child's id) to be replaced soon.
+    // An array of children produces an array of divs.
     Object.entries(this.children).forEach(([childName, child]) => {
-      stubbedProps[childName] = `<div data-id="${child._id}"></div>`;
+      if (Array.isArray(child)) {
+        stubbedProps[childName] = child.map((inner) => `<div data-id="${inner._id}"></div>`);
+      } else {
+        stubbedProps[childName] = `<div data-id="${child._id}"></div>`;
+      }
     });
     // Create wrapper element to render into, a 'template' element.
     // It has a 'DocumentFragment' as a root element
@@ -191,11 +215,24 @@ export abstract class Block {
     const fragment = document.createElement('template');
     // insert our markup with unique divs (instead of children) into wrapper
     fragment.innerHTML = template(stubbedProps);
-    // iterate over children and locate stubs inside fragment DOM nodes
-    Object.values(this.children).forEach((child) => {
+
+    // a function to replace stubs
+    const replaceStub = (child: Block): void => {
+      // find a stub div using child's id
       const stub = fragment.content.querySelector(`[data-id="${child._id}"]`);
       // finally replace stub with chlid element
       stub?.replaceWith(child.getContent());
+    };
+
+    // iterate over children and locate stubs inside fragment DOM nodes
+    Object.values(this.children).forEach((child) => {
+      if (Array.isArray(child)) {
+        child.forEach((inner) => {
+          replaceStub(inner);
+        });
+      } else {
+        replaceStub(child);
+      }
     });
     // then we render the component's template and return markup
     // dont't forget to use {{{ }}} for child placeholders
