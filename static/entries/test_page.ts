@@ -23,7 +23,7 @@ export default class Pg extends Block {
       }
       this.children.innerButton.setProps({ title: newProps.buttonTitle });
     }
-    console.log('cdu page');
+    console.log(newProps);
 
     return true;
   }

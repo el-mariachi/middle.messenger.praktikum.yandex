@@ -37,7 +37,6 @@ export abstract class Block {
   protected _element!: HTMLElement; // Using Definite assignment here because this._element is definitely assigned during init.
   protected _meta: { tagName: string; props?: IProps };
   protected eventBus: IEventBusGetter;
-  protected _newPropsCount = 0;
   protected _propsChanged = false;
   protected _id?: string;
   protected _attributes?: IAttributes;
@@ -50,7 +49,7 @@ export abstract class Block {
     this._attributes = attributes && Object.keys(attributes).length !== 0 ? attributes : undefined;
     this._classList = classList && classList.length !== 0 ? classList : undefined;
     const { children, props } = this._getChildren(allProps);
-    this.children = children;
+    this.children = this._makePropsProxy(children);
     const eventBus = new EventBus();
 
     this._meta = {
@@ -109,14 +108,8 @@ export abstract class Block {
 
   _componentDidMount(): void {
     this.componentDidMount();
-    Object.values(this.children).forEach((child) => {
-      if (Array.isArray(child)) {
-        child.forEach((inner) => {
-          inner.dispatchComponentDidMount();
-        });
-      } else {
-        child.dispatchComponentDidMount();
-      }
+    [...Object.values(this.children)].flat().forEach((child) => {
+      child.dispatchComponentDidMount();
     });
   }
 
@@ -144,28 +137,23 @@ export abstract class Block {
     if (!nextPropsAndChildren || Object.keys(nextPropsAndChildren).length === 0) {
       return;
     }
+    this._propsChanged = false;
     // separate props from children like in the constructor
     const { children: nextChildren, props: nextProps } = this._getChildren(nextPropsAndChildren);
-
-    this._newPropsCount = Object.keys(nextProps).length;
 
     // Update children with new ones before updating props
     if (Object.keys(nextChildren).length > 0) {
       Object.assign(this.children, nextChildren);
-      if (this._newPropsCount === 0) {
-        // No other props were updated - emit and return. If count > 0, CDU gets trigd anyway.
-        this.eventBus().emit(Block.EVENTS.FLOW_CDU);
-        return;
-      }
     }
-
-    if (this._newPropsCount === 0) {
-      return;
+    if (Object.keys(nextProps).length > 0) {
+      Object.assign(this.props, nextProps);
     }
-    // if some prop's value is an object literal, CDU will be triggered
-    // even if the contents are identical
-    Object.assign(this.props, nextProps);
-    Object.assign(this._meta.props, nextProps);
+    if (this._propsChanged) {
+      this.eventBus().emit(Block.EVENTS.FLOW_CDU, this._meta.props, this.props);
+      this._propsChanged = false;
+      // save newProps to _meta
+      Object.assign(this._meta.props, nextProps);
+    }
   }
 
   get element(): HTMLElement {
@@ -259,9 +247,9 @@ export abstract class Block {
     return this.element;
   }
 
-  _makePropsProxy(props: IProps) {
+  _makePropsProxy<T extends IProps>(props: T) {
     const proxyDescriptor = {
-      get: (target: IProps, prop: string): unknown => {
+      get: (target: T, prop: string): unknown => {
         if (prop.indexOf('_') === 0) {
           throw new Error('Access denied');
         } else {
@@ -269,32 +257,28 @@ export abstract class Block {
           return typeof value === 'function' ? value.bind(target) : value;
         }
       },
-      set: (target: IProps, prop: string, value: unknown): boolean => {
+      set: (target: T, prop: string, value: unknown): boolean => {
         if (prop.indexOf('_') === 0) {
-          this._newPropsCount = 0; // ! reset incoming props count. change this if throw is removed
           throw new Error('Access denied');
         } else {
           if (target[prop] !== value) {
-            target[prop] = value;
+            // target[prop] = value;
             this._propsChanged = true;
+            return Reflect.set(target, prop, value);
           }
-        }
-        if (--this._newPropsCount === 0 && this._propsChanged) {
-          // emit CDU only after all new props have been examined and at least one was changed
-          this.eventBus().emit(Block.EVENTS.FLOW_CDU, this._meta.props, target);
-          this._propsChanged = false; // reset flag
         }
         return true;
       },
-      deleteProperty(target: IProps, prop: string): boolean {
+      deleteProperty: (target: T, prop: string): boolean => {
         if (prop.indexOf('_') === 0) {
           throw new Error('Access denied');
         } else {
-          delete target[prop];
-          return true;
+          this._propsChanged = true;
+          // delete target[prop];
+          return Reflect.deleteProperty(target, prop);
         }
       },
-      ownKeys(target: IProps) {
+      ownKeys(target: T) {
         return Object.keys(target).filter((key) => !key.startsWith('_'));
       },
     };
