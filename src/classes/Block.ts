@@ -150,9 +150,9 @@ export abstract class Block {
     }
     if (this._propsChanged) {
       this.eventBus().emit(Block.EVENTS.FLOW_CDU, this._meta.props, this.props);
-      this._propsChanged = false;
       // save newProps to _meta
       Object.assign(this._meta.props, nextProps);
+      this._propsChanged = false;
     }
   }
 

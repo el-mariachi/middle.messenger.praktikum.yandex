@@ -67,5 +67,5 @@ export class Login extends Block {
 }
 
 setTimeout(() => {
-  pageForm.inputs[0].focus();
+  pageForm.inputs['login'].focus();
 }, 10);

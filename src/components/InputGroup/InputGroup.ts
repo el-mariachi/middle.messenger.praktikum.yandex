@@ -31,6 +31,9 @@ export class InputGroup extends Block {
   public focus() {
     this._input.focus();
   }
+  setError(errorMessage: string): void {
+    //
+  }
   render(): DocumentFragment {
     return this.insertChildren(groupTemplate, this.props);
   }

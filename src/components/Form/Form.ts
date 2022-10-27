@@ -8,9 +8,13 @@ export interface IFormProps extends IProps {
   buttonList: Array<IProps>;
 }
 
+type NamedInputs = {
+  [k: string]: InputGroup;
+};
+
 export class Form extends Block {
   public props!: IFormProps;
-  public inputs!: InputGroup[];
+  public inputs!: NamedInputs;
   public buttons!: IChildren[];
   constructor(props: IFormProps) {
     const classList = ['Form', 'Profile-Form'];
@@ -20,8 +24,9 @@ export class Form extends Block {
     // make sure inputs and buttons are processed as arrays
     const inputData = [this.props.inputList].flat(1);
     const buttonData = [this.props.buttonList].flat(1);
-    this.inputs = inputData.map((input) => new InputGroup({ ...input }));
-    this.children.inputs = this.inputs;
+    const inputMap = new Map(inputData.map((input) => [input.name, new InputGroup({ ...input })]));
+    this.inputs = Object.fromEntries(inputMap);
+    this.children.inputs = Object.values(this.inputs);
     this.children.buttons = buttonData.map((button) => new Button(button.tagName, button));
     super.init();
   }
