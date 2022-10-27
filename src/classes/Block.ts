@@ -8,15 +8,16 @@ interface IEventBusGetter {
 type EventsProp = {
   [k: string]: (event: Event) => unknown;
 };
-interface IChildren {
+export interface IChildren {
   [k: string]: Block | Block[];
 }
 
-export interface IAttributes {
-  [k: string]: string | boolean;
-}
+export type IAttributes = {
+  [k: string]: string | boolean | undefined;
+};
 export interface IProps {
   [k: string]: unknown;
+  tagName?: string;
   events?: EventsProp;
   classList?: string[];
   attributes?: IAttributes;
@@ -307,7 +308,7 @@ export abstract class Block {
     classList && element.classList.add(...classList);
     attributes &&
       Object.entries(attributes).forEach(([attrName, attrVal]) => {
-        if (typeof attrVal === 'boolean') {
+        if (typeof attrVal === 'boolean' || attrVal === undefined) {
           attrVal = attrName;
         }
         element.setAttribute(attrName, attrVal);

@@ -1,5 +1,6 @@
-import { Block } from '../../classes/Block';
-import Form, { IFormProps } from '../../components/Form';
+import { Block, IProps } from '../../classes/Block';
+import Form from '../../components/Form';
+import { logForm } from '../../utils/logForm';
 import pageTemplate from './login.hbs';
 
 const pageName = 'Вход';
@@ -25,9 +26,38 @@ const inputs = [
   },
 ];
 
-const pageForm = new Form({ inputList: inputs, formName: pageName });
+const buttons = [
+  {
+    tagName: 'input',
+    attributes: {
+      type: 'submit',
+      name: 'submit',
+      value: 'Войти',
+    },
+    classList: ['Submit', 'Form-Submit'],
+  },
+  {
+    attributes: {
+      name: 'cancel',
+      type: 'button',
+    },
+    text: 'Нет аккаунта?',
+    classList: ['Link', 'PageLink', 'PageLink_to_login'],
+  },
+];
+
+const formData = {
+  formName: pageName,
+  inputList: inputs,
+  buttonList: buttons,
+  events: {
+    submit: logForm,
+  },
+};
+
+const pageForm = new Form(formData);
 export class Login extends Block {
-  constructor(props: IFormProps) {
+  constructor(props: IProps) {
     const classList = ['Page', 'Page_type_profile'];
     super('main', { ...props, classList, pageForm });
   }
@@ -35,3 +65,7 @@ export class Login extends Block {
     return this.insertChildren(pageTemplate, this.props);
   }
 }
+
+setTimeout(() => {
+  pageForm.inputs[0].focus();
+}, 10);

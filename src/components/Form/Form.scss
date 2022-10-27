@@ -61,7 +61,7 @@
 
 .Form-Input:focus {
   font-size: 1.6em;
-  border-bottom-color: vars.$siteBlue;
+  border-bottom: 1px solid vars.$siteBlue;
 }
 
 .Form-Submit {

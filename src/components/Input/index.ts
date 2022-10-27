@@ -1,5 +1,4 @@
 import './Input.scss';
-import { Input, IInputProps } from './Input';
+import { Input } from './Input';
 
 export default Input;
-export { IInputProps };

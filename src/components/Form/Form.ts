@@ -1,21 +1,28 @@
-import { Block, IProps } from '../../classes/Block';
+import { Block, IProps, IChildren } from '../../classes/Block';
 import InputGroup from '../../components/InputGroup';
+import Button from '../Button';
 import formTemplate from './Form.hbs';
 
 export interface IFormProps extends IProps {
   inputList: Array<{ [k: string]: string }>;
+  buttonList: Array<IProps>;
 }
 
 export class Form extends Block {
+  public props!: IFormProps;
+  public inputs!: InputGroup[];
+  public buttons!: IChildren[];
   constructor(props: IFormProps) {
     const classList = ['Form', 'Profile-Form'];
     super('form', { ...props, classList, settings: { hasID: true } });
   }
   init(): void {
-    const inputClassList = ['Form-Input'];
-    if (Array.isArray(this.props.inputList)) {
-      this.children.inputs = this.props.inputList.map((inputData) => new InputGroup({ ...inputData, inputClassList }));
-    }
+    // make sure inputs and buttons are processed as arrays
+    const inputData = [this.props.inputList].flat(1);
+    const buttonData = [this.props.buttonList].flat(1);
+    this.inputs = inputData.map((input) => new InputGroup({ ...input }));
+    this.children.inputs = this.inputs;
+    this.children.buttons = buttonData.map((button) => new Button(button.tagName, button));
     super.init();
   }
   componentDidUpdate(oldProps: IProps, newProps: IProps): boolean {
