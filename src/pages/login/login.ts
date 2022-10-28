@@ -1,5 +1,5 @@
 import { Block, IProps } from '../../classes/Block';
-import Form from '../../components/Form';
+import Form from '../../components/ProfileForm';
 import { logForm } from '../../utils/logForm';
 import pageTemplate from './login.hbs';
 
@@ -14,6 +14,7 @@ const inputs = [
     placeholder: 'Логин',
     accept: '',
     value: '',
+    test: /^(?=.*[a-zA-Z])[a-zA-Z0-9_-]{3,20}$/,
   },
   {
     name: 'password',
@@ -23,6 +24,7 @@ const inputs = [
     placeholder: 'Пароль',
     accept: '',
     value: '',
+    test: /^(?=.*\d)(?=.*[A-ZА-Я]).{8,40}$/,
   },
 ];
 
@@ -67,6 +69,8 @@ export class Login extends Block {
 }
 
 setTimeout(() => {
-  pageForm.inputs['login'].focus();
-  console.log(pageForm.inputs['password'].props);
+  console.log(pageForm.isValid());
+
+  // pageForm.inputs['login'].focus();
+  // pageForm.inputs['login'].hideError();
 }, 10);

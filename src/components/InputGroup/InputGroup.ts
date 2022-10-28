@@ -6,33 +6,81 @@ export type InputProps = IProps & {
   type: string;
   name: string;
   placeholder: string;
+  test?: RegExp;
+  valid?: boolean;
 };
 
 export class InputGroup extends Block {
   public props!: InputProps;
   protected _input!: Input;
+  protected _label: HTMLElement | null = null;
+  protected _error: HTMLElement | null = null;
+  protected _regex: RegExp | null;
+  protected _valid = true;
   constructor(props: InputProps) {
-    super('div', { ...props, classList: ['Input-Group'], settings: { hasID: true } });
+    super('div', { ...props, classList: ['Input-Group'], settings: { hasID: true }, valid: true });
+    this._regex = this.props.test ? this.props.test : null;
   }
   set errorMessage(message: string) {
     this.setProps({
       errorMessage: message,
     });
   }
+  get valid(): boolean {
+    this._valid = this._regex ? this._regex.test(this._input.getContent().value) : true;
+    this.showValidity();
+    return this._valid;
+  }
+  set valid(value: boolean) {
+    this._valid = value;
+    this.showValidity();
+  }
+  showValidity() {
+    if (this._valid) {
+      this.hideError();
+    } else {
+      this.showError();
+    }
+  }
+  showError(): void {
+    this._error && this._error.classList.add('Input_errorvisible');
+  }
+  hideError(): void {
+    this._error && this._error.classList.remove('Input_errorvisible');
+  }
+  showLabel() {
+    this._label && this._label.classList.remove('Input_labelhidden');
+  }
+  hideLabel() {
+    this._label && this._input.getContent().value === '' && this._label.classList.add('Input_labelhidden');
+  }
   init(): void {
     const { type, name, placeholder } = this.props;
     const inputClassList = ['Form-Input'];
-
+    const events = {
+      focus: () => {
+        this.showLabel();
+        this.valid = true;
+      },
+      blur: () => {
+        this.hideLabel();
+        return this.valid;
+      },
+    };
     const attributes: IAttributes = {
       type,
       name,
       id: name,
       placeholder,
     };
-    const inputProps: IProps = { attributes, classList: inputClassList };
+    const inputProps: IProps = { attributes, events, classList: inputClassList };
     this._input = new Input(inputProps);
     this.children.input = this._input;
     super.init();
+  }
+  componentDidMount(): void {
+    this._label = this.element.querySelector('.Input-Label');
+    this._error = this.element.querySelector('.Input-Error');
   }
   public focus() {
     this._input.focus();

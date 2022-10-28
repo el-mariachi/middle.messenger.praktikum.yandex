@@ -17,7 +17,10 @@ export class Form extends Block {
   public inputs!: NamedInputs;
   public buttons!: IChildren[];
   constructor(props: IFormProps) {
-    const classList = ['Form', 'Profile-Form'];
+    let classList = ['Form'];
+    if (props.classList) {
+      classList = classList.concat(props.classList);
+    }
     super('form', { ...props, classList, settings: { hasID: true } });
   }
   init(): void {
@@ -39,6 +42,11 @@ export class Form extends Block {
       }
     }
     return true;
+  }
+  isValid() {
+    return Object.values(this.inputs)
+      .map((input) => input.valid)
+      .reduce((result, current) => result && current, true);
   }
   render(): DocumentFragment {
     return this.insertChildren(formTemplate, this.props);

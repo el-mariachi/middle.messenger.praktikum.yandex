@@ -8,6 +8,9 @@ export class Input extends Block {
     }
     super('input', { ...props, classList, settings: { hasID: true } });
   }
+  getContent(): HTMLInputElement {
+    return this._element as HTMLInputElement;
+  }
   public focus() {
     this.element.focus();
   }
