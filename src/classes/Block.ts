@@ -167,7 +167,7 @@ export abstract class Block {
     }
     Object.keys(events).forEach((eventName) => {
       if (!(typeof events[eventName] === 'function')) {
-        throw new Error(`Event handler for event ${eventName} in ${this.constructor.name}`);
+        throw new Error(`Event handler for event ${eventName} in ${this.constructor.name} is not a function`);
       }
       this._element.addEventListener(eventName, events[eventName]);
     });

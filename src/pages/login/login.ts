@@ -1,6 +1,7 @@
 import { Block, IProps } from '../../classes/Block';
 import Form from '../../components/ProfileForm';
 import { logForm } from '../../utils/logForm';
+import { cancelForm } from '../../utils/cancelForm';
 import pageTemplate from './login.hbs';
 
 const pageName = 'Вход';
@@ -42,9 +43,13 @@ const buttons = [
     attributes: {
       name: 'cancel',
       type: 'button',
+      'data-url': '/up_/up_/src/pages/sign_up/sign_up.html',
     },
     text: 'Нет аккаунта?',
     classList: ['Link', 'PageLink', 'PageLink_to_login'],
+    events: {
+      click: cancelForm,
+    },
   },
 ];
 
@@ -69,8 +74,7 @@ export class Login extends Block {
 }
 
 setTimeout(() => {
-  console.log(pageForm.isValid());
-
-  // pageForm.inputs['login'].focus();
+  /* eslint-disable-next-line no-console */
+  pageForm.inputs['login'].focus();
   // pageForm.inputs['login'].hideError();
 }, 10);

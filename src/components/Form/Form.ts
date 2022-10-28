@@ -16,6 +16,7 @@ export class Form extends Block {
   public props!: IFormProps;
   public inputs!: NamedInputs;
   public buttons!: IChildren[];
+  protected _userSubmitHandler: EventListener | undefined;
   constructor(props: IFormProps) {
     let classList = ['Form'];
     if (props.classList) {
@@ -31,6 +32,27 @@ export class Form extends Block {
     this.inputs = Object.fromEntries(inputMap);
     this.children.inputs = Object.values(this.inputs);
     this.children.buttons = buttonData.map((button) => new Button(button.tagName, button));
+
+    // handling submit and validation
+    const { events } = this.props;
+    /* eslint-disable-next-line @typescript-eslint/no-this-alias */
+    const instance = this;
+    // our event handler
+    function submit(this: HTMLFormElement, event: Event): boolean {
+      event.preventDefault();
+      if (instance.isValid()) {
+        instance._userSubmitHandler && instance._userSubmitHandler.call(this, event);
+        return true;
+      } else {
+        instance._userSubmitHandler && instance._userSubmitHandler.call(null, event);
+        return false;
+      }
+    }
+    if (events && events.submit) {
+      this._userSubmitHandler = events.submit;
+      // replace user handler with ours
+      events.submit = submit;
+    }
     super.init();
   }
   componentDidUpdate(oldProps: IProps, newProps: IProps): boolean {
