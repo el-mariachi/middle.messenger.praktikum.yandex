@@ -21,11 +21,15 @@ export class Form extends Block {
     super('form', { ...props, classList, settings: { hasID: true } });
   }
   init(): void {
-    // make sure inputs and buttons are processed as arrays
-    const inputData = [this.props.inputList].flat(1);
-    const buttonData = [this.props.buttonList].flat(1);
-    const inputMap = new Map(inputData.map((input) => [input.name, new InputGroup({ ...input })]));
-    this.inputs = Object.fromEntries(inputMap);
+    // make sure inputs and buttons are processed as (flat) arrays
+    const inputData = [this.props.inputList].flat();
+    const buttonData = [this.props.buttonList].flat();
+    // create inputs object with Array.reduce()
+    const inputsReducer = (result: NamedInputs, current: { [k: string]: string }): NamedInputs => ({
+      ...result,
+      [current.name]: new InputGroup({ ...current }),
+    });
+    this.inputs = inputData.reduce(inputsReducer, {});
     this.children.inputs = Object.values(this.inputs);
     this.children.buttons = buttonData.map((button) => new Button(button.tagName, button));
     super.init();
