@@ -4,8 +4,8 @@ import Button from '../Button';
 import formTemplate from './Form.hbs';
 
 export interface IFormProps extends IProps {
-  inputList: Array<{ [k: string]: string }>;
-  buttonList: Array<IProps>;
+  inputList: InputProps[];
+  buttonList: IProps[];
 }
 
 type NamedInputs = {
@@ -24,12 +24,8 @@ export class Form extends Block {
     // make sure inputs and buttons are processed as (flat) arrays
     const inputData = [this.props.inputList].flat();
     const buttonData = [this.props.buttonList].flat();
-    // create inputs object with Array.reduce()
-    const inputsReducer = (result: NamedInputs, current: InputProps): NamedInputs => ({
-      ...result,
-      [current.name]: new InputGroup({ ...current }),
-    });
-    this.inputs = inputData.reduce(inputsReducer, {});
+    const inputMap = new Map(inputData.map((input) => [input.name, new InputGroup({ ...input })]));
+    this.inputs = Object.fromEntries(inputMap);
     this.children.inputs = Object.values(this.inputs);
     this.children.buttons = buttonData.map((button) => new Button(button.tagName, button));
     super.init();
