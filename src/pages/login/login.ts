@@ -68,4 +68,5 @@ export class Login extends Block {
 
 setTimeout(() => {
   pageForm.inputs['login'].focus();
+  console.log(pageForm.inputs['password'].props);
 }, 10);

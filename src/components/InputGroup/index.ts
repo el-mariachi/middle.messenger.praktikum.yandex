@@ -1,4 +1,5 @@
 import './InputGroup.scss';
-import { InputGroup } from './InputGroup';
+import { InputGroup, InputProps } from './InputGroup';
 
 export default InputGroup;
+export { InputProps };

@@ -2,16 +2,22 @@ import { Block, IProps, IAttributes } from '../../classes/Block';
 import Input from '../Input';
 import groupTemplate from './InputGroup.hbs';
 
+export type InputProps = IProps & {
+  type: string;
+  name: string;
+  placeholder: string;
+};
+
 export class InputGroup extends Block {
-  public props = {
-    type: 'text',
-    name: '',
-    placeholder: '',
-    inputClassList: [],
-  };
+  public props!: InputProps;
   protected _input!: Input;
-  constructor(props: IProps) {
+  constructor(props: InputProps) {
     super('div', { ...props, classList: ['Input-Group'], settings: { hasID: true } });
+  }
+  set errorMessage(message: string) {
+    this.setProps({
+      errorMessage: message,
+    });
   }
   init(): void {
     const { type, name, placeholder } = this.props;
@@ -31,9 +37,7 @@ export class InputGroup extends Block {
   public focus() {
     this._input.focus();
   }
-  setError(errorMessage: string): void {
-    //
-  }
+
   render(): DocumentFragment {
     return this.insertChildren(groupTemplate, this.props);
   }

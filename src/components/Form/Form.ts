@@ -1,5 +1,5 @@
 import { Block, IProps, IChildren } from '../../classes/Block';
-import InputGroup from '../../components/InputGroup';
+import InputGroup, { InputProps } from '../../components/InputGroup';
 import Button from '../Button';
 import formTemplate from './Form.hbs';
 
@@ -25,7 +25,7 @@ export class Form extends Block {
     const inputData = [this.props.inputList].flat();
     const buttonData = [this.props.buttonList].flat();
     // create inputs object with Array.reduce()
-    const inputsReducer = (result: NamedInputs, current: { [k: string]: string }): NamedInputs => ({
+    const inputsReducer = (result: NamedInputs, current: InputProps): NamedInputs => ({
       ...result,
       [current.name]: new InputGroup({ ...current }),
     });
