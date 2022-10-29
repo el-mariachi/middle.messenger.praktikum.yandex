@@ -16,7 +16,7 @@ export class Form extends Block {
   public props!: IFormProps;
   public inputs!: NamedInputs;
   public buttons!: IChildren[];
-  protected _userSubmitHandler: EventListener | undefined;
+  protected _userSubmitHandler: EventListener | EventListener[] | undefined;
   constructor(props: IFormProps) {
     let classList = ['Form'];
     if (props.classList) {
@@ -45,12 +45,20 @@ export class Form extends Block {
     function submit(this: HTMLFormElement, event: Event): boolean {
       event.preventDefault();
       if (instance.isValid()) {
-        instance._userSubmitHandler && instance._userSubmitHandler.call(this, event);
+        if (instance._userSubmitHandler) {
+          [instance._userSubmitHandler].flat().forEach((handler) => {
+            handler.call(this, event);
+          });
+        }
         return true;
       } else {
-        instance._userSubmitHandler && instance._userSubmitHandler.call(null, event);
-        return false;
+        if (instance._userSubmitHandler) {
+          [instance._userSubmitHandler].flat().forEach((handler) => {
+            handler.call(null, event);
+          });
+        }
       }
+      return false;
     }
     if (events && events.submit) {
       this._userSubmitHandler = events.submit;

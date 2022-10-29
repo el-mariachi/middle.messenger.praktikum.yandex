@@ -5,8 +5,12 @@ interface IEventBusGetter {
   (): EventBus;
 }
 
+type Listener = {
+  (event: Event): unknown;
+};
+
 type EventsProp = {
-  [k: string]: (event: Event) => unknown;
+  [k: string]: Listener | Listener[];
 };
 export interface IChildren {
   [k: string]: Block | Block[];
@@ -165,11 +169,13 @@ export abstract class Block {
     if (!events) {
       return;
     }
-    Object.keys(events).forEach((eventName) => {
-      if (!(typeof events[eventName] === 'function')) {
-        throw new Error(`Event handler for event ${eventName} in ${this.constructor.name} is not a function`);
-      }
-      this._element.addEventListener(eventName, events[eventName]);
+    // An event prop may be an array of listeners. Flatten it.
+    Object.entries(events).forEach(([eventName, arrayOrHandler]) => {
+      [arrayOrHandler].flat().forEach((eventHandler) => {
+        if (typeof eventHandler === 'function') {
+          this._element.addEventListener(eventName, eventHandler);
+        }
+      });
     });
   }
 
@@ -178,8 +184,12 @@ export abstract class Block {
     if (!events) {
       return;
     }
-    Object.keys(events).forEach((eventName) => {
-      this._element.removeEventListener(eventName, events[eventName]);
+    Object.entries(events).forEach(([eventName, arrayOrHandler]) => {
+      [arrayOrHandler].flat().forEach((eventHandler) => {
+        if (typeof eventHandler === 'function') {
+          this._element.removeEventListener(eventName, eventHandler);
+        }
+      });
     });
   }
 
