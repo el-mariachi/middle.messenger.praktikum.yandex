@@ -1,4 +1,4 @@
-import { Block, IProps, IAttributes } from '../../classes/Block';
+import { Block, IProps, EventsProp, IAttributes } from '../../classes/Block';
 import Input from '../Input';
 import groupTemplate from './InputGroup.hbs';
 
@@ -18,6 +18,7 @@ export class InputGroup extends Block {
   protected _regex: RegExp | null;
   protected _valid = true;
   constructor(props: InputProps) {
+    // intercept outer eventListeners
     super('div', { ...props, classList: ['Input-Group'], settings: { hasID: true }, valid: true });
     this._regex = this.props.test ? this.props.test : null;
   }
@@ -61,9 +62,13 @@ export class InputGroup extends Block {
     this._label && this._input.getContent().value === '' && this._label.classList.add('Input_labelhidden');
   }
   init(): void {
-    const { type, name, placeholder } = this.props;
+    // We can extract events from props before the super() call
+    const { type, name, placeholder, events } = this.props;
+    // We're not adding any event listeners on the outer DOM element of InputGroup
+    // passing them all down to the input element
+    delete this.props.events;
     const inputClassList = ['Form-Input'];
-    const events = {
+    const localEvents: EventsProp = {
       focus: () => {
         this.showLabel();
         this.valid = true;
@@ -73,13 +78,22 @@ export class InputGroup extends Block {
         return this.valid;
       },
     };
+    Object.entries(localEvents).forEach(([eventName, localHandler]) => {
+      // merge in outer events
+      if (events && events[eventName]) {
+        localEvents[eventName] = [...[events[eventName]].flat()].concat(localHandler);
+        delete events[eventName]; // we don't need it anymore
+      }
+    });
+    // Pass down what's left of outer events
+    Object.assign(localEvents, events);
     const attributes: IAttributes = {
       type,
       name,
       id: name,
       placeholder,
     };
-    const inputProps: IProps = { attributes, events, classList: inputClassList };
+    const inputProps: IProps = { attributes, events: localEvents, classList: inputClassList };
     this._input = new Input(inputProps);
     this.children.input = this._input;
     super.init();

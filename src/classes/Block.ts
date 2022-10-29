@@ -9,7 +9,7 @@ type Listener = {
   (event: Event): unknown;
 };
 
-type EventsProp = {
+export type EventsProp = {
   [k: string]: Listener | Listener[];
 };
 export interface IChildren {

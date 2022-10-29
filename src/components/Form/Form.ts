@@ -32,7 +32,7 @@ export class Form extends Block {
     this.inputs = Object.fromEntries(inputMap);
     // set up password2
     if (this.inputs.password && this.inputs.password2) {
-      // TODO set password2 regex to password valu
+      // TODO set password2 regex to password value
     }
     this.children.inputs = Object.values(this.inputs);
     this.children.buttons = buttonData.map((button) => new Button(button.tagName, button));
