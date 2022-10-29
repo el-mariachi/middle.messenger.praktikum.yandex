@@ -27,6 +27,12 @@ export class InputGroup extends Block {
       errorMessage: message,
     });
   }
+  get validatorRE() {
+    return this._regex;
+  }
+  set validator(value: string) {
+    this._regex = new RegExp(`^${value}$`);
+  }
   get value(): string {
     return this._input.getContent().value;
   }

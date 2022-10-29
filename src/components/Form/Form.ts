@@ -25,22 +25,31 @@ export class Form extends Block {
     super('form', { ...props, classList, settings: { hasID: true } });
   }
   init(): void {
+    /* eslint-disable-next-line @typescript-eslint/no-this-alias */
+    const instance = this;
+    function passwordsEqual(this: HTMLInputElement) {
+      instance.inputs.password2.validator = this.value.replace(/([$()*+.?[^{|\\])/g, '\\$1');
+    }
     // make sure inputs and buttons are processed as (flat) arrays
     const inputData = [this.props.inputList].flat();
-    const buttonData = [this.props.buttonList].flat();
+    // set up password2
+    const forPassword = inputData.filter((inp) => inp.name === 'password')[0];
+    const forPassword2 = inputData.filter((inp) => inp.name === 'password2')[0];
+    if (forPassword && forPassword2) {
+      forPassword.events = {
+        blur: passwordsEqual,
+      };
+    }
     const inputMap = new Map(inputData.map((input) => [input.name, new InputGroup({ ...input })]));
     this.inputs = Object.fromEntries(inputMap);
-    // set up password2
-    if (this.inputs.password && this.inputs.password2) {
-      // TODO set password2 regex to password value
-    }
+
     this.children.inputs = Object.values(this.inputs);
+
+    const buttonData = [this.props.buttonList].flat();
     this.children.buttons = buttonData.map((button) => new Button(button.tagName, button));
 
     // handling submit and validation
     const { events } = this.props;
-    /* eslint-disable-next-line @typescript-eslint/no-this-alias */
-    const instance = this;
     // our event handler
     function submit(this: HTMLFormElement, event: Event): boolean {
       event.preventDefault();
@@ -60,6 +69,7 @@ export class Form extends Block {
       }
       return false;
     }
+
     if (events && events.submit) {
       this._userSubmitHandler = events.submit;
       // replace user handler with ours
