@@ -30,6 +30,10 @@ export class Form extends Block {
     const buttonData = [this.props.buttonList].flat();
     const inputMap = new Map(inputData.map((input) => [input.name, new InputGroup({ ...input })]));
     this.inputs = Object.fromEntries(inputMap);
+    // set up password2
+    if (this.inputs.password && this.inputs.password2) {
+      // TODO set password2 regex to password valu
+    }
     this.children.inputs = Object.values(this.inputs);
     this.children.buttons = buttonData.map((button) => new Button(button.tagName, button));
 

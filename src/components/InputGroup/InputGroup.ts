@@ -26,6 +26,12 @@ export class InputGroup extends Block {
       errorMessage: message,
     });
   }
+  get value(): string {
+    return this._input.getContent().value;
+  }
+  set value(newValue: string) {
+    this._input.getContent().value = newValue;
+  }
   get valid(): boolean {
     this._valid = this._regex ? this._regex.test(this._input.getContent().value) : true;
     this.showValidity();
