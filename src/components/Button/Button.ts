@@ -8,6 +8,6 @@ export class Button extends Block {
   render(): DocumentFragment {
     return this._element.nodeName === 'INPUT'
       ? document.createDocumentFragment()
-      : this.insertChildren(buttonTemplate, this.props);
+      : this.compile(buttonTemplate, this.props);
   }
 }

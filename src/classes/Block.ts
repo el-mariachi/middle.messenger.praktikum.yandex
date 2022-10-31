@@ -194,7 +194,7 @@ export abstract class Block {
   }
 
   // we will generate markup in this method and then call it from render()
-  insertChildren(template: TemplateDelegate, props: IProps): DocumentFragment {
+  compile(template: TemplateDelegate, props: IProps): DocumentFragment {
     const stubbedProps = { ...props }; // make a copy of props. we'll modify that object
     // Iterate over children and create props for each child.
     // Prop name is child name, prop value is a string containing markup,
@@ -249,7 +249,7 @@ export abstract class Block {
   render(): DocumentFragment {
     // Should be overridden in descendatns. Returns DocumentFragment.
     const template = () => '';
-    return this.insertChildren(template, this.props);
+    return this.compile(template, this.props);
     // return document.createDocumentFragment();
   }
 

@@ -113,6 +113,6 @@ export class InputGroup extends Block {
   }
 
   render(): DocumentFragment {
-    return this.insertChildren(groupTemplate, this.props);
+    return this.compile(groupTemplate, this.props);
   }
 }

@@ -12,6 +12,6 @@ export default class Button extends Block {
   }
 
   render() {
-    return this.insertChildren(template, this.props);
+    return this.compile(template, this.props);
   }
 }

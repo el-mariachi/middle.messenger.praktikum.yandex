@@ -120,6 +120,6 @@ export class SignUp extends Block {
     super('main', { ...props, classList, pageForm });
   }
   render(): DocumentFragment {
-    return this.insertChildren(pageTemplate, this.props);
+    return this.compile(pageTemplate, this.props);
   }
 }

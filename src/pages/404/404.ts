@@ -15,6 +15,6 @@ export class Page404 extends Block {
   }
 
   render(): DocumentFragment {
-    return this.insertChildren(ErrorPageTemplate, this.props);
+    return this.compile(ErrorPageTemplate, this.props);
   }
 }

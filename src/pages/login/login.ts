@@ -69,12 +69,10 @@ export class Login extends Block {
     super('main', { ...props, classList, pageForm });
   }
   render(): DocumentFragment {
-    return this.insertChildren(pageTemplate, this.props);
+    return this.compile(pageTemplate, this.props);
   }
 }
 
 setTimeout(() => {
-  /* eslint-disable-next-line no-console */
   pageForm.inputs['login'].focus();
-  // pageForm.inputs['login'].hideError();
 }, 10);

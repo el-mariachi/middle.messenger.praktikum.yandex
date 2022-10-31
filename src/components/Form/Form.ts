@@ -93,6 +93,6 @@ export class Form extends Block {
       .reduce((result, current) => result && current, true);
   }
   render(): DocumentFragment {
-    return this.insertChildren(formTemplate, this.props);
+    return this.compile(formTemplate, this.props);
   }
 }

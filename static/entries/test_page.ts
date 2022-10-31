@@ -29,8 +29,8 @@ export default class Pg extends Block {
   }
 
   render() {
-    // return this.insertChildren(template, this.props);
-    return this.insertChildren(template, {
+    // return this.compile(template, this.props);
+    return this.compile(template, {
       userName: this.props.userName,
       button: this.props.button,
     });
