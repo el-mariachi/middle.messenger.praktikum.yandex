@@ -9,7 +9,7 @@ input:-webkit-autofill:focus {
 
 .Input {
   color: vars.$greyInput;
-  border: none;
+  // border: transparent;
   line-height: 2rem;
 }
 
@@ -23,4 +23,5 @@ input:-webkit-autofill:focus {
 
 .Input_theme_grey {
   background-color: vars.$grFill1;
+  border: transparent;
 }

@@ -104,7 +104,7 @@ const buttons = [
 ];
 
 const formData = {
-  formName: pageName,
+  formTitle: pageName,
   inputList: inputs,
   buttonList: buttons,
   events: {
