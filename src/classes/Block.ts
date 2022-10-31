@@ -16,6 +16,8 @@ export interface IChildren {
   [k: string]: Block | Block[];
 }
 
+export type ClassList = string[];
+
 export type IAttributes = {
   [k: string]: string | boolean | undefined;
 };
@@ -23,7 +25,7 @@ export interface IProps {
   [k: string]: unknown;
   tagName?: string;
   events?: EventsProp;
-  classList?: string[];
+  classList?: ClassList;
   attributes?: IAttributes;
   settings?: {
     [k: string]: unknown;
@@ -37,6 +39,10 @@ export abstract class Block {
     FLOW_CDU: 'flow:component-did-update',
     FLOW_RENDER: 'flow:render',
   };
+
+  static appendClassList(localClasses: ClassList, props: IProps) {
+    return props.classList ? localClasses.concat(props.classList) : localClasses;
+  }
 
   protected _element!: HTMLElement; // Using Definite assignment here because this._element is definitely assigned during init.
   protected _meta: { tagName: string; props?: IProps };
@@ -310,12 +316,14 @@ export abstract class Block {
     return element;
   }
 
-  show() {
+  show(param?: unknown) {
     this.getContent().style.display = 'block';
+    1 && param;
   }
 
-  hide() {
+  hide(param: unknown) {
     this.getContent().style.display = 'none';
+    1 && param;
   }
 }
 

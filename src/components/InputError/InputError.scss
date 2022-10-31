@@ -1,0 +1,23 @@
+@use '/static/styles/vars.scss';
+
+/* Input-Error */
+
+.Input-Error {
+  font-size: 1.2em;
+  font-weight: 300;
+  color: vars.$errMsg;
+  visibility: hidden;
+}
+
+.Input_errorvisible {
+  visibility: visible;
+}
+
+@media screen and (min-width: 376px) {
+  .Input-Error {
+    width: 100%;
+    justify-self: flex-end;
+    text-align: right;
+    order: 0;
+  }
+}

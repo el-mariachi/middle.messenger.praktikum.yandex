@@ -19,7 +19,12 @@ export class InputGroup extends Block {
   protected _valid = true;
   constructor(props: InputProps) {
     // intercept outer eventListeners
-    super('div', { ...props, classList: ['Input-Group'], settings: { hasID: true }, valid: true });
+    super('div', {
+      ...props,
+      classList: InputGroup.appendClassList(['Input-Group'], props),
+      settings: { hasID: true },
+      valid: true,
+    });
     this._regex = this.props.test ? this.props.test : null;
   }
   set errorMessage(message: string) {
