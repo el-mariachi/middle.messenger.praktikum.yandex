@@ -116,9 +116,12 @@ const validatorOptions: ValidatorOptions = {
     target: 'password2',
   },
 };
-
+/* eslint-disable @typescript-eslint/no-unused-vars */
+// @ts-expect-error unused var
 const validator = new FormValidator(inputData, validatorOptions);
+// @ts-expect-error unused var
 const sender = new FormSender();
+/* eslint-enable @typescript-eslint/no-unused-vars */
 
 const formData = {
   formTitle: pageName,
