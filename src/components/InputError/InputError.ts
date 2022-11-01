@@ -1,5 +1,6 @@
 import { Block, IProps } from '../../classes/Block';
 import { EventBusSingl } from '../../controllers/EventBusSingl';
+import inputErrorTemplage from './InputError.hbs';
 import { EVENTS } from '../../constants/events';
 
 type ErrorProps = {
@@ -17,7 +18,7 @@ export class InputError extends Block {
     appBus.on(EVENTS.INPUT_OK, this.hide.bind(this));
   }
   show({ name, errorMessage }: ErrorProps): void {
-    if (name === this.props.forInput) {
+    if (name === this.props.name) {
       errorMessage && this.setProps({ errorMessage });
       this._element.classList.add('Input_errorvisible');
     }
@@ -26,5 +27,8 @@ export class InputError extends Block {
     if (name === this.props.name) {
       this._element.classList.remove('Input_errorvisible');
     }
+  }
+  render(): DocumentFragment {
+    return this.compile(inputErrorTemplage, this.props);
   }
 }

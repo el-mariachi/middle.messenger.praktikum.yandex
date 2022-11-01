@@ -23,6 +23,8 @@ interface IEventBus {
   clear(eventName: string): void;
 }
 
+export type EventData = { name: string; value: string };
+
 export class EventBusSingl implements IEventBus {
   private _listeners: Ilistenres = {};
   private _callbackId = 0;
@@ -72,7 +74,7 @@ export class EventBusSingl implements IEventBus {
     const callbacksObj = this._listeners[eventName];
     if (!callbacksObj) {
       /* eslint-disable-next-line no-console */
-      return console.warn(`Event ${eventName} not found!`);
+      return console.warn(`Nobody cares about event ${eventName}!`);
     }
     Object.entries(callbacksObj).forEach(([callbackId, callback]) => {
       callback(...args);

@@ -1,17 +1,12 @@
 import { Block, IProps } from '../../classes/Block';
 import Form from '../../components/ProfileForm';
-import addInputHandlers from '../../utils/addInputHandlers';
-import createInput from '../../utils/createInput';
-import Button from '../../components/Button';
 import { logForm } from '../../utils/logForm';
 import { cancelForm } from '../../utils/cancelForm';
 import pageTemplate from './login.hbs';
-import { FormValidator } from '../../controllers/FormValidator';
 
-// page data (model)
 const pageName = 'Вход';
 
-const inputData = [
+const inputs = [
   {
     name: 'login',
     label: 'Логин',
@@ -33,8 +28,6 @@ const inputData = [
     test: /^(?=.*\d)(?=.*[A-ZА-Я]).{8,40}$/,
   },
 ];
-
-const inputs = inputData.map(addInputHandlers).map(createInput);
 
 const buttons = [
   {
@@ -58,27 +51,28 @@ const buttons = [
       click: cancelForm,
     },
   },
-].map((button) => new Button(button.tagName, button));
+];
 
 const formData = {
   formTitle: pageName,
-  inputs,
-  buttons,
+  inputList: inputs,
+  buttonList: buttons,
   events: {
     submit: logForm,
   },
 };
 
-const validator = new FormValidator(inputData);
-
 const pageForm = new Form(formData);
-
 export class Login extends Block {
   constructor(props: IProps) {
-    const classList = Login.appendClassList(['Page', 'Page_type_profile'], props);
+    const classList = ['Page', 'Page_type_profile'];
     super('main', { ...props, classList, pageForm });
   }
   render(): DocumentFragment {
     return this.compile(pageTemplate, this.props);
   }
 }
+
+setTimeout(() => {
+  pageForm.inputs['login'].focus();
+}, 10);

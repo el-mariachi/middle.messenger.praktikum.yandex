@@ -1,11 +1,9 @@
-import Form, { IFormProps } from '../Form';
+import Form from '../Form';
+import { IProps } from '../../classes/Block';
 
 export class ProfileForm extends Form {
-  constructor(props: IFormProps) {
-    let classList = ['Profile-Form'];
-    if (props.classList) {
-      classList = classList.concat(props.classList);
-    }
+  constructor(props: IProps) {
+    const classList = ProfileForm.appendClassList(['Profile-Form'], props);
     super({ ...props, classList });
   }
 }

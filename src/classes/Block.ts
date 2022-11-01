@@ -12,8 +12,8 @@ type Listener = {
 export type EventsProp = {
   [k: string]: Listener | Listener[];
 };
-export interface IChildren {
-  [k: string]: Block | Block[];
+export interface IChildren<T> {
+  [k: string]: T | T[];
 }
 
 export type ClassList = string[];
@@ -51,7 +51,7 @@ export abstract class Block {
   protected _id?: string;
   protected _attributes?: IAttributes;
   protected _classList?: string[];
-  public children: IChildren;
+  public children: IChildren<Block>;
   public props: IProps;
 
   constructor(public tagName = 'div', public allProps: IProps = {}) {
@@ -83,7 +83,7 @@ export abstract class Block {
   _isBlock = (prop: unknown): prop is Block => prop instanceof Block;
 
   _getChildren(propsAndChildren: IProps) {
-    const children: IChildren = {};
+    const children: IChildren<Block> = {};
     const props: IProps = {};
 
     Object.entries(propsAndChildren).forEach(([propName, propValue]) => {
