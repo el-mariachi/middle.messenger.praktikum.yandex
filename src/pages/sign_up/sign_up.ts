@@ -1,12 +1,17 @@
 import { Block, IProps } from '../../classes/Block';
 import Form from '../../components/ProfileForm';
-import { logForm } from '../../utils/logForm';
+import addInputHandlers from '../../utils/addInputHandlers';
+import createInput from '../../utils/createInput';
+import Button from '../../components/Button';
+import submitForm from '../../controllers/submitForm';
 import { cancelForm } from '../../utils/cancelForm';
 import pageTemplate from './sign_up.hbs';
+import { FormValidator, ValidatorOptions } from '../../controllers/FormValidator';
+import { FormSender } from '../../controllers/FormSender';
 
 const pageName = 'Регистрация';
 
-const inputs = [
+const inputData = [
   {
     name: 'first_name',
     label: 'Имя',
@@ -79,6 +84,8 @@ const inputs = [
   },
 ];
 
+const inputs = inputData.map(addInputHandlers).map(createInput);
+
 const buttons = [
   {
     tagName: 'input',
@@ -101,14 +108,24 @@ const buttons = [
       click: cancelForm,
     },
   },
-];
+].map((button) => new Button(button.tagName, button));
+
+const validatorOptions: ValidatorOptions = {
+  password: {
+    source: 'password',
+    target: 'password2',
+  },
+};
+
+const validator = new FormValidator(inputData, validatorOptions);
+const sender = new FormSender();
 
 const formData = {
   formTitle: pageName,
-  inputList: inputs,
-  buttonList: buttons,
+  inputs,
+  buttons,
   events: {
-    submit: logForm,
+    submit: submitForm,
   },
 };
 
@@ -116,7 +133,7 @@ const pageForm = new Form(formData);
 
 export class SignUp extends Block {
   constructor(props: IProps) {
-    const classList = ['Page', 'Page_type_profile'];
+    const classList = SignUp.appendClassList(['Page', 'Page_type_profile'], props);
     super('main', { ...props, classList, pageForm });
   }
   render(): DocumentFragment {

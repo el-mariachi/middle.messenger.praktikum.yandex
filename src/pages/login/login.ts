@@ -4,13 +4,11 @@ import addInputHandlers from '../../utils/addInputHandlers';
 import createInput from '../../utils/createInput';
 import Button from '../../components/Button';
 import submitForm from '../../controllers/submitForm';
-import { logForm } from '../../utils/logForm';
 import { cancelForm } from '../../utils/cancelForm';
 import pageTemplate from './login.hbs';
 import { FormValidator } from '../../controllers/FormValidator';
 import { FormSender } from '../../controllers/FormSender';
 
-// page data (model)
 const pageName = 'Вход';
 
 const inputData = [

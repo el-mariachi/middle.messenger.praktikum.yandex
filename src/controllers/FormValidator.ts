@@ -4,7 +4,7 @@ import { InputProps } from '../components/InputGroup';
 
 const appBus = new EventBusSingl();
 
-type ValidatorOptions = {
+export type ValidatorOptions = {
   password: {
     source: string;
     target: string;
