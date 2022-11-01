@@ -3,10 +3,12 @@ import Form from '../../components/ProfileForm';
 import addInputHandlers from '../../utils/addInputHandlers';
 import createInput from '../../utils/createInput';
 import Button from '../../components/Button';
+import submitForm from '../../controllers/submitForm';
 import { logForm } from '../../utils/logForm';
 import { cancelForm } from '../../utils/cancelForm';
 import pageTemplate from './login.hbs';
 import { FormValidator } from '../../controllers/FormValidator';
+import { FormSender } from '../../controllers/FormSender';
 
 // page data (model)
 const pageName = 'Вход';
@@ -60,16 +62,17 @@ const buttons = [
   },
 ].map((button) => new Button(button.tagName, button));
 
+const validator = new FormValidator(inputData);
+const sender = new FormSender();
+
 const formData = {
   formTitle: pageName,
   inputs,
   buttons,
   events: {
-    submit: logForm,
+    submit: submitForm,
   },
 };
-
-const validator = new FormValidator(inputData);
 
 const pageForm = new Form(formData);
 
