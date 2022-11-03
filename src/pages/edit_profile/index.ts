@@ -1,7 +1,7 @@
 import './edit_profile.scss';
-import { EditProfile } from './edit_profile';
+import { EditProfilePage } from './edit_profile';
 import { renderDOM } from '../../utils/renderDOM';
 
-const login = new EditProfile({});
+const login = new EditProfilePage({});
 
 renderDOM('#app', login);

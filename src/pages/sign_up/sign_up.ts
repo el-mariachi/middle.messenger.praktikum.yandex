@@ -134,9 +134,9 @@ const formData = {
 
 const pageForm = new Form(formData);
 
-export class SignUp extends Block {
+export class SignUpPage extends Block {
   constructor(props: IProps) {
-    const classList = SignUp.appendClassList(['Page', 'Page_type_profile'], props);
+    const classList = SignUpPage.appendClassList(['Page', 'Page_type_profile'], props);
     super('main', { ...props, classList, pageForm });
   }
   render(): DocumentFragment {

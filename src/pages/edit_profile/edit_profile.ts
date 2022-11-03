@@ -152,9 +152,9 @@ const formData = {
 
 const pageForm = new Form(formData);
 
-export class EditProfile extends Block {
+export class EditProfilePage extends Block {
   constructor(props: IProps) {
-    const classList = EditProfile.appendClassList(['Page', 'Page_type_profile'], props);
+    const classList = EditProfilePage.appendClassList(['Page', 'Page_type_profile'], props);
     super('main', { ...props, classList, pageForm });
   }
   render(): DocumentFragment {
