@@ -19,7 +19,7 @@ export interface IChildren<T> {
 export type ClassList = string[];
 
 export type IAttributes = {
-  [k: string]: string | boolean | undefined;
+  [k: string]: string | boolean | URL | undefined;
 };
 export interface IProps {
   [k: string]: unknown;
@@ -311,7 +311,7 @@ export abstract class Block {
         if (typeof attrVal === 'boolean' || attrVal === undefined) {
           attrVal = attrName;
         }
-        element.setAttribute(attrName, attrVal);
+        element.setAttribute(attrName, String(attrVal));
       });
     return element;
   }
