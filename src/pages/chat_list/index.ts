@@ -5,8 +5,8 @@ import ChatList from '~/src/components/ChatList';
 import MessageArea from '~/src/components/MessageArea';
 
 const chatList = new ChatList({});
-const chatArea = new MessageArea({});
+const messageArea = new MessageArea({});
 
-const chatListPage = new ChatListPage({ chatList, chatArea });
+const chatListPage = new ChatListPage({ chatList, messageArea });
 
 renderDOM('#app', chatListPage);

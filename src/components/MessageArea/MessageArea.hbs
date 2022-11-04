@@ -1,2 +1,47 @@
+{{#if selectedChat}}
+{{{messageAreaHeader}}}
+<div class="MessageArea-Content">
+  <div class="MessageArea-Date">28 августа</div>
+  <div class="Message MessageArea-Message Message_type_incoming">
+    <div class="Message-Bubble">
+      <div class="Message-Body Message_type_image">
+        <img class="Message-Image" src="/chat_pic.0202db4e.png" alt="">
+        <time class="Status Message-Status">15:44</time>
+      </div>
+      <p class="Message-Body Message_type_text">Gent. Incieni maioren derumen dicate pa solum apit
+        eate poribus quossin ciaero omnima ne sit, cusandundae magnatis reicabo repudae qui aut
+        fugit quae verunt ea suntiis citist vero et lamet at autecat emquia cus.<time
+          class="Status Message-Status">15:44</time></p>
+
+    </div>
+  </div>
+  <div class="Message MessageArea-Message Message_type_outgoing">
+    <div class="Message-Bubble">
+      <p class="Message-Body Message_type_text">Rlga asdofygls asyg<time
+          class="Status Message-Status Status_state_read">15:47</time></p>
+    </div>
+  </div>
+  <div class="Message MessageArea-Message Message_type_incoming">
+    <div class="Message-Bubble">
+      <p class="Message-Body Message_type_text">Gia acestibusam il invelest, tent maximin ctotat.<time
+          class="Status Message-Status">15:48</time></p>
+    </div>
+  </div>
+</div>
+<div class="Compose">
+  <nav class="Compose-Menu Menu Icon Icon_type_attach Menu_active">
+    <h3 class="OutlineHeader">Меню вложений</h3>
+    <ul class="Menu-Body Menu_bodytype_attach">
+      <li class="Menu-Item"><a class="Menu-Link Menu_linktype_photo" href="">Фото/видео</a></li>
+      <li class="Menu-Item"><a class="Menu-Link Menu_linktype_file" href="">Файл</a></li>
+    </ul>
+  </nav>
+  <form class="From Compose-Form" action="#">
+    <input class="NewMessage Input Input_theme_grey" type="text" name="message" placeholder="Сообщение">
+    <button class="Button Send Compose-Send Icon Icon_type_send"></button>
+  </form>
+</div>
+{{else}}
 <h5 class="OutlineHeader">Выбранный чат</h5>
 <p class="Hint">Выберите чат</p>
+{{/if}}

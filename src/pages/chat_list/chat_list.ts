@@ -1,4 +1,3 @@
-import './chat_list.scss';
 import { Block, IProps } from '../../classes/Block';
 import pageTemplate from './chat_list.hbs';
 import { EventBusSingl } from '~/src/controllers/EventBusSingl';

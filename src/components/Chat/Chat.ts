@@ -15,6 +15,7 @@ export class Chat extends Block {
   check(evt: Event) {
     if (evt.composedPath().includes(this._element)) {
       this.select();
+      appBus.emit(EVENTS.CHAT_SELECTED, this.props);
     } else {
       this.deselect();
     }
