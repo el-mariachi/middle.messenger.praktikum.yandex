@@ -6,7 +6,6 @@ export class Form extends Block {
     const classList = Form.appendClassList(['Form'], props);
     const settings = { hasID: true };
     super('form', { ...props, classList, settings });
-    // console.log(this.children);
   }
   componentDidMount(): void {
     this._element.querySelectorAll('.Input').forEach((input) => {

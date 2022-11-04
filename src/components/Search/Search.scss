@@ -24,3 +24,9 @@
   padding-left: 16px;
   outline: 1px solid vars.$greyInput;
 }
+
+.Search-Submit {
+  position: absolute;
+  opacity: 0;
+  left: -999em;
+}

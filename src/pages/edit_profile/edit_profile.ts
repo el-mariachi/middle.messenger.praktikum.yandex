@@ -136,9 +136,9 @@ const buttons = [
   },
 ].map((button) => new Button(button.tagName, button));
 
-// const imageUrl = '/chat_avatar.02df8291.png';
+const imageUrl = new URL('/static/images/chat_avatar.png', import.meta.url);
 
-const avatar = new Avatar({});
+const avatar = new Avatar({ imageUrl });
 
 const formData = {
   formTitle: profileName,
