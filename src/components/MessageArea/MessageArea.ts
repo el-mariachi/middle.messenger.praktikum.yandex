@@ -1,9 +1,9 @@
 import { Block, IProps } from '../../classes/Block';
-import chatAreaTemplate from './ChatArea.hbs';
+import chatAreaTemplate from './MessageArea.hbs';
 
-export class ChatArea extends Block {
+export class MessageArea extends Block {
   constructor(props: IProps) {
-    const classList = ChatArea.appendClassList(['ChatArea'], props);
+    const classList = MessageArea.appendClassList(['MessageArea'], props);
     const settings = { hasID: true };
     super('main', { ...props, classList, settings });
   }

@@ -10,9 +10,9 @@
 @use '/src/components/Button/Button.scss';
 @use '/src/components/NewMessage/NewMessage.scss';
 
-/* ChatArea */
+/* MessageArea */
 
-.ChatArea {
+.MessageArea {
   background-color: vars.$white;
   width: 100%;
   height: 100%;
@@ -21,7 +21,7 @@
   justify-content: center;
 }
 
-.ChatArea-Header {
+.MessageArea-Header {
   display: flex;
   justify-content: space-between;
   box-sizing: border-box;
@@ -30,23 +30,23 @@
   padding: 10px 20px;
 }
 
-.ChatArea-Menu {
+.MessageArea-Menu {
   margin: 3px 0 0;
 }
 
-.ChatArea-Info {
+.MessageArea-Info {
   flex: 1 0 100px;
   padding: 2px 2px 0 0;
 }
 
-.ChatArea-Content {
+.MessageArea-Content {
   flex: 1 0 200px;
   padding: 0 20px;
   overflow-y: auto;
   // height: calc(100vh - 102px);
 }
 
-.ChatArea-Date {
+.MessageArea-Date {
   font-size: 1.2em;
   line-height: 1.4rem;
   color: vars.$white;
@@ -61,8 +61,8 @@
 }
 
 @media screen and (min-width: 640px) {
-  /* ChatArea */
-  .ChatArea {
+  /* MessageArea */
+  .MessageArea {
     width: calc(60% - 1px);
   }
 }

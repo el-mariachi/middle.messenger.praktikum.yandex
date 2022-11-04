@@ -18,7 +18,7 @@ body {
   left: -9999em;
 }
 
-.Page_type_chatlist .ChatArea {
+.Page_type_chatlist .MessageArea {
   display: none;
 }
 
@@ -43,7 +43,7 @@ body {
 }
 
 @media screen and (min-width: 640px) {
-  .Page_type_chatlist .ChatArea {
+  .Page_type_chatlist .MessageArea {
     display: flex;
   }
 
