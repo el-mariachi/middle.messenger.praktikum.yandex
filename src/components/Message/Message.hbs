@@ -1,0 +1,10 @@
+<div class="Message-Bubble">
+  {{#if image}}
+  <div class="Message-Body Message_type_image">
+    <img class="Message-Image" src="{{ image.src }}" alt="{{ image.alt }}">
+    <time class="Status Message-Status {{ image.status }}">{{ timestamp }}</time>
+  </div>
+  {{/if}}
+  <p class="Message-Body Message_type_text">{{ text }}<time class="Status Message-Status {{ status }}">{{
+      timestamp }}</time></p>
+</div>

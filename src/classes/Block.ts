@@ -71,7 +71,7 @@ export abstract class Block {
       this._id = uniqueID();
       this.props = this._makePropsProxy({ ...props, __id: this._id });
     } else {
-      this.props = this._makePropsProxy({ ...props });
+      this.props = this._makePropsProxy(props);
     }
 
     this.eventBus = () => eventBus;

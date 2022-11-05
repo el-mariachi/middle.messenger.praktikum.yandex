@@ -12,6 +12,10 @@
   background-color: transparent;
   padding: 10px;
   border-top: 1px solid vars.$greyLine;
+  cursor: pointer;
+  &:hover {
+    background-color: vars.$lightBlue;
+  }
 }
 
 .Chat_selected {

@@ -4,6 +4,7 @@ import Menu from '~/src/components/Menu';
 import Button from '~/src/components/Button';
 import { EventBusSingl } from '~/src/controllers/EventBusSingl';
 import { EVENTS } from '~/src/constants/events';
+import Link from '~/src/components/Link';
 
 const appBus = new EventBusSingl();
 
@@ -25,10 +26,21 @@ const messageAreaMenuData: IProps = {
 
 const messageAreaMenu = new Menu(messageAreaMenuData);
 
+const chatListUrl = new URL('/src/pages/chat_list/chat_list.handlebars', import.meta.url);
+
+const chatListLink = new Link({
+  text: 'Назад',
+  classList: ['PageLink', 'PageLink_to_list'],
+  attributes: {
+    href: chatListUrl,
+  },
+});
+
 export class MessageAreaHeader extends Block {
   constructor(props: IProps) {
     const classList = MessageAreaHeader.appendClassList(['MessageArea-Header'], props);
-    super('div', { ...props, classList, messageAreaMenu });
+    const settings = { hasID: true };
+    super('div', { ...props, classList, settings, messageAreaMenu, chatListLink });
   }
   componentDidMount(): void {
     appBus.on(EVENTS.CHAT_SELECTED, this.setHeader.bind(this));

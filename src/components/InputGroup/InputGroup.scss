@@ -44,7 +44,7 @@
   visibility: hidden;
 }
 
-@media screen and (min-width: 376px) {
+@media screen and (min-width: vars.$formBreak) {
   /* Input */
 
   .Input-Label {

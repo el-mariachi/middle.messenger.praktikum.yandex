@@ -1,3 +1,4 @@
+@use '/static/styles/vars.scss';
 @use '/src/components/Picture/Picture.scss';
 
 body {
@@ -42,7 +43,7 @@ body {
   padding-top: 32px;
 }
 
-@media screen and (min-width: 640px) {
+@media screen and (min-width: vars.$pageBreak) {
   .Page_type_chatlist .MessageArea {
     display: flex;
   }

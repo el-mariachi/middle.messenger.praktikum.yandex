@@ -13,7 +13,7 @@
   visibility: visible;
 }
 
-@media screen and (min-width: 376px) {
+@media screen and (min-width: vars.$formBreak) {
   .Input-Error {
     width: 100%;
     justify-self: flex-end;

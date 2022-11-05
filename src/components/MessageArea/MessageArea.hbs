@@ -1,32 +1,9 @@
-{{#if selectedChat}}
 {{{messageAreaHeader}}}
-<div class="MessageArea-Content">
-  <div class="MessageArea-Date">28 августа</div>
-  <div class="Message MessageArea-Message Message_type_incoming">
-    <div class="Message-Bubble">
-      <div class="Message-Body Message_type_image">
-        <img class="Message-Image" src="/chat_pic.0202db4e.png" alt="">
-        <time class="Status Message-Status">15:44</time>
-      </div>
-      <p class="Message-Body Message_type_text">Gent. Incieni maioren derumen dicate pa solum apit
-        eate poribus quossin ciaero omnima ne sit, cusandundae magnatis reicabo repudae qui aut
-        fugit quae verunt ea suntiis citist vero et lamet at autecat emquia cus.<time
-          class="Status Message-Status">15:44</time></p>
-
-    </div>
-  </div>
-  <div class="Message MessageArea-Message Message_type_outgoing">
-    <div class="Message-Bubble">
-      <p class="Message-Body Message_type_text">Rlga asdofygls asyg<time
-          class="Status Message-Status Status_state_read">15:47</time></p>
-    </div>
-  </div>
-  <div class="Message MessageArea-Message Message_type_incoming">
-    <div class="Message-Bubble">
-      <p class="Message-Body Message_type_text">Gia acestibusam il invelest, tent maximin ctotat.<time
-          class="Status Message-Status">15:48</time></p>
-    </div>
-  </div>
+{{#if selectedChat}}
+<div class="MessageArea-Curent">
+  {{#each messages}}
+  {{{.}}}
+  {{/each}}
 </div>
 <div class="Compose">
   <nav class="Compose-Menu Menu Icon Icon_type_attach Menu_active">
