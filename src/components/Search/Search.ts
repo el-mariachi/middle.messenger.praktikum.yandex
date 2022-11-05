@@ -1,13 +1,13 @@
-import { Block, IProps } from '~/src/classes/Block';
-import { FormValidator } from '~/src/controllers/FormValidator';
-import Input from '~/src/components/Input';
-import { InputProps } from '~/src/components/InputGroup';
+import { Block, IProps } from '../../classes/Block';
+import { FormValidator } from '../../controllers/FormValidator';
+import Input from '../Input';
+import { InputProps } from '../InputGroup';
 import searchTemplate from './Search.hbs';
-import { EventBusSingl } from '~/src/controllers/EventBusSingl';
-import { EVENTS } from '~/src/constants/events';
-import submitForm from '~/src/controllers/submitForm';
-import prepInputAttrs from '~/src/utils/prepInputAttrs';
-import { FormSender } from '~/src/controllers/FormSender';
+import { EventBusSingl } from '../../controllers/EventBusSingl';
+import { EVENTS } from '../../constants/events';
+import submitForm from '../../controllers/submitForm';
+import prepInputAttrs from '../../utils/prepInputAttrs';
+import { FormSender } from '../../controllers/FormSender';
 
 const appBus = new EventBusSingl();
 

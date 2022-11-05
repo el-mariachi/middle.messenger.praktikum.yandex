@@ -1,8 +1,8 @@
-import { Block, IProps } from '~/src/classes/Block';
+import { Block, IProps } from '../../classes/Block';
 import composeTemplate from './Compose.hbs';
-import NewMessage from '~/src/components/NewMessage';
-import Menu from '~/src/components/Menu';
-import Button from '~/src/components/Button';
+import NewMessage from '../NewMessage';
+import Menu from '../Menu';
+import Button from '../Button';
 
 const photoLink = new Button('button', {
   text: 'Фото/Видео',

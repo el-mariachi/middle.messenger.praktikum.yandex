@@ -1,7 +1,7 @@
-import { Block, IProps } from '~/src/classes/Block';
+import { Block, IProps } from '../../classes/Block';
 import chatsTemplate from './Chats.hbs';
-import { EventBusSingl } from '~/src/controllers/EventBusSingl';
-import { EVENTS } from '~/src/constants/events';
+import { EventBusSingl } from '../../controllers/EventBusSingl';
+import { EVENTS } from '../../constants/events';
 
 const appBus = new EventBusSingl();
 

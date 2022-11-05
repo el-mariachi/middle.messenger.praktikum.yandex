@@ -11,10 +11,6 @@
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "moduleResolution": "node",
-    "baseUrl": "./",
-    "paths": {
-      "~/*":["./*"]
-    },
     "esModuleInterop": true,
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true

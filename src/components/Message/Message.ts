@@ -1,4 +1,4 @@
-import { Block, IProps } from '~/src/classes/Block';
+import { Block, IProps } from '../../classes/Block';
 import messageTemplate from './Message.hbs';
 
 type MessageProps = IProps & {

@@ -1,7 +1,7 @@
-import { Block, IProps } from '~/src/classes/Block';
+import { Block, IProps } from '../../classes/Block';
 import messageAreaTemplate from './MessageArea.hbs';
-import MessageAreaHeader from '~/src/components/MessageAreaHeader';
-import Compose from '~/src/components/Compose';
+import MessageAreaHeader from '../MessageAreaHeader';
+import Compose from '../Compose';
 
 const compose = new Compose({});
 

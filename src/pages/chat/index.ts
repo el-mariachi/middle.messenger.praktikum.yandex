@@ -1,9 +1,9 @@
 import './chat.scss';
 import { ChatPage } from './chat';
-import { renderDOM } from '~/src/utils/renderDOM';
-import ChatList from '~/src/components/ChatList';
-import MessageArea from '~/src/components/MessageArea';
-import Message from '~/src/components/Message';
+import { renderDOM } from '../../utils/renderDOM';
+import ChatList from '../../components/ChatList';
+import MessageArea from '../../components/MessageArea';
+import Message from '../../components/Message';
 
 const messages = [
   {

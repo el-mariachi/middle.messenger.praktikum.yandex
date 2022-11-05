@@ -1,8 +1,8 @@
-import { Block, IProps } from '~/src/classes/Block';
+import { Block, IProps } from '../../classes/Block';
 import headerTemplate from './ChatListHeader.hbs';
-import Menu from '~/src/components/Menu';
-import Button from '~/src/components/Button';
-import Link from '~/src/components/Link';
+import Menu from '../Menu';
+import Button from '../Button';
+import Link from '../Link';
 
 const renameLink = new Button('button', {
   text: 'Переименовать',

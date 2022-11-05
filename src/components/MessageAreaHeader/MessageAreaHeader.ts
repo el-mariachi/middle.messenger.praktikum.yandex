@@ -1,10 +1,10 @@
-import { Block, IProps } from '~/src/classes/Block';
+import { Block, IProps } from '../../classes/Block';
 import messAreaTemplate from './MessageAreaHeader.hbs';
-import Menu from '~/src/components/Menu';
-import Button from '~/src/components/Button';
-import { EventBusSingl } from '~/src/controllers/EventBusSingl';
-import { EVENTS } from '~/src/constants/events';
-import Link from '~/src/components/Link';
+import Menu from '../Menu';
+import Button from '../Button';
+import { EventBusSingl } from '../../controllers/EventBusSingl';
+import { EVENTS } from '../../constants/events';
+import Link from '../Link';
 
 const appBus = new EventBusSingl();
 

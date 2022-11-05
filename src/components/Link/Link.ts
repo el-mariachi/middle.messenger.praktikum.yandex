@@ -1,4 +1,4 @@
-import { Block, IProps } from '~/src/classes/Block';
+import { Block, IProps } from '../../classes/Block';
 import linkTemplate from './Link.hbs';
 
 export class Link extends Block {

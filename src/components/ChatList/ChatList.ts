@@ -1,9 +1,9 @@
-import { Block, IProps } from '~/src/classes/Block';
+import { Block, IProps } from '../../classes/Block';
 import chatListTemplate from './ChatList.hbs';
-import Search from '~/src/components/Search';
-import ChatListHeader from '~/src/components/ChatListHeader';
-import Chats from '~/src/components/Chats';
-import Chat from '~/src/components/Chat';
+import Search from '../Search';
+import ChatListHeader from '../ChatListHeader';
+import Chats from '../Chats';
+import Chat from '../Chat';
 
 const chats = [
   {
