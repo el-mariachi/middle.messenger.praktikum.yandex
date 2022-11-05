@@ -1,7 +1,7 @@
 {
   "compilerOptions": {
     "target": "ES2016",
-    "module": "es2020",
+    "module": "commonjs",
     "allowJs": true,
     "sourceMap": true,
     "outDir": "./dist",
@@ -10,11 +10,11 @@
     "strictNullChecks": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
+    "moduleResolution": "node",
     "baseUrl": "./",
     "paths": {
       "~/*":["./*"]
     },
-    "moduleResolution": "node",
     "esModuleInterop": true,
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true
