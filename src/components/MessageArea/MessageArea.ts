@@ -17,3 +17,8 @@ export class MessageArea extends Block {
     return this.compile(messageAreaTemplate, this.props);
   }
 }
+
+// TODO remove
+messageAreaHeader.setProps({
+  title: 'Чат не выбран',
+});
