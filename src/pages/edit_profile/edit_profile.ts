@@ -137,7 +137,7 @@ const buttons = [
   },
 ].map((button) => new Button(button.tagName, button));
 
-const imageUrl = new URL('/static/images/chat_avatar.png', import.meta.url);
+const imageUrl = new URL('images/chat_avatar.png', 'http://localhost:3000');
 
 const avatar = new Avatar({ imageUrl });
 

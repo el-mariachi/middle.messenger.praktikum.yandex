@@ -74,6 +74,12 @@
   outline: 1px solid vars.$black;
 }
 
+/* TODO remove following style */
+.tempLink {
+  color: inherit;
+  text-decoration: none;
+}
+
 @media screen and (min-width: vars.$pageBreak) {
   /* Modal */
 

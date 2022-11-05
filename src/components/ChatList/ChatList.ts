@@ -8,7 +8,7 @@ import Chat from '~/src/components/Chat';
 const chats = [
   {
     title: 'Vasili Pupkin',
-    image: new URL('/static/images/chat_avatar.png', import.meta.url),
+    image: new URL('images/chat_avatar.png', 'http://localhost:3000'),
     status: {
       time: '15:42',
     },
@@ -17,7 +17,7 @@ const chats = [
   },
   {
     title: 'Колян',
-    image: new URL('/static/images/chat_avatar.png', import.meta.url),
+    image: new URL('images/chat_avatar.png', 'http://localhost:3000'),
     status: {
       time: '5:22',
     },
@@ -26,7 +26,7 @@ const chats = [
   },
   {
     title: 'Александр Новиков',
-    image: new URL('/static/images/chat_avatar.png', import.meta.url),
+    image: new URL('images/chat_avatar.png', 'http://localhost:3000'),
     status: {
       time: 'Ср.',
       state: 'Status_state_read',
@@ -37,7 +37,7 @@ const chats = [
   },
   {
     title: '+7 903 750-48-21',
-    image: new URL('/static/images/chat_avatar.png', import.meta.url),
+    image: new URL('images/chat_avatar.png', 'http://localhost:3000'),
     status: {
       time: '12-Июн-2022',
     },
@@ -47,7 +47,7 @@ const chats = [
   },
   {
     title: 'Vasili Pupkin',
-    image: new URL('/static/images/chat_avatar.png', import.meta.url),
+    image: new URL('images/chat_avatar.png', 'http://localhost:3000'),
     status: {
       time: '15:42',
     },
@@ -56,7 +56,7 @@ const chats = [
   },
   {
     title: 'Колян',
-    image: new URL('/static/images/chat_avatar.png', import.meta.url),
+    image: new URL('images/chat_avatar.png', 'http://localhost:3000'),
     status: {
       time: '5:22',
     },
@@ -65,7 +65,7 @@ const chats = [
   },
   {
     title: 'Александр Новиков',
-    image: new URL('/static/images/chat_avatar.png', import.meta.url),
+    image: new URL('images/chat_avatar.png', 'http://localhost:3000'),
     status: {
       time: 'Ср.',
       state: 'Status_state_read',
@@ -76,7 +76,7 @@ const chats = [
   },
   {
     title: '+7 903 750-48-21',
-    image: new URL('/static/images/chat_avatar.png', import.meta.url),
+    image: new URL('images/chat_avatar.png', 'http://localhost:3000'),
     status: {
       time: '12-Июн-2022',
     },

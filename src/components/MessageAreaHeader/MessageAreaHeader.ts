@@ -27,7 +27,7 @@ const messageAreaMenuData: IProps = {
 
 const messageAreaMenu = new Menu(messageAreaMenuData);
 
-const chatListUrl = new URL('/src/pages/chat_list/chat_list.handlebars', import.meta.url);
+const chatListUrl = '/up_/up_/src/pages/chat_list/chat_list.html';
 
 const chatListLink = new Link({
   text: 'Назад',

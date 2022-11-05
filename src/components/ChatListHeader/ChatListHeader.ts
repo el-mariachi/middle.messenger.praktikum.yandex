@@ -33,7 +33,7 @@ const newChatButtonData = {
 
 const newChatButton = new Button(newChatButtonData.tagName, newChatButtonData);
 
-const profileUrl = new URL('/src/pages/edit_profile/edit_profile.handlebars', import.meta.url);
+const profileUrl = '/up_/up_/src/pages/edit_profile/edit_profile.html';
 
 const profileLink = new Link({
   text: 'Профиль',
