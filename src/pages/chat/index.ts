@@ -18,7 +18,15 @@ const messages = [
   {
     timestamp: Date.parse('2022-07-28T15:47:12.000+03:00'),
     type: 'Message_type_outgoing',
-    text: 'Rlga asdofygls asyg',
+    text: `1. Подключён TypeScript.
+    2. Добавлен компонентный подход.
+    3. Проект структурирован.`,
+    status: 'Status_state_read',
+  },
+  {
+    timestamp: Date.parse('2022-07-28T15:47:12.000+03:00'),
+    type: 'Message_type_outgoing',
+    text: 'Обязательно валидировать формы на страницахавторизации, регистрации, настроек пользователя.Опционально: отправка сообщения.',
     status: 'Status_state_read',
   },
   {

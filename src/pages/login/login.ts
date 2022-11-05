@@ -62,17 +62,20 @@ const buttons = [
 
 /* eslint-disable @typescript-eslint/no-unused-vars */
 // @ts-expect-error unused var
-const validator = new FormValidator(inputData);
+const validator = new FormValidator(inputData, { formName: 'login_form' });
 // @ts-expect-error unused var
-const sender = new FormSender();
+const sender = new FormSender('login_form');
 /* eslint-enable @typescript-eslint/no-unused-vars */
 
-const formData = {
+const formData: IProps = {
   formTitle: pageName,
   inputs,
   buttons,
   events: {
     submit: submitForm,
+  },
+  attributes: {
+    name: 'login_form',
   },
 };
 

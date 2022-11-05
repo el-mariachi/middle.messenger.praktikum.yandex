@@ -15,6 +15,7 @@ const deleteLink = new Button('button', {
 });
 
 const chatListMenuData: IProps = {
+  menuName: 'Главное меню',
   classList: ['ChatListHeader-Menu'],
   menuItems: [renameLink, deleteLink],
   bodyType: 'Menu_bodytype_chatlist',

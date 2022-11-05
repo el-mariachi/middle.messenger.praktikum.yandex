@@ -5,19 +5,7 @@
   {{{.}}}
   {{/each}}
 </div>
-<div class="Compose">
-  <nav class="Compose-Menu Menu Icon Icon_type_attach Menu_active">
-    <h3 class="OutlineHeader">Меню вложений</h3>
-    <ul class="Menu-Body Menu_bodytype_attach">
-      <li class="Menu-Item"><a class="Menu-Link Menu_linktype_photo" href="">Фото/видео</a></li>
-      <li class="Menu-Item"><a class="Menu-Link Menu_linktype_file" href="">Файл</a></li>
-    </ul>
-  </nav>
-  <form class="From Compose-Form" action="#">
-    <input class="NewMessage Input Input_theme_grey" type="text" name="message" placeholder="Сообщение">
-    <button class="Button Send Compose-Send Icon Icon_type_send"></button>
-  </form>
-</div>
+{{{compose}}}
 {{else}}
 <h5 class="OutlineHeader">Выбранный чат</h5>
 <p class="Hint">Выберите чат</p>

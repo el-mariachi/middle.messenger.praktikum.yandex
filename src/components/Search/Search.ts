@@ -26,9 +26,9 @@ const searchInputData: InputProps = {
 };
 /* eslint-disable @typescript-eslint/no-unused-vars */
 // @ts-expect-error unused var
-const validator = new FormValidator([searchInputData]);
+const validator = new FormValidator([searchInputData], { formName: 'search_form' });
 // @ts-expect-error unused var
-const sender = new FormSender();
+const sender = new FormSender('search_form');
 /* eslint-enable @typescript-eslint/no-unused-vars */
 
 const searchInput = new Input(prepInputAttrs(searchInputData));

@@ -8,7 +8,8 @@ const appBus = new EventBusSingl();
 export class Menu extends Block {
   constructor(props: IProps) {
     const classList = Menu.appendClassList(['Menu'], props);
-    super('nav', { ...props, classList });
+    const settings = { hasID: true };
+    super('nav', { ...props, classList, settings });
   }
   componentDidMount(): void {
     this._element.addEventListener('click', () => {

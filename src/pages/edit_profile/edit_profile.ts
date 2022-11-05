@@ -105,6 +105,7 @@ const inputData = [
 ];
 
 const validatorOptions: ValidatorOptions = {
+  formName: 'edit_profile_form',
   password: {
     source: 'newPassword',
     target: 'newPassword2',
@@ -119,7 +120,7 @@ const validatorOptions: ValidatorOptions = {
 // @ts-expect-error unused var
 const validator = new FormValidator(inputData, validatorOptions);
 // @ts-expect-error unused var
-const sender = new FormSender();
+const sender = new FormSender('edit_profile_form');
 /* eslint-enable @typescript-eslint/no-unused-vars */
 
 const inputs = inputData.map(addInputHandlers).map(createInput);
@@ -140,13 +141,16 @@ const imageUrl = new URL('/static/images/chat_avatar.png', import.meta.url);
 
 const avatar = new Avatar({ imageUrl });
 
-const formData = {
+const formData: IProps = {
   formTitle: profileName,
   avatar,
   inputs,
   buttons,
   events: {
     submit: submitForm,
+  },
+  attributes: {
+    name: 'edit_profile_form',
   },
 };
 

@@ -19,6 +19,7 @@ const deleteLink = new Button('button', {
 });
 
 const messageAreaMenuData: IProps = {
+  menuName: 'Меню чата',
   classList: ['MessageArea-Menu'],
   menuItems: [addLink, deleteLink],
   bodyType: 'Menu_bodytype_chat',

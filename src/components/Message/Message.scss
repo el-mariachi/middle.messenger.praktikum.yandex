@@ -4,12 +4,25 @@
 
 .Message {
   max-width: calc(100% - 40px);
-  margin-bottom: 30px;
   clear: both;
 }
 
 .Message_type_incoming {
+  margin-bottom: 8px;
   float: left;
+}
+
+.Message_type_outgoing {
+  margin-bottom: 8px;
+  float: right;
+}
+
+.Message_type_incoming + .Message_type_outgoing {
+  margin-top: 30px;
+}
+
+.Message_type_outgoing + .Message_type_incoming {
+  margin-top: 30px;
 }
 
 .Message-Bubble {
@@ -37,10 +50,6 @@
 .Message_type_outgoing .Message-Bubble:last-child {
   border-bottom-left-radius: 12px;
   border-bottom-right-radius: 1px;
-}
-
-.Message_type_outgoing {
-  float: right;
 }
 
 .Message-Body {

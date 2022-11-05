@@ -14,6 +14,9 @@
 
 .Compose-Menu {
   margin: 4px 10px 4px 0;
+  & .Menu-Dot {
+    display: none;
+  }
 }
 
 .Compose-Form {

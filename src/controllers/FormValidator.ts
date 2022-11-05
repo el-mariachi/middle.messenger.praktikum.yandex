@@ -5,7 +5,8 @@ import { InputProps } from '../components/InputGroup';
 const appBus = new EventBusSingl();
 
 export type ValidatorOptions = {
-  password: {
+  formName?: string;
+  password?: {
     source: string;
     target: string;
   };
@@ -13,12 +14,17 @@ export type ValidatorOptions = {
 
 export class FormValidator {
   public inputs: { [k: string]: InputProps };
+  public formName?: string;
   constructor(public inputsArray: InputProps[], public options?: ValidatorOptions) {
+    // Create an object from array
     this.inputs = inputsArray.reduce((result, current) => Object.assign(result, { [current.name]: current }), {});
 
     if (options?.password) {
       // add a special handler for password2 to set it's test value
       appBus.on(EVENTS.INPUT_BLUR, this.passwordEqual.bind(this));
+    }
+    if (options?.formName) {
+      this.formName = options.formName;
     }
     appBus.on(EVENTS.INPUT_BLUR, this.validateInput.bind(this));
     appBus.on(EVENTS.INPUT_FOCUS, this.resetInput.bind(this));
@@ -26,9 +32,9 @@ export class FormValidator {
   }
   passwordEqual(eventData: EventData) {
     /* eslint-disable-next-line @typescript-eslint/no-non-null-assertion */
-    const password = this.options!.password.source;
+    const password = this.options!.password!.source;
     /* eslint-disable-next-line @typescript-eslint/no-non-null-assertion */
-    const password2 = this.options!.password.target;
+    const password2 = this.options!.password!.target;
     if (eventData.name === password) {
       // Prepare validation string for password equality
       const reString = eventData.value.replace(/([$()*+.?[^{|\\])/g, '\\$1');
@@ -56,6 +62,9 @@ export class FormValidator {
     appBus.emit(EVENTS.INPUT_OK, { name });
   }
   validateForm(form: HTMLFormElement) {
+    if (this.formName !== form.name) {
+      return;
+    }
     const formValid = Object.keys(this.inputs)
       .map((inputName) => this.checkInput(inputName, form[inputName].value))
       .reduce((result, current) => result && current, true);

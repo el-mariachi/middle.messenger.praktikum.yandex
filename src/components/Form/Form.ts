@@ -1,6 +1,8 @@
 import { Block, IProps } from '../../classes/Block';
 import formTemplate from './Form.hbs';
 
+// This component is used where inputs are arranged in InputGroup components
+// containing a label and an error message.
 export class Form extends Block {
   constructor(props: IProps) {
     const classList = Form.appendClassList(['Form'], props);

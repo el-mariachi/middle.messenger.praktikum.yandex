@@ -111,6 +111,7 @@ const buttons = [
 ].map((button) => new Button(button.tagName, button));
 
 const validatorOptions: ValidatorOptions = {
+  formName: 'sign_up_form',
   password: {
     source: 'password',
     target: 'password2',
@@ -120,15 +121,18 @@ const validatorOptions: ValidatorOptions = {
 // @ts-expect-error unused var
 const validator = new FormValidator(inputData, validatorOptions);
 // @ts-expect-error unused var
-const sender = new FormSender();
+const sender = new FormSender('sign_up_form');
 /* eslint-enable @typescript-eslint/no-unused-vars */
 
-const formData = {
+const formData: IProps = {
   formTitle: pageName,
   inputs,
   buttons,
   events: {
     submit: submitForm,
+  },
+  attributes: {
+    name: 'sign_up_form',
   },
 };
 
