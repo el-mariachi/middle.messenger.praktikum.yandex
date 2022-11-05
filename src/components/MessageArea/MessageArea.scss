@@ -62,7 +62,12 @@
 
 @media screen and (min-width: vars.$pageBreak) {
   /* MessageArea */
+
   .MessageArea {
     width: calc(60% - 1px);
+
+    & .PageLink_to_list {
+      display: none;
+    }
   }
 }

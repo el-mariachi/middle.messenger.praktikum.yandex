@@ -57,9 +57,3 @@
   color: vars.$siteBlue;
   text-align: center;
 }
-
-@media screen and (min-width: vars.$pageBreak) {
-  .PageLink_to_list {
-    display: none;
-  }
-}
