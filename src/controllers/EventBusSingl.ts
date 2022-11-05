@@ -3,33 +3,21 @@ interface IEventListener {
   /* eslint-disable-next-line @typescript-eslint/no-explicit-any */
   (...args: any[]): void;
 }
-
-interface ICallbackList {
-  [id: string]: IEventListener;
-}
-
-interface Ilistenres {
+type ICallbackList = IEventListener[];
+interface IListenres {
   [eventName: string]: ICallbackList;
 }
 
-interface ISubscribe {
-  unsubscribe: () => void;
-}
-
-interface IEventBus {
-  on(eventName: string, callback: IEventListener): ISubscribe;
-  once(eventName: string, callback: IEventListener): ISubscribe;
-  emit<T extends unknown[]>(eventName: string, ...args: T): void;
-  clear(eventName: string): void;
-}
-
 export type EventData = { name: string; value: string };
-
+interface IEventBus {
+  listeners: IListenres;
+  on(event: string, callback: IEventListener): void;
+  off(event: string, callback: IEventListener): void;
+  emit<T extends unknown[]>(event: string, args?: T): void;
+}
 export class EventBusSingl implements IEventBus {
-  private _listeners: Ilistenres = {};
-  private _callbackId = 0;
+  public listeners: IListenres = {};
   static _eventBus: EventBusSingl;
-
   constructor() {
     if (EventBusSingl._eventBus) {
       return EventBusSingl._eventBus;
@@ -37,59 +25,29 @@ export class EventBusSingl implements IEventBus {
     EventBusSingl._eventBus = this;
   }
 
-  on(eventName: string, callback: IEventListener): ISubscribe {
-    if (!this._listeners[eventName]) {
-      this._listeners[eventName] = {};
+  on(event: string, callback: IEventListener): void {
+    if (!this.listeners[event]) {
+      this.listeners[event] = [];
     }
-    const id = this._callbackId++;
 
-    this._listeners[eventName][id] = callback;
-
-    const unsubscribe = () => {
-      delete this._listeners[eventName][id];
-      // If there are no more subscriptions, clear the event object
-      if (Object.keys(this._listeners[eventName]).length === 0) {
-        delete this._listeners[eventName];
-      }
-    };
-    return { unsubscribe };
+    this.listeners[event].push(callback);
   }
 
-  once(eventName: string, callback: IEventListener): ISubscribe {
-    if (!this._listeners[eventName]) {
-      this._listeners[eventName] = {};
+  off(event: string, callback: IEventListener): void {
+    if (!this.listeners[event]) {
+      throw new Error(`Нет события: ${event}`);
     }
-    const id = 'd' + this._callbackId++;
-    this._listeners[eventName][id] = callback;
-    const unsubscribe = () => {
-      delete this._listeners[eventName][id];
-      // If there are no more subscriptions, clear the event object
-      if (Object.keys(this._listeners[eventName]).length === 0) {
-        delete this._listeners[eventName];
-      }
-    };
-    return { unsubscribe };
+
+    this.listeners[event] = this.listeners[event].filter((listener) => listener !== callback);
   }
-  emit<T extends unknown[]>(eventName: string, ...args: T): void {
-    const callbacksObj = this._listeners[eventName];
-    if (!callbacksObj) {
-      /* eslint-disable-next-line no-console */
-      return console.warn(`Nobody cares about event ${eventName}!`);
+
+  emit<T extends unknown[]>(event: string, ...args: T): void {
+    if (!this.listeners[event]) {
+      throw new Error(`Нет события: ${event}`);
     }
-    Object.entries(callbacksObj).forEach(([callbackId, callback]) => {
-      callback(...args);
-      if (callbackId[0] === 'd') {
-        delete callbacksObj[callbackId];
-      }
+
+    this.listeners[event].forEach(function (listener) {
+      listener(...args);
     });
-  }
-  clear(eventName?: string): void {
-    // clear all if no name provided
-    if (!eventName) {
-      this._listeners = {};
-      return;
-    }
-    // otherwise clear the specified event
-    delete this._listeners[eventName];
   }
 }
