@@ -4,11 +4,12 @@ import Search from '../Search';
 import ChatListHeader from '../ChatListHeader';
 import Chats from '../Chats';
 import Chat from '../Chat';
+import chatAvatar from '../../../static/images/chat_avatar.png';
 
 const chats = [
   {
     title: 'Vasili Pupkin',
-    image: new URL('images/chat_avatar.png', 'http://localhost:3000'),
+    image: chatAvatar,
     status: {
       time: '15:42',
     },
@@ -17,7 +18,7 @@ const chats = [
   },
   {
     title: 'Колян',
-    image: new URL('images/chat_avatar.png', 'http://localhost:3000'),
+    image: chatAvatar,
     status: {
       time: '5:22',
     },
@@ -26,7 +27,7 @@ const chats = [
   },
   {
     title: 'Александр Новиков',
-    image: new URL('images/chat_avatar.png', 'http://localhost:3000'),
+    image: chatAvatar,
     status: {
       time: 'Ср.',
       state: 'Status_state_read',
@@ -37,7 +38,7 @@ const chats = [
   },
   {
     title: '+7 903 750-48-21',
-    image: new URL('images/chat_avatar.png', 'http://localhost:3000'),
+    image: chatAvatar,
     status: {
       time: '12-Июн-2022',
     },
@@ -47,7 +48,7 @@ const chats = [
   },
   {
     title: 'Vasili Pupkin',
-    image: new URL('images/chat_avatar.png', 'http://localhost:3000'),
+    image: chatAvatar,
     status: {
       time: '15:42',
     },
@@ -56,7 +57,7 @@ const chats = [
   },
   {
     title: 'Колян',
-    image: new URL('images/chat_avatar.png', 'http://localhost:3000'),
+    image: chatAvatar,
     status: {
       time: '5:22',
     },
@@ -65,7 +66,7 @@ const chats = [
   },
   {
     title: 'Александр Новиков',
-    image: new URL('images/chat_avatar.png', 'http://localhost:3000'),
+    image: chatAvatar,
     status: {
       time: 'Ср.',
       state: 'Status_state_read',
@@ -76,7 +77,7 @@ const chats = [
   },
   {
     title: '+7 903 750-48-21',
-    image: new URL('images/chat_avatar.png', 'http://localhost:3000'),
+    image: chatAvatar,
     status: {
       time: '12-Июн-2022',
     },

@@ -4,6 +4,7 @@ import { renderDOM } from '../../utils/renderDOM';
 import ChatList from '../../components/ChatList';
 import MessageArea from '../../components/MessageArea';
 import Message from '../../components/Message';
+import pict from '../../../static/images/chat_pic.png';
 
 const messages = [
   {
@@ -11,7 +12,7 @@ const messages = [
     type: 'Message_type_incoming',
     text: 'Gent. Incieni maioren derumen dicate pa solum apit eate poribus quossin ciaero omnima ne sit, cusandundae magnatis reicabo repudae qui aut fugit quae verunt ea suntiis citist vero et lamet at autecat emquia cus.',
     image: {
-      src: new URL('images/chat_pic.png', 'http://localhost:3000'),
+      src: pict,
       alt: 'Чуваки',
     },
   },
@@ -39,7 +40,7 @@ const messages = [
     type: 'Message_type_incoming',
     text: 'Gent. Incieni maioren derumen dicate pa solum apit eate poribus quossin ciaero omnima ne sit, cusandundae magnatis reicabo repudae qui aut fugit quae verunt ea suntiis citist vero et lamet at autecat emquia cus.',
     image: {
-      src: new URL('images/chat_pic.png', 'http://localhost:3000'),
+      src: pict,
       alt: 'Чуваки',
     },
   },

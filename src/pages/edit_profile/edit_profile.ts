@@ -8,6 +8,7 @@ import pageTemplate from './edit_profile.hbs';
 import { FormValidator, ValidatorOptions } from '../../controllers/FormValidator';
 import { FormSender } from '../../controllers/FormSender';
 import Avatar from '../../components/Avatar';
+import profileAvatar from '../../../static/images/chat_avatar.png';
 
 const profileName = 'Александр Новиков';
 
@@ -137,9 +138,7 @@ const buttons = [
   },
 ].map((button) => new Button(button.tagName, button));
 
-const imageUrl = new URL('images/chat_avatar.png', 'http://localhost:3000');
-
-const avatar = new Avatar({ imageUrl });
+const avatar = new Avatar({ imageUrl: profileAvatar });
 
 const formData: IProps = {
   formTitle: profileName,
