@@ -7,6 +7,7 @@
     "dev": "parcel \"static/entries/*.handlebars\"",
     "clean:dist": "rimraf dist",
     "build:f": "parcel build static/entries/index.handlebars --no-optimize",
+    "build:report": "parcel build static/entries/index.handlebars --no-optimize --reporter @parcel/reporter-bundle-analyzer",
     "build": "npm run clean:dist && parcel build static/entries/index.handlebars && tsc --project tsconfig.netlify.json",
     "start": "node dist/server",
     "start:local": "ts-node server.ts",
@@ -57,5 +58,8 @@
   },
   "dependencies": {
     "express": "4.18.2"
+  },
+  "@parcel/bundler-default": {
+    "minBundles": 2
   }
 }
