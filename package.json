@@ -6,7 +6,7 @@
     "test": "mocha",
     "dev": "parcel \"static/entries/*.handlebars\"",
     "clean:dist": "rimraf dist",
-    "build:f": "parcel build static/entries/index.handlebars",
+    "build:f": "parcel build static/entries/index.handlebars --no-optimize",
     "build": "npm run clean:dist && parcel build static/entries/index.handlebars && tsc --project tsconfig.netlify.json",
     "start": "node dist/server",
     "start:local": "ts-node server.ts",
