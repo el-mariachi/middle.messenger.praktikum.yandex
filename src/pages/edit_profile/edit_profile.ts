@@ -9,7 +9,17 @@ import { FormValidator, ValidatorOptions } from '../../controllers/FormValidator
 import { FormSender } from '../../controllers/FormSender';
 import Avatar from '../../components/Avatar';
 import profileAvatar from '../../../static/images/chat_avatar.png';
+import Link from '../../components/Link';
 
+const chatListUrl = '/up_/up_/src/pages/chat_list/chat_list.html';
+
+const chatListLink = new Link({
+  text: 'Назад к чатам',
+  classList: ['PageLink', 'PageLink_to_list', 'Profile-PageLink'],
+  attributes: {
+    href: chatListUrl,
+  },
+});
 const profileName = 'Александр Новиков';
 
 const inputData = [
@@ -158,7 +168,7 @@ const pageForm = new Form(formData);
 export class EditProfilePage extends Block {
   constructor(props: IProps) {
     const classList = EditProfilePage.appendClassList(['Page', 'Page_type_profile'], props);
-    super('main', { ...props, classList, pageForm });
+    super('main', { ...props, classList, pageForm, chatListLink });
   }
   render(): DocumentFragment {
     return this.compile(pageTemplate, this.props);

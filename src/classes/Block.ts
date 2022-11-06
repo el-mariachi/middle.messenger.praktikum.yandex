@@ -45,7 +45,7 @@ export abstract class Block {
   }
 
   protected _element!: HTMLElement; // Using Definite assignment here because this._element is definitely assigned during init.
-  protected _meta: { tagName: string; props?: IProps };
+  protected _meta: { tagName: string; props: IProps };
   protected eventBus: IEventBusGetter;
   protected _propsChanged = false;
   protected _id?: string;

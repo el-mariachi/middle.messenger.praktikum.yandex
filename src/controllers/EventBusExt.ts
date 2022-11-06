@@ -64,7 +64,7 @@ export class EventBus implements IEventBus {
     const callbacksObj = this._listeners[eventName];
     if (!callbacksObj) {
       /* eslint-disable-next-line no-console */
-      return console.warn(`Event ${eventName} not found!`);
+      return console.warn(`Nobody cares about event ${eventName}!`);
     }
     Object.entries(callbacksObj).forEach(([callbackId, callback]) => {
       callback(...args);
