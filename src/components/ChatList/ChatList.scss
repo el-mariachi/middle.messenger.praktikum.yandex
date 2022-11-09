@@ -1,10 +1,5 @@
 @use '/static/styles/vars.scss';
 @use '/static/styles/fonts.scss';
-@use '/src/components/Menu/Menu.scss';
-@use '/src/components/Icon/Icon.scss';
-@use '/src/components/Link/Link.scss';
-@use '/src/components/Input/Input.scss';
-@use '/src/components/Search/Search.scss';
 
 /* ChatList */
 
@@ -17,35 +12,6 @@
   justify-content: flex-start;
   overflow-x: hidden;
   overflow-y: auto;
-}
-
-/* ChatListHeader */
-
-.ChatListHeader {
-  display: flex;
-  justify-content: space-between;
-  width: 100%;
-  height: 54px;
-  box-sizing: border-box;
-  padding: 16px 10px;
-}
-
-.ChatListHeader-Menu {
-  margin: 0 12px 0 9px;
-  &:focus {
-    outline: 1px solid vars.$siteBlue;
-  }
-}
-
-.ChatListHeader-NewChat {
-  margin: 0 auto 0 0;
-  appearance: none;
-  background-color: transparent;
-  cursor: pointer;
-}
-
-.ChatListHeader-NewChat:focus {
-  outline: 1px solid vars.$siteBlue;
 }
 
 .ChatList-Frame {
@@ -63,82 +29,7 @@
   margin: 0;
 }
 
-/* Chat */
-
-.Chat {
-  display: flex;
-  justify-content: space-between;
-  box-sizing: border-box;
-  width: 100%;
-  height: 72px;
-  background-color: transparent;
-  padding: 10px;
-  border-top: 1px solid vars.$greyLine;
-}
-
-.Chat_selected {
-  background-color: vars.$lightBlue;
-}
-
-.Chat-Picture {
-  margin: 2px 10px 3px 0;
-  border-radius: 50%;
-}
-.Chat-Info {
-  flex: 1;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-}
-
-.Chat-Header {
-  display: flex;
-  justify-content: space-between;
-  width: 100%;
-}
-
-.Chat-Title {
-  margin: 0 0 4px;
-  font-size: 1.3em;
-  line-height: 1.15;
-  font-weight: 400;
-  color: vars.$black;
-}
-
-.Chat-Preview {
-  font-size: 1.3em;
-  line-height: 1.15;
-  flex: 1 1 100px;
-  color: vars.$greyText;
-  height: 30px;
-  overflow: hidden;
-  hyphens: auto;
-}
-
-.Chat-Sender {
-  font-weight: 400;
-  color: vars.$black;
-}
-
-.Chat-Sender::after {
-  content: ': ';
-}
-
-.Chat-UnreadCount {
-  display: flex;
-  width: 20px;
-  height: 20px;
-  border-radius: 50%;
-  background-color: vars.$siteBlue;
-  align-items: center;
-  justify-content: center;
-  font-size: 1.2em;
-  font-weight: 500;
-  color: vars.$white;
-  margin: 3px 0 3px 4px;
-}
-
-@media screen and (min-width: 640px) {
+@media screen and (min-width: vars.$pageBreak) {
   .ChatList {
     width: 40%;
     min-width: 260px;

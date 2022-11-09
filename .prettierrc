@@ -1,0 +1,19 @@
+{
+  "singleQuote": true,
+  "tabWidth": 2,
+  "semi": true,
+  "overrides": [
+    {
+      "files": "*.hbs",
+      "options": {
+        "singleQuote": false
+      }
+    },
+    {
+      "files": ".json",
+      "options": {
+        "parser": "json5"
+      }
+    }
+  ]
+}

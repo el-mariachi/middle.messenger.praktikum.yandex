@@ -1,13 +1,20 @@
-import './500.scss';
-import { renderPage } from '../../utils/renderPage';
+import { Block, IProps } from '../../classes/Block';
+import ErrorPageTemplate from '../../components/ErrorPage/ErrorPage.hbs';
 
-import ErrorPage from '../../components/ErrorPage/ErrorPage.hbs';
+export class Page500 extends Block {
+  constructor(props: IProps) {
+    const classList = ['Page', 'Page_type_not-found'];
+    const pageData: IProps = {
+      errorCode: 500,
+      errorMessage: 'Ошибка сервера',
+      settings: {
+        hasID: true,
+      },
+    };
+    super('main', { ...props, classList, ...pageData });
+  }
 
-console.log(ErrorPage);
-
-const pageData = {
-  errorCode: 500,
-  errorMessage: 'Ошибка сервера',
-};
-
-renderPage('#app', ErrorPage(pageData));
+  render(): DocumentFragment {
+    return this.compile(ErrorPageTemplate, this.props);
+  }
+}

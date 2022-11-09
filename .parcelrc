@@ -6,10 +6,6 @@
     ],
     "*.hbs": [
       "parcel-transformer-hbs"
-    ],
-    "bundle-text:*": [
-      "...",
-      "@parcel/transformer-inline-string"
     ]
   }
 }

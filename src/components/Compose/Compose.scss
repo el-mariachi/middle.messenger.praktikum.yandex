@@ -11,9 +11,20 @@
   padding: 11px 20px;
   align-items: flex-end;
 }
+
 .Compose-Menu {
   margin: 4px 10px 4px 0;
+
+  & .Menu-Dot {
+    display: none;
+  }
 }
+
+.Compose-Form {
+  flex: 1;
+  display: flex;
+}
+
 .Compose-Send {
   margin: 4px 0 4px 10px;
 }

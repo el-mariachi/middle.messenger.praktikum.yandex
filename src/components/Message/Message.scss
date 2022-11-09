@@ -4,21 +4,42 @@
 
 .Message {
   max-width: calc(100% - 40px);
-  margin-bottom: 30px;
   clear: both;
 }
 
 .Message_type_incoming {
+  margin-bottom: 8px;
   float: left;
 }
 
+.Message_type_outgoing {
+  margin-bottom: 8px;
+  float: right;
+}
+
+.Message_type_incoming + .Message_type_outgoing {
+  margin-top: 30px;
+}
+
+.Message_type_outgoing + .Message_type_incoming {
+  margin-top: 30px;
+}
+
+.Message-Bubble {
+  border-radius: 1px;
+}
+
 .Message_type_incoming .Message-Bubble {
-  background-color: vars.$lightGrey;
+  background-color: vars.$grFill1;
 }
 
 .Message-Bubble:first-child {
   border-top-left-radius: 12px;
   border-top-right-radius: 12px;
+}
+
+.Message_type_outgoing .Message-Bubble {
+  background-color: vars.$lightBlue;
 }
 
 .Message_type_incoming .Message-Bubble:last-child {
@@ -29,18 +50,6 @@
 .Message_type_outgoing .Message-Bubble:last-child {
   border-bottom-left-radius: 12px;
   border-bottom-right-radius: 1px;
-}
-
-.Message_type_outgoing .Message-Bubble {
-  background-color: vars.$lightBlue;
-}
-
-.Message_type_outgoing {
-  float: right;
-}
-
-.Message-Bubble {
-  border-radius: 1px;
 }
 
 .Message-Body {
@@ -61,6 +70,11 @@
   position: relative;
 }
 
+.Message-Status {
+  float: right;
+  margin-left: 10px;
+}
+
 .Message_type_image .Message-Status {
   position: relative;
   bottom: 24px;
@@ -71,6 +85,14 @@
   color: vars.$white;
 }
 
+.Message-Image {
+  display: block;
+  margin: 0;
+  width: 100%;
+  border-top-left-radius: 12px;
+  border-top-right-radius: 12px;
+}
+
 .Message_type_incoming .Message_type_image:only-child .Message-Image {
   border-bottom-right-radius: 12px;
   border-bottom-left-radius: 1px;
@@ -79,17 +101,4 @@
 .Message_type_outgoing .Message_type_image:only-child .Message-Image {
   border-bottom-right-radius: 1px;
   border-bottom-left-radius: 12px;
-}
-
-.Message-Status {
-  float: right;
-  margin-left: 10px;
-}
-
-.Message-Image {
-  display: block;
-  margin: 0;
-  width: 100%;
-  border-top-left-radius: 12px;
-  border-top-right-radius: 12px;
 }
