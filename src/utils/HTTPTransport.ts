@@ -42,6 +42,10 @@ function queryStringify(data: IRequestBody) {
 }
 export class HTTPTransport {
   get(url: string, options: OptionsWithoutMethod = {}): Promise<XMLHttpRequest> {
+    const data = parseOptions({ ...options, method: METHOD.GET });
+    if (data) {
+      url = `${url}?${queryStringify(data)}`;
+    }
     return this.request(url, { ...options, method: METHOD.GET }, options.timeout);
   }
 
@@ -70,10 +74,6 @@ export class HTTPTransport {
       throw new Error('Bad request url');
     }
     const { method, headers, data } = parseOptions(options);
-
-    if (method === METHOD.GET && data) {
-      url = `${url}?${queryStringify(data)}`;
-    }
 
     return new Promise((resolve, reject) => {
       const xhr = new XMLHttpRequest();
