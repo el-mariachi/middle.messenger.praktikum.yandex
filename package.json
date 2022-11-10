@@ -4,11 +4,18 @@
   "description": "Yandex Praktikum Middle Frontend Developer Course Project",
   "scripts": {
     "test": "mocha",
-    "dev": "parcel static/index.handlebars",
+    "dev": "parcel \"static/entries/*.handlebars\"",
     "clean:dist": "rimraf dist",
-    "build": "npm run clean:dist && parcel build static/index.handlebars && tsc",
+    "build:f": "parcel build static/entries/index.handlebars --no-optimize",
+    "build:report": "parcel build static/entries/index.handlebars --no-optimize --reporter @parcel/reporter-bundle-analyzer",
+    "build": "npm run clean:dist && parcel build static/entries/index.handlebars && tsc --project tsconfig.netlify.json",
     "start": "node dist/server",
-    "start:local": "ts-node server.ts"
+    "start:local": "ts-node server.ts",
+    "eslint": "eslint \"src/**/*.ts\" --ignore-path .gitignore",
+    "stylelint": "stylelint \"src/**/*.{scss,css}\" --ignore-path .gitignore",
+    "lint": "npm run eslint && npm run stylelint",
+    "format": "prettier \"**/*.{ts,hbs,json}\" --write",
+    "typecheck": "tsc --noEmit"
   },
   "repository": {
     "type": "git",
@@ -28,16 +35,31 @@
     "@parcel/transformer-inline-string": "2.7.0",
     "@parcel/transformer-sass": "2.7.0",
     "@types/express": "4.17.14",
+    "@types/uuid": "^8.3.4",
+    "@typescript-eslint/eslint-plugin": "5.40.1",
+    "@typescript-eslint/parser": "5.40.1",
+    "eslint": "8.25.0",
+    "eslint-config-prettier": "8.5.0",
+    "eslint-plugin-prettier": "4.2.1",
     "handlebars": "4.7.7",
     "parcel": "2.7.0",
     "parcel-transformer-handlebars": "1.0.0",
     "parcel-transformer-hbs": "1.0.4",
     "prettier": "2.7.1",
     "rimraf": "3.0.2",
-    "ts-node": "10.9.1",
-    "typescript": "4.8.4"
+    "stylelint": "14.14.0",
+    "stylelint-config-prettier-scss": "0.0.1",
+    "stylelint-config-standard": "29.0.0",
+    "stylelint-config-standard-scss": "5.0.0",
+    "stylelint-scss": "4.3.0",
+    "ts-node": "10.9.1"
   },
   "dependencies": {
-    "express": "4.18.2"
+    "express": "4.18.2",
+    "typescript": "4.8.4",
+    "uuid": "9.0.0"
+  },
+  "@parcel/bundler-default": {
+    "minBundles": 2
   }
 }

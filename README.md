@@ -52,4 +52,3 @@
 
 - Пропс может быть экземпляром класса Block или одноуровневым массивом таких экземпляров. Других типов в массиве быть не должно.
 
-[Ссылка на Pull Request Sprint 2](https://github.com/el-mariachi/middle.messenger.praktikum.yandex/pull/2#issue-1437475395)

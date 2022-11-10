@@ -75,6 +75,9 @@
   color: vars.$black;
   text-decoration: none;
   cursor: pointer;
+  border: 0;
+  background: none;
+
   &:hover {
     text-decoration: underline;
   }

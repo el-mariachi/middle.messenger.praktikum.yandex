@@ -7,6 +7,7 @@
   border: 0;
   width: 24px;
   background-color: transparent;
+  cursor: pointer;
 }
 
 .Icon_type_newchat {
@@ -18,11 +19,11 @@
 }
 
 .Icon_type_attach {
-  background-position: 1px 0px;
+  background-position: 1px 0;
 }
 
 .Icon_type_attach:hover {
-  background-position: -99px 0px;
+  background-position: -99px 0;
 }
 
 .Icon_type_send {

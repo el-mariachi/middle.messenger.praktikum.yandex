@@ -15,6 +15,10 @@
   font-weight: 500;
   font-size: 1.3em;
   line-height: 1.85;
+  border: 0;
+  appearance: none;
+  padding: 0;
+  background-color: transparent;
 }
 
 .PageLink_to_profile::after {
@@ -31,18 +35,22 @@
   margin-left: 0.4em;
 }
 
-.PageLink_to_list::before {
-  content: '';
-  display: inline-block;
-  width: 6px;
-  height: 6px;
-  border-style: solid;
-  border-width: 2px;
-  border-color: transparent;
-  border-right-color: vars.$greyText;
-  border-top-color: vars.$greyText;
-  transform: rotate(-135deg);
-  margin-right: 0.4em;
+.PageLink_to_list {
+  margin-right: 10px;
+
+  &::before {
+    content: '';
+    display: inline-block;
+    width: 6px;
+    height: 6px;
+    border-style: solid;
+    border-width: 2px;
+    border-color: transparent;
+    border-right-color: vars.$greyText;
+    border-top-color: vars.$greyText;
+    transform: rotate(-135deg);
+    margin-right: 0.4em;
+  }
 }
 
 .PageLink_to_login {

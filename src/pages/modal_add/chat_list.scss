@@ -1,5 +1,16 @@
 @use '/static/styles/fonts.scss';
 @use '/src/components/Page/Page.scss';
 @use '/src/components/ChatList/ChatList.scss';
-@use '/src/components/ChatArea/ChatArea.scss';
+@use '/src/components/MessageArea/MessageArea.scss';
+@use '/src/components/Message/Message.scss';
 @use '/src/components/Status/Status.scss';
+@use '/src/components/ChatListHeader/ChatListHeader.scss';
+@use '/src/components/Search/Search.scss';
+@use '/src/components/Chat/Chat.scss';
+@use '/src/components/Menu/Menu.scss';
+@use '/src/components/Form/Form.scss';
+@use '/src/components/Input/Input.scss';
+@use '/src/components/InputGroup/InputGroup.scss';
+@use '/src/components/Link/Link.scss';
+
+@use '/src/components/Modal/Modal.scss';
