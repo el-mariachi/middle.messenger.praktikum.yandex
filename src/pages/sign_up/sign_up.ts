@@ -108,7 +108,7 @@ const buttons = [
       click: cancelForm,
     },
   },
-].map((button) => new Button(button.tagName, button));
+].map((button) => new Button(button));
 
 const validatorOptions: ValidatorOptions = {
   formName: 'sign_up_form',
@@ -140,8 +140,9 @@ const pageForm = new Form(formData);
 
 export class SignUpPage extends Block {
   constructor(props: IProps) {
+    const tagName = 'main';
     const classList = SignUpPage.appendClassList(['Page', 'Page_type_profile'], props);
-    super('main', { ...props, classList, pageForm });
+    super({ ...props, tagName, classList, pageForm });
   }
   render(): DocumentFragment {
     return this.compile(pageTemplate, this.props);

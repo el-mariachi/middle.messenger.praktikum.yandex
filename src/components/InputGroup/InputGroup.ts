@@ -21,7 +21,7 @@ export class InputGroup extends Block {
   protected _input!: Input;
   protected _error!: InputError;
   constructor(props: IProps) {
-    super('div', {
+    super({
       ...props,
       classList: InputGroup.appendClassList(['Input-Group'], props),
       settings: { hasID: true },

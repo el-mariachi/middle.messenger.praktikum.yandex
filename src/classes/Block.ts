@@ -32,6 +32,7 @@ export interface IProps {
     hasID?: boolean;
   };
 }
+
 export abstract class Block {
   static EVENTS = {
     INIT: 'init',
@@ -54,7 +55,8 @@ export abstract class Block {
   public children: IChildren<Block>;
   public props: IProps;
 
-  constructor(public tagName = 'div', public allProps: IProps = {}) {
+  constructor(public allProps: IProps = {}) {
+    const tagName = allProps.tagName || 'div';
     const { attributes, classList } = allProps;
     this._attributes = attributes && Object.keys(attributes).length !== 0 ? attributes : undefined;
     this._classList = classList && classList.length !== 0 ? classList : undefined;
@@ -321,7 +323,7 @@ export abstract class Block {
     1 && param;
   }
 
-  hide(param: unknown) {
+  hide(param?: unknown) {
     this.getContent().style.display = 'none';
     1 && param;
   }

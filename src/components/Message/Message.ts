@@ -14,7 +14,7 @@ export class Message extends Block {
     const { type } = props;
     const classList = Message.appendClassList(['Message', 'ChatArea-Message', type], props);
     const settings = { hasID: true };
-    super('div', { ...props, classList, settings });
+    super({ ...props, classList, settings });
   }
   render(): DocumentFragment {
     return this.compile(messageTemplate, this.props);

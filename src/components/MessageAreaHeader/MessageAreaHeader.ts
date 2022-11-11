@@ -8,12 +8,14 @@ import Link from '../Link';
 
 const appBus = new EventBusSingl();
 
-const addLink = new Button('button', {
+const addLink = new Button({
+  tagName: 'button',
   text: 'Добавить пользователя',
   classList: ['Menu-Link', 'Menu_linktype_add'],
 });
 
-const deleteLink = new Button('button', {
+const deleteLink = new Button({
+  tagName: 'button',
   text: 'Удалить пользователя',
   classList: ['Menu-Link', 'Menu_linktype_delete'],
 });
@@ -41,7 +43,7 @@ export class MessageAreaHeader extends Block {
   constructor(props: IProps) {
     const classList = MessageAreaHeader.appendClassList(['MessageArea-Header'], props);
     const settings = { hasID: true };
-    super('div', { ...props, classList, settings, messageAreaMenu, chatListLink });
+    super({ ...props, classList, settings, messageAreaMenu, chatListLink });
   }
   componentDidMount(): void {
     appBus.on(EVENTS.CHAT_SELECTED, this.setHeader.bind(this));

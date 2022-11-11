@@ -35,10 +35,11 @@ const searchInput = new Input(prepInputAttrs(searchInputData));
 
 export class Search extends Block {
   constructor(props: IProps) {
+    const tagName = 'form';
     const classList = Search.appendClassList(['Search'], props);
     const attributes = { name: 'search_form' };
     const events = { submit: submitForm };
-    super('form', { ...props, classList, attributes, events, searchInput });
+    super({ ...props, tagName, classList, attributes, events, searchInput });
   }
   componentDidMount(): void {
     appBus.on(EVENTS.SEARCH_UPDATE, this.submit.bind(this));

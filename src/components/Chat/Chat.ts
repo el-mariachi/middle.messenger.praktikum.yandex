@@ -7,7 +7,8 @@ const appBus = new EventBusSingl();
 export class Chat extends Block {
   constructor(props: IProps) {
     const classList = Chat.appendClassList(['Chat'], props);
-    super('li', { ...props, classList });
+    const tagName = 'li';
+    super({ ...props, tagName, classList });
   }
   componentDidMount(): void {
     appBus.on(EVENTS.CHAT_SELECT, this.check.bind(this));

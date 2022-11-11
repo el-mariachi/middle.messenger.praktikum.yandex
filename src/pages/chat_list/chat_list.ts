@@ -9,7 +9,7 @@ export class ChatListPage extends Page {
   constructor(props: IProps) {
     const classList = ChatListPage.appendClassList(['Page', 'Page_type_chatlist'], props);
     const settings = { hasID: true };
-    super('div', { ...props, classList, settings });
+    super({ ...props, classList, settings });
   }
   componentDidMount(): void {
     this._element.addEventListener('click', (evt: Event) => {

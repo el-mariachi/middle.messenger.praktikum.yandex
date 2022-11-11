@@ -4,12 +4,14 @@ import Menu from '../Menu';
 import Button from '../Button';
 import Link from '../Link';
 
-const renameLink = new Button('button', {
+const renameLink = new Button({
+  tagName: 'button',
   text: 'Переименовать',
   classList: ['Menu-Link', 'Menu_linktype_edit'],
 });
 
-const deleteLink = new Button('button', {
+const deleteLink = new Button({
+  tagName: 'button',
   text: 'Удалить',
   classList: ['Menu-Link', 'Menu_linktype_delete'],
 });
@@ -31,7 +33,7 @@ const newChatButtonData = {
   classList: ['NewChat', 'ChatListHeader-NewChat', 'Icon', 'Icon_type_newchat'],
 };
 
-const newChatButton = new Button(newChatButtonData.tagName, newChatButtonData);
+const newChatButton = new Button(newChatButtonData);
 
 const profileUrl = '/up_/up_/src/pages/edit_profile/edit_profile.html';
 
@@ -46,7 +48,7 @@ const profileLink = new Link({
 export class ChatListHeader extends Block {
   constructor(props: IProps) {
     const classList = ChatListHeader.appendClassList(['ChatListHeader'], props);
-    super('div', { ...props, classList, chatListMenu, newChatButton, profileLink });
+    super({ ...props, classList, chatListMenu, newChatButton, profileLink });
   }
   render(): DocumentFragment {
     return this.compile(headerTemplate, this.props);

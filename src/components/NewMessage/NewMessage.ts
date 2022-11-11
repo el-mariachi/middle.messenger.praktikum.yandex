@@ -25,22 +25,22 @@ const sender = new FormSender('compose_form');
 const newMessageInput = new Input(prepInputAttrs(newMessageInputData));
 
 const sendButtonData = {
-  tagName: 'button',
   attributes: {
     type: 'submit',
   },
   classList: ['Send', 'Compose-Send', 'Icon', 'Icon_type_send'],
 };
 
-const sendButton = new Button(sendButtonData.tagName, sendButtonData);
+const sendButton = new Button(sendButtonData);
 
 export class NewMessage extends Block {
   constructor(props: IProps) {
+    const tagName = 'form';
     const classList = NewMessage.appendClassList(['Compose-Form'], props);
     const attributes = { name: 'compose_form' };
     const events = { submit: submitForm };
     const settings = { hasID: true };
-    super('form', { ...props, classList, attributes, events, settings, newMessageInput, sendButton });
+    super({ ...props, tagName, classList, attributes, events, settings, newMessageInput, sendButton });
   }
   render(): DocumentFragment {
     return this.compile(newMessageTemplate, this.props);

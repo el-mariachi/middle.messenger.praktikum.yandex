@@ -146,7 +146,7 @@ const buttons = [
     },
     classList: ['Submit', 'Form-Submit'],
   },
-].map((button) => new Button(button.tagName, button));
+].map((button) => new Button(button));
 
 const avatar = new Avatar({ imageUrl: profileAvatar });
 
@@ -167,8 +167,9 @@ const pageForm = new Form(formData);
 
 export class EditProfilePage extends Block {
   constructor(props: IProps) {
+    const tagName = 'main';
     const classList = EditProfilePage.appendClassList(['Page', 'Page_type_profile'], props);
-    super('main', { ...props, classList, pageForm, chatListLink });
+    super({ ...props, tagName, classList, pageForm, chatListLink });
   }
   render(): DocumentFragment {
     return this.compile(pageTemplate, this.props);

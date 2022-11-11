@@ -58,7 +58,7 @@ const buttons = [
       click: cancelForm,
     },
   },
-].map((button) => new Button(button.tagName, button));
+].map((button) => new Button(button));
 
 /* eslint-disable @typescript-eslint/no-unused-vars */
 // @ts-expect-error unused var
@@ -83,8 +83,9 @@ const pageForm = new Form(formData);
 
 export class LoginPage extends Block {
   constructor(props: IProps) {
+    const tagName = 'main';
     const classList = LoginPage.appendClassList(['Page', 'Page_type_profile'], props);
-    super('main', { ...props, classList, pageForm });
+    super({ ...props, tagName, classList, pageForm });
   }
   render(): DocumentFragment {
     return this.compile(pageTemplate, this.props);

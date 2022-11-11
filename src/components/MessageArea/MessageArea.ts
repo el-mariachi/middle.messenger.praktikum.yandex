@@ -13,7 +13,7 @@ type MessageType = {
   type: string;
   text: string;
   image?: {
-    src: any;
+    src: string;
     alt: string;
   };
   status: string;
@@ -25,9 +25,10 @@ const messageAreaHeader = new MessageAreaHeader({});
 
 export class MessageArea extends Block {
   constructor(props: IProps) {
+    const tagName = 'main';
     const classList = MessageArea.appendClassList(['MessageArea'], props);
     const settings = { hasID: true };
-    super('main', { ...props, classList, settings, messageAreaHeader, compose });
+    super({ ...props, tagName, classList, settings, messageAreaHeader, compose });
   }
   componentDidMount(): void {
     appBus.on(EVENTS.MESSAGES_LOADED, this.updateMessages.bind(this));
@@ -38,7 +39,9 @@ export class MessageArea extends Block {
     this.setProps({
       messages,
     });
-    this.dispatchComponentDidMount();
+    messages.forEach((message) => {
+      message.dispatchComponentDidMount();
+    });
   }
   render(): DocumentFragment {
     return this.compile(messageAreaTemplate, this.props);
