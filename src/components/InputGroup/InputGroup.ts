@@ -16,16 +16,14 @@ export type InputProps = IProps & {
 const appBus = new EventBusSingl();
 // InputGroup will have two children: input & inputError
 export class InputGroup extends Block {
-  public name = '';
-  protected _label: HTMLElement | null = null;
+  // public name = '';
+  // protected _label: HTMLElement | null = null;
   protected _input!: Input;
   protected _error!: InputError;
   constructor(props: IProps) {
-    super({
-      ...props,
-      classList: InputGroup.appendClassList(['Input-Group'], props),
-      settings: { hasID: true },
-    });
+    const classList = InputGroup.appendClassList(['Input-Group'], props);
+    const settings = { hasID: true };
+    super({ ...props, classList, settings });
   }
 
   init() {

@@ -21,7 +21,7 @@ type Options = {
   data?: IRequestBody;
 };
 
-type OptionsWithoutMethod = Omit<Options, 'method'>;
+export type OptionsWithoutMethod = Omit<Options, 'method'>;
 
 function parseOptions(options: Options) {
   const { method } = options;
@@ -41,6 +41,10 @@ function queryStringify(data: IRequestBody) {
     .join('&');
 }
 export class HTTPTransport {
+  constructor(protected _baseURL: string = '') {}
+  protected buildURL(targetURL: string) {
+    return this._baseURL === '' ? targetURL : `${this._baseURL}${targetURL}`;
+  }
   get(url: string, options: OptionsWithoutMethod = {}): Promise<XMLHttpRequest> {
     const data = parseOptions({ ...options, method: METHOD.GET });
     if (data) {
@@ -73,6 +77,7 @@ export class HTTPTransport {
     if (!url) {
       throw new Error('Bad request url');
     }
+    url = this.buildURL(url);
     const { method, headers, data } = parseOptions(options);
 
     return new Promise((resolve, reject) => {
