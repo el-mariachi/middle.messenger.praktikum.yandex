@@ -13,7 +13,7 @@ export class Router {
     Router._instance = this;
   }
 
-  use(pathname: string, block: Block) {
+  use(pathname: string, block: new () => Block) {
     const route = new Route(pathname, block, { rootQuery: this._rootQuery });
 
     this.routes.push(route);
@@ -29,9 +29,9 @@ export class Router {
         if (pathname) {
           this._onRoute(pathname);
         }
-        this._onRoute(window.location.pathname);
       }).bind(this)
     );
+    this._onRoute(window.location.pathname);
   }
 
   _onRoute(pathname: string) {
@@ -40,7 +40,7 @@ export class Router {
       return;
     }
     if (this._currentRoute) {
-      // this._currentRoute.leave();
+      this._currentRoute.leave();
     }
     this._currentRoute = route;
     route.render();

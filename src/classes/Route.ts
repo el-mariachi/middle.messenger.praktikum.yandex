@@ -1,20 +1,24 @@
 import { Block } from './Block';
-import { isEqual } from '../utils/isEqual';
+// import isEqual from '../utils/isEqual';
 import { renderDOM } from '../utils/renderDOM';
+
+type RouteProps = {
+  rootQuery: string;
+};
 
 export default class Route {
   protected _pathname: string;
-  protected _blockClass: any;
-  protected _block: any = null;
-  protected _props: any;
-  constructor(pathname: string, view: Block, props: any) {
+  protected _blockClass: new () => Block;
+  protected _block: Block | null = null;
+  protected _props: RouteProps;
+  constructor(pathname: string, view: new () => Block, props: RouteProps) {
     this._pathname = pathname;
     this._blockClass = view;
     this._props = props;
   }
   navigate(pathname: string) {
     if (this.match(pathname)) {
-      this._pathname = pathname;
+      // this._pathname = pathname;
       this.render();
     }
   }
@@ -24,7 +28,7 @@ export default class Route {
     }
   }
   match(pathname: string) {
-    return isEqual(pathname, this._pathname);
+    return pathname === this._pathname;
   }
   render() {
     if (!this._block) {
