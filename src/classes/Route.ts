@@ -1,17 +1,18 @@
 import { Block } from './Block';
-// import isEqual from '../utils/isEqual';
 import { renderDOM } from '../utils/renderDOM';
 
 type RouteProps = {
   rootQuery: string;
 };
+/* eslint-disable-next-line @typescript-eslint/no-explicit-any */
+export type Constructable<T = any> = new (...args: any[]) => T;
 
 export default class Route {
   protected _pathname: string;
-  protected _blockClass: new () => Block;
+  protected _blockClass: Constructable<Block>;
   protected _block: Block | null = null;
   protected _props: RouteProps;
-  constructor(pathname: string, view: new () => Block, props: RouteProps) {
+  constructor(pathname: string, view: Constructable<Block>, props: RouteProps) {
     this._pathname = pathname;
     this._blockClass = view;
     this._props = props;
