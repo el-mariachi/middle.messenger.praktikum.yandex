@@ -39,6 +39,7 @@ export class Router {
     if (!route) {
       return;
     }
+
     if (this._currentRoute) {
       this._currentRoute.leave();
     }

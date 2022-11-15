@@ -1,7 +1,7 @@
 import './login.scss';
 import { LoginPage } from './login';
-import { renderDOM } from '../../utils/renderDOM';
+// import { renderDOM } from '../../utils/renderDOM';
 
-const login = new LoginPage({});
+export default LoginPage;
 
-renderDOM('#app', login);
+// renderDOM('#app', login);

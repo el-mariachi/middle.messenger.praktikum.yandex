@@ -1,7 +1,7 @@
 import './sign_up.scss';
 import { SignUpPage } from './sign_up';
-import { renderDOM } from '../../utils/renderDOM';
+// import { renderDOM } from '../../utils/renderDOM';
 
-const sign_up = new SignUpPage({});
+export default SignUpPage;
 
-renderDOM('#app', sign_up);
+// renderDOM('#app', sign_up);

@@ -1,4 +1,4 @@
-import { Block, IProps } from '../../classes/Block';
+import Page, { IProps } from '../../components/Page';
 import Form from '../../components/ProfileForm';
 import addInputHandlers from '../../utils/addInputHandlers';
 import createInput from '../../utils/createInput';
@@ -138,7 +138,7 @@ const formData: IProps = {
 
 const pageForm = new Form(formData);
 
-export class SignUpPage extends Block {
+export class SignUpPage extends Page {
   constructor(props: IProps) {
     const tagName = 'main';
     const classList = SignUpPage.appendClassList(['Page', 'Page_type_profile'], props);

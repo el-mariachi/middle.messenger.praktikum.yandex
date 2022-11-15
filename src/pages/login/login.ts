@@ -1,4 +1,4 @@
-import { Block, IProps } from '../../classes/Block';
+import Page, { IProps } from '../../components/Page';
 import Form from '../../components/ProfileForm';
 import addInputHandlers from '../../utils/addInputHandlers';
 import createInput from '../../utils/createInput';
@@ -50,7 +50,7 @@ const buttons = [
     attributes: {
       name: 'cancel',
       type: 'button',
-      'data-url': '/up_/up_/src/pages/sign_up/sign_up.html',
+      'data-url': '/sign_up',
     },
     text: 'Нет аккаунта?',
     classList: ['Link', 'PageLink', 'PageLink_to_login'],
@@ -81,7 +81,7 @@ const formData: IProps = {
 
 const pageForm = new Form(formData);
 
-export class LoginPage extends Block {
+export class LoginPage extends Page {
   constructor(props: IProps) {
     const tagName = 'main';
     const classList = LoginPage.appendClassList(['Page', 'Page_type_profile'], props);
