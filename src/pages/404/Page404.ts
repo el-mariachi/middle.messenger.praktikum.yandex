@@ -16,10 +16,7 @@ export class Page404 extends Page {
   }
 
   render(): DocumentFragment {
-    const title = document.querySelector('title');
-    if (title) {
-      title.textContent = 'Messenger 404';
-    }
+    this.setPageTitle('404');
     return this.compile(ErrorPageTemplate, this.props);
   }
 }

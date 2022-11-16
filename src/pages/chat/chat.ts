@@ -19,10 +19,7 @@ export class ChatPage extends Page {
     });
   }
   render(): DocumentFragment {
-    const title = document.querySelector('title');
-    if (title) {
-      title.textContent = 'Messenger Chat';
-    }
+    this.setPageTitle('Chat');
     return this.compile(pageTemplate, this.props);
   }
 }

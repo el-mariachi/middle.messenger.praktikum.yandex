@@ -19,10 +19,7 @@ export class ChatListPage extends Page {
     });
   }
   render(): DocumentFragment {
-    const title = document.querySelector('title');
-    if (title) {
-      title.textContent = 'Messenger Chat List';
-    }
+    this.setPageTitle('Chat List');
     return this.compile(pageTemplate, this.props);
   }
 }

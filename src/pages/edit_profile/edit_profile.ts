@@ -170,10 +170,7 @@ export class EditProfilePage extends Page {
     super({ ...props, tagName, classList, pageForm, chatListLink });
   }
   render(): DocumentFragment {
-    const title = document.querySelector('title');
-    if (title) {
-      title.textContent = 'Messenger Edit Profile';
-    }
+    this.setPageTitle('Edit Profile');
     return this.compile(pageTemplate, this.props);
   }
 }

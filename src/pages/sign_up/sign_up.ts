@@ -145,10 +145,7 @@ export class SignUpPage extends Page {
     super({ ...props, tagName, classList, pageForm });
   }
   render(): DocumentFragment {
-    const title = document.querySelector('title');
-    if (title) {
-      title.textContent = 'Messenger Sign-Up';
-    }
+    this.setPageTitle('Sign Up');
     return this.compile(pageTemplate, this.props);
   }
 }
