@@ -43,7 +43,10 @@ export class FormValidator {
     }
   }
   validateInput(eventData: EventData): boolean {
-    const { name, value } = eventData;
+    const { name, value, formName } = eventData;
+    if (formName !== this.formName) {
+      return true;
+    }
     return this.checkInput(name, value);
   }
   checkInput(name: string, value: string): boolean {

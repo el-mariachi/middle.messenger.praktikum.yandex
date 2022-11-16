@@ -100,7 +100,7 @@ const buttons = [
     attributes: {
       name: 'cancel',
       type: 'button',
-      'data-url': '/up_/up_/src/pages/login/login.html',
+      'data-url': '/',
     },
     text: 'Вход',
     classList: ['Link', 'PageLink', 'PageLink_to_login'],
@@ -145,6 +145,10 @@ export class SignUpPage extends Page {
     super({ ...props, tagName, classList, pageForm });
   }
   render(): DocumentFragment {
+    const title = document.querySelector('title');
+    if (title) {
+      title.textContent = 'Messenger Sign-Up';
+    }
     return this.compile(pageTemplate, this.props);
   }
 }

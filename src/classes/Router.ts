@@ -4,9 +4,10 @@ import Route, { Constructable } from './Route';
 export class Router {
   protected static _instance: Router;
   public routes: Route[] = [];
+  // protected _route404: Route;
   public history = window.history;
   protected _currentRoute?: Route;
-  constructor(protected _rootQuery: string) {
+  constructor(protected _rootQuery: string = '#app') {
     if (Router._instance) {
       return Router._instance;
     }
@@ -37,6 +38,14 @@ export class Router {
   _onRoute(pathname: string) {
     const route = this.getRoute(pathname);
     if (!route) {
+      const errorRoute = this.getRoute('404');
+      if (!errorRoute) {
+        return;
+      }
+      if (this._currentRoute) {
+        this._currentRoute.leave();
+      }
+      errorRoute.render();
       return;
     }
 

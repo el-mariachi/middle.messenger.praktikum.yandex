@@ -1,4 +1,4 @@
-import { Block, IProps } from '../../classes/Block';
+import Page, { IProps } from '../../components/Page';
 import Form from '../../components/ProfileForm';
 import addInputHandlers from '../../utils/addInputHandlers';
 import createInput from '../../utils/createInput';
@@ -165,13 +165,17 @@ const formData: IProps = {
 
 const pageForm = new Form(formData);
 
-export class EditProfilePage extends Block {
+export class EditProfilePage extends Page {
   constructor(props: IProps) {
     const tagName = 'main';
     const classList = EditProfilePage.appendClassList(['Page', 'Page_type_profile'], props);
     super({ ...props, tagName, classList, pageForm, chatListLink });
   }
   render(): DocumentFragment {
+    const title = document.querySelector('title');
+    if (title) {
+      title.textContent = 'Messenger Edit Profile';
+    }
     return this.compile(pageTemplate, this.props);
   }
 }

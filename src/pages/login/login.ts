@@ -88,6 +88,10 @@ export class LoginPage extends Page {
     super({ ...props, tagName, classList, pageForm });
   }
   render(): DocumentFragment {
+    const title = document.querySelector('title');
+    if (title) {
+      title.textContent = 'Messenger Login';
+    }
     return this.compile(pageTemplate, this.props);
   }
 }
