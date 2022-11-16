@@ -29,13 +29,11 @@ const messageAreaMenuData: IProps = {
 
 const messageAreaMenu = new Menu(messageAreaMenuData);
 
-const chatListUrl = '/up_/up_/src/pages/chat_list/chat_list.html';
-
 const chatListLink = new Link({
   text: 'Назад',
   classList: ['PageLink', 'PageLink_to_list'],
   attributes: {
-    href: chatListUrl,
+    href: '/chat_list',
   },
 });
 

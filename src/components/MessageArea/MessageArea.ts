@@ -33,6 +33,7 @@ export class MessageArea extends Block {
   componentDidMount(): void {
     appBus.on(EVENTS.MESSAGES_LOADED, this.updateMessages.bind(this));
     appBus.on(EVENTS.MESSAGES_UPDATED, this.updateMessages.bind(this));
+    appBus.on(EVENTS.CHAT_SELECTED, this.showChat.bind(this));
   }
   updateMessages(messagesData: MessageType[]) {
     const messages = messagesData.map((message) => new Message(message));
@@ -41,6 +42,12 @@ export class MessageArea extends Block {
     });
     messages.forEach((message) => {
       message.dispatchComponentDidMount();
+    });
+  }
+  // TODO for testing purposes. Remove!
+  showChat() {
+    this.setProps({
+      selectedChat: true,
     });
   }
   render(): DocumentFragment {

@@ -1,3 +1,4 @@
+<h5 class="OutlineHeader">Выбранный чат</h5>
 {{#if selectedChat}}
 {{{messageAreaHeader}}}
 <div class="MessageArea-Curent">
@@ -7,6 +8,8 @@
 </div>
 {{{compose}}}
 {{else}}
-<h5 class="OutlineHeader">Выбранный чат</h5>
-<p class="Hint">Выберите чат</p>
+{{{messageAreaHeader}}}
+<div class="MessageArea-Curent">
+  <p class="Hint">Выберите чат</p>
+</div>
 {{/if}}

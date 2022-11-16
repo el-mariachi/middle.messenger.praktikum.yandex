@@ -11,13 +11,11 @@ import Avatar from '../../components/Avatar';
 import profileAvatar from '../../../static/images/chat_avatar.png';
 import Link from '../../components/Link';
 
-const chatListUrl = '/up_/up_/src/pages/chat_list/chat_list.html';
-
 const chatListLink = new Link({
   text: 'Назад к чатам',
   classList: ['PageLink', 'PageLink_to_list', 'Profile-PageLink'],
   attributes: {
-    href: chatListUrl,
+    href: '/chat_list',
   },
 });
 const profileName = 'Александр Новиков';

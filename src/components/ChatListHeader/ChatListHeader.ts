@@ -35,13 +35,11 @@ const newChatButtonData = {
 
 const newChatButton = new Button(newChatButtonData);
 
-const profileUrl = '/up_/up_/src/pages/edit_profile/edit_profile.html';
-
 const profileLink = new Link({
   text: 'Профиль',
   classList: ['PageLink', 'PageLink_to_profile'],
   attributes: {
-    href: profileUrl,
+    href: '/settings',
   },
 });
 
