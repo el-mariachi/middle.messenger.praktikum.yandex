@@ -5,7 +5,7 @@ import { InputProps } from '../components/InputGroup';
 const appBus = new EventBusSingl();
 
 export type ValidatorOptions = {
-  formName?: string;
+  formName: string;
   password?: {
     source: string;
     target: string;

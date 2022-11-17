@@ -97,7 +97,7 @@ export class HTTPTransport {
       xhr.onload = function () {
         resolve(xhr);
       };
-
+      xhr.withCredentials = true;
       xhr.onabort = reject;
       xhr.onerror = reject;
       xhr.ontimeout = reject;

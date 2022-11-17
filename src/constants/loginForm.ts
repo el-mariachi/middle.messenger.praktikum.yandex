@@ -1,3 +1,5 @@
+import { ValidatorOptions } from '../controllers/FormValidator';
+
 export const inputData = [
   {
     name: 'login',
@@ -42,3 +44,7 @@ export const buttonsData = [
     classList: ['Link', 'PageLink', 'PageLink_to_login'],
   },
 ];
+
+export const validatorOptions: ValidatorOptions = {
+  formName: 'login_form',
+};

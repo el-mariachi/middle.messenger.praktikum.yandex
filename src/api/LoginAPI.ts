@@ -8,8 +8,14 @@ export type LoginRequest = {
   password: string;
 };
 
+const headers = {
+  'Content-Type': 'application/json',
+};
 export class LoginAPI extends BaseAPI {
   request(user: LoginRequest): Promise<XMLHttpRequest> {
-    return authAPITransport.post('/signin', { data: user }).then((response) => response);
+    return authAPITransport.post('/signin', { headers, data: user }).then((response) => response);
+  }
+  logout() {
+    return authAPITransport.post('/logout').then((response) => response);
   }
 }

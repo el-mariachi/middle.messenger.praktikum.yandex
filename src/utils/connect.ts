@@ -1,5 +1,5 @@
 import { Block, IProps } from '../classes/Block';
-import store, { State } from '../classes/Store';
+import store, { State } from '../store/Store';
 import isEqual from './isEqual';
 
 export function connect(mapStateToProps: (state: State) => State) {
