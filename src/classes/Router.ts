@@ -1,10 +1,11 @@
 import { Block } from './Block';
 import Route, { Constructable } from './Route';
+import Page404 from '../../src/pages/404';
 
 export class Router {
   protected static _instance: Router;
   public routes: Route[] = [];
-  // protected _route404: Route;
+  static _route404: Route;
   public history = window.history;
   protected _currentRoute?: Route;
   constructor(protected _rootQuery: string = '#app') {
@@ -12,6 +13,7 @@ export class Router {
       return Router._instance;
     }
     Router._instance = this;
+    Router._route404 = new Route('', Page404, { rootQuery: this._rootQuery });
   }
 
   use(pathname: string, block: Constructable<Block>) {
@@ -36,17 +38,10 @@ export class Router {
   }
 
   _onRoute(pathname: string) {
-    const route = this.getRoute(pathname);
+    let route = this.getRoute(pathname);
     if (!route) {
-      const errorRoute = this.getRoute('404');
-      if (!errorRoute) {
-        return;
-      }
-      if (this._currentRoute) {
-        this._currentRoute.leave();
-      }
-      errorRoute.render();
-      return;
+      route = Router._route404;
+      // return;
     }
 
     if (this._currentRoute) {

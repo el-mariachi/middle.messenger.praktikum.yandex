@@ -1,5 +1,8 @@
 import { ValidatorOptions } from '../controllers/FormValidator';
 import { goToURL } from '../utils/goToURL';
+import { LoginController } from '../controllers/LoginController';
+
+const loginController = new LoginController();
 
 export const inputData = [
   {
@@ -21,6 +24,16 @@ export const inputData = [
     accept: '',
     value: '',
     test: /^([A-Z][A-Za-z]*$)|([А-Я][А-Яа-я-]*$)/,
+  },
+  {
+    name: 'display_name',
+    label: 'Ник',
+    errorMessage: 'Поле заполнено некорректно',
+    type: 'text',
+    placeholder: 'Ник',
+    accept: '',
+    value: '',
+    test: /^([A-Za-z]+$)|([А-Яа-я-]+$)/,
   },
   {
     name: 'login',
@@ -53,21 +66,31 @@ export const inputData = [
     test: /^\+?\d{10,15}$/i,
   },
   {
-    name: 'password',
-    label: 'Пароль',
+    name: 'newPassword',
+    label: 'Новый пароль',
     errorMessage: 'Пароль не подходит',
     type: 'password',
-    placeholder: 'Пароль',
+    placeholder: 'Новый пароль',
     accept: '',
     value: '',
     test: /^(?=.*\d)(?=.*[A-ZА-Я]).{8,40}$/,
   },
   {
-    name: 'password2',
+    name: 'newPassword2',
     label: 'Повторите пароль',
     errorMessage: 'Пароли не совпадают',
     type: 'password',
     placeholder: 'Повторите пароль',
+    accept: '',
+    value: '',
+    test: /^(?=.*\d)(?=.*[A-ZА-Я]).{8,40}$/,
+  },
+  {
+    name: 'oldPassword',
+    label: 'Старый пароль',
+    errorMessage: 'Пароль не подходит',
+    type: 'password',
+    placeholder: 'Старый пароль',
     accept: '',
     value: '',
     test: /^(?=.*\d)(?=.*[A-ZА-Я]).{8,40}$/,
@@ -80,28 +103,51 @@ export const buttonsData = [
     attributes: {
       type: 'submit',
       name: 'submit',
-      value: 'Зарегистрироваться',
+      value: 'Сохранить',
     },
     classList: ['Submit', 'Form-Submit'],
   },
   {
     attributes: {
-      // name: 'cancel',
       type: 'button',
       'data-url': '/',
     },
-    text: 'Вход',
+    text: 'Сменить аккаунт',
     classList: ['Link', 'PageLink', 'PageLink_to_login'],
     events: {
-      click: goToURL,
+      click: (e: Event) => {
+        const target = e.target as HTMLElement;
+        loginController.logout().then((result) => {
+          if (result) {
+            goToURL.call(target);
+          }
+        });
+      },
     },
   },
 ];
 
+export const chatListLinkData = {
+  text: 'Назад к чатам',
+  classList: ['PageLink', 'PageLink_to_list', 'Profile-PageLink'],
+  attributes: {
+    href: '/chat_list',
+  },
+  events: {
+    click: (e: Event) => {
+      e.preventDefault();
+      const target = e.target as HTMLElement;
+      if (target) {
+        goToURL.call(target);
+      }
+    },
+  },
+};
+
 export const validatorOptions: ValidatorOptions = {
-  formName: 'sign_up_form',
+  formName: 'edit_profile_form',
   password: {
-    source: 'password',
-    target: 'password2',
+    source: 'newPassword',
+    target: 'newPassword2',
   },
 };

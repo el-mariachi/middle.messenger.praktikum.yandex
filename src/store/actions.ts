@@ -1,15 +1,4 @@
-import store from './Store';
-
-type UserData = {
-  id: number;
-  first_name: string;
-  second_name: string;
-  display_name: string;
-  login: string;
-  email: string;
-  phone: string;
-  avatar: string;
-};
+import store, { UserData } from './Store';
 
 // const getUserState = () => {
 //   const state = store.getState();
@@ -28,9 +17,13 @@ type UserData = {
 //     user
 //   );
 // };
+const getUser = () => {
+  const { user } = store.getState();
+  return user;
+};
 
-const setUser = (userData: UserData) => {
+const setUser = (userData: UserData | null) => {
   store.set('user', userData);
 };
 
-export { setUser };
+export { setUser, getUser };

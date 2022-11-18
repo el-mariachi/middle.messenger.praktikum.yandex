@@ -7,14 +7,17 @@ import submitForm from '../../controllers/submitForm';
 import pageTemplate from './login.hbs';
 import { inputData, buttonsData } from '../../constants/loginForm';
 import { LoginController } from '../../controllers/LoginController';
+import { checkUserState } from '../../store/checkUserState';
 
+const currentPath = '/';
+if (window.location.pathname === currentPath) {
+  checkUserState('/chat_list'); // if Store has user, go to chat_list
+}
 const pageName = 'Вход';
-
 const inputs = inputData.map(addInputHandlers).map(createInput);
-
 const buttons = buttonsData.map((button) => new Button(button));
 
-new LoginController();
+new LoginController(currentPath);
 
 const formData: IProps = {
   formTitle: pageName,

@@ -5,6 +5,7 @@ import Button from '../Button';
 import { EventBusSingl } from '../../controllers/EventBusSingl';
 import { EVENTS } from '../../constants/events';
 import Link from '../Link';
+import { goToURL } from '../../utils/goToURL';
 
 const appBus = new EventBusSingl();
 
@@ -34,6 +35,15 @@ const chatListLink = new Link({
   classList: ['PageLink', 'PageLink_to_list'],
   attributes: {
     href: '/chat_list',
+  },
+  events: {
+    click: (e: Event) => {
+      e.preventDefault();
+      const target = e.target as HTMLElement;
+      if (target) {
+        goToURL.call(target);
+      }
+    },
   },
 });
 

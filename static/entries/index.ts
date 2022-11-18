@@ -1,5 +1,4 @@
 import { Router } from '../../src/classes/Router';
-import Page404 from '../../src/pages/404';
 import Page500 from '../../src/pages/500';
 import Login from '../../src/pages/login';
 import SignUp from '../../src/pages/sign_up';
@@ -21,7 +20,6 @@ appRouter
   .use('/settings', EditProfilePage)
   .use('/chat_list', ChatListPage)
   .use('/chat', ChatPage)
-  .use('/404', Page404)
   .use('/500', Page500)
   .start();
 

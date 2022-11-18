@@ -1,4 +1,5 @@
 import { ValidatorOptions } from '../controllers/FormValidator';
+import { goToURL } from '../utils/goToURL';
 
 export const inputData = [
   {
@@ -34,14 +35,16 @@ export const buttonsData = [
     classList: ['Submit', 'Form-Submit'],
   },
   {
-    tagName: 'a',
     attributes: {
-      name: 'cancel',
+      // name: 'cancel',
       type: 'button',
-      href: '/sign_up',
+      'data-url': '/sign_up',
     },
     text: 'Нет аккаунта?',
     classList: ['Link', 'PageLink', 'PageLink_to_login'],
+    events: {
+      click: goToURL,
+    },
   },
 ];
 

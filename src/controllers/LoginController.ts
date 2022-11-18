@@ -5,21 +5,30 @@ import { FormValidator } from './FormValidator';
 import { inputData, validatorOptions } from '../constants/loginForm';
 import { getFormData } from '../utils/getFormData';
 import { Router } from '../classes/Router';
-import { UserController } from './UserController';
+import { setUser } from '../store/actions';
+import { loadUser } from '../utils/loadUser';
 
 const appBus = new EventBusSingl();
 const appRouter = new Router();
-const userController = new UserController();
 
 const loginApi = new LoginAPI();
 
 export class LoginController {
+  static _loginController: LoginController;
   public formName;
-  constructor() {
+  constructor(private currentPath: string) {
+    if (LoginController._loginController) {
+      return LoginController._loginController;
+    }
     const { formName } = validatorOptions;
     this.formName = formName;
     appBus.on(EVENTS.FORM_VALID, this.login.bind(this));
     new FormValidator(inputData, validatorOptions);
+    if (window.location.pathname === this.currentPath) {
+      // try to load user and maybe go to '/chat_list'
+      loadUser('/chat_list');
+    }
+    LoginController._loginController = this;
   }
   public async login(form: HTMLFormElement) {
     if (form.name !== this.formName) {
@@ -27,17 +36,13 @@ export class LoginController {
     }
     const data = getFormData(form) as LoginRequest;
     try {
-      const loggedOut = await this.logout();
-      if (!loggedOut) {
-        throw new Error('Failed to log out user');
-      }
       const { status, response } = await loginApi.request(data);
       let errorMessage, responseObj;
       switch (status - (status % 100)) {
         case 200:
           console.log('LoginController received', response);
-          userController.loadUser();
-          appRouter.go('/chat_list');
+          // response is just a string 'OK'
+          loadUser('/chat_list');
           break;
         case 400:
           if (status === 401) {
@@ -53,19 +58,19 @@ export class LoginController {
         case 500:
           appRouter.go('/500');
       }
-      /* eslint-disable-next-line no-console */
-      // Router.go('/chat_list')
     } catch (error) {
       console.log('LoginController catch', error);
-      // show 500 page
+      // TODO show 500 with error ??
     }
   }
   public async logout() {
     const { status, response } = await loginApi.logout();
     if (status === 500) {
-      console.log(response);
+      response;
+      // TODO show 500 with response ??
       return false;
     } else {
+      setUser(null);
       return true;
     }
   }

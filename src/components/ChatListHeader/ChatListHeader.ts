@@ -3,6 +3,7 @@ import headerTemplate from './ChatListHeader.hbs';
 import Menu from '../Menu';
 import Button from '../Button';
 import Link from '../Link';
+import { goToURL } from '../../utils/goToURL';
 
 const renameLink = new Button({
   tagName: 'button',
@@ -40,6 +41,15 @@ const profileLink = new Link({
   classList: ['PageLink', 'PageLink_to_profile'],
   attributes: {
     href: '/settings',
+  },
+  events: {
+    click: (e: Event) => {
+      e.preventDefault();
+      const target = e.target as HTMLElement;
+      if (target) {
+        goToURL.call(target);
+      }
+    },
   },
 });
 

@@ -1,9 +1,7 @@
 import { SignUpAPI } from '../api/SignUpAPI';
 import { setUser } from '../store/actions';
-import { Router } from '../classes/Router';
 
 const signUpApi = new SignUpAPI();
-const appRouter = new Router();
 
 export class UserController {
   static _userController: UserController;
@@ -13,29 +11,27 @@ export class UserController {
     }
     UserController._userController = this;
   }
-  public async loadUser() {
+  public async loadUser(): Promise<boolean> {
     try {
       const { status, response } = await signUpApi.userInfo();
       switch (status - (status % 100)) {
         case 200:
           setUser(response);
-          appRouter.go('/chat_list');
-          break;
+          return true;
         case 400:
-          // TODO figure out if we need to show this
           if (status === 401) {
+            // TODO remove
             console.log('unauthorized get user');
           }
-          appRouter.go('/404');
-          break;
+          return false;
         case 500:
-          appRouter.go('/500');
-          break;
         default:
-          break;
+          return false;
       }
     } catch (error) {
+      // TODO show 500 with error
       console.error('Unble to load user.', error);
+      return false;
     }
   }
 }

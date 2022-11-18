@@ -15,16 +15,16 @@ export class InputError extends Block {
     const settings = { hasID: true };
     super({ ...props, tagName, classList, settings });
     const appBus = new EventBusSingl();
-    appBus.on(EVENTS.INPUT_ERROR, this.show.bind(this));
-    appBus.on(EVENTS.INPUT_OK, this.hide.bind(this));
+    appBus.on(EVENTS.INPUT_ERROR, this.showError.bind(this));
+    appBus.on(EVENTS.INPUT_OK, this.hideError.bind(this));
   }
-  show({ name, errorMessage }: ErrorProps): void {
+  showError({ name, errorMessage }: ErrorProps): void {
     if (name === this.props.name) {
       errorMessage && this.setProps({ errorMessage });
       this._element.classList.add('Input_errorvisible');
     }
   }
-  hide({ name }: ErrorProps): void {
+  hideError({ name }: ErrorProps): void {
     if (name === this.props.name) {
       this._element.classList.remove('Input_errorvisible');
     }
