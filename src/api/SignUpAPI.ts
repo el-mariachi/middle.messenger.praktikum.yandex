@@ -22,7 +22,7 @@ export class SignUpAPI extends BaseAPI {
   userInfo(): Promise<XMLHttpRequest> {
     // sends cookie
     const headers = {
-      // 'Content-Type': 'application/json',
+      'Content-Type': 'application/json',
       'X-Requested-With': 'XMLHttpRequest',
       'Access-Control-Allow-Origin': '*',
     };

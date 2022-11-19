@@ -3,7 +3,7 @@ import { EVENTS } from '../constants/events';
 import set from '../utils/set';
 
 export type UserData = {
-  id: number;
+  id: number | null;
   first_name: string;
   second_name: string;
   display_name: string;
@@ -13,14 +13,25 @@ export type UserData = {
   avatar: string;
 };
 
+export const userStruct: UserData = {
+  id: null,
+  first_name: '',
+  second_name: '',
+  display_name: '',
+  login: '',
+  email: '',
+  phone: '',
+  avatar: '',
+};
+
 export type State = {
   [k: string]: any; // eslint-disable-line @typescript-eslint/no-explicit-any
-  user: UserData | null;
+  user: UserData;
 };
 
 class Store extends EventBus {
   private _state: State = {
-    user: null,
+    user: userStruct,
   };
 
   public getState() {

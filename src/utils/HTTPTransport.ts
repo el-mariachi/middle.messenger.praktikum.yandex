@@ -95,6 +95,7 @@ export class HTTPTransport {
         resolve(xhr);
       };
       xhr.withCredentials = true;
+      xhr.responseType = 'json';
       xhr.onabort = reject;
       xhr.onerror = reject;
       xhr.ontimeout = reject;

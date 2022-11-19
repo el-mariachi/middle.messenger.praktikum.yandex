@@ -7,7 +7,6 @@ import submitForm from '../../controllers/submitForm';
 import pageTemplate from './login.hbs';
 import { inputData, buttonsData } from '../../constants/loginForm';
 import { LoginController } from '../../controllers/LoginController';
-import { checkUserState } from '../../store/checkUserState';
 
 function createPageResources(currentPath: string) {
   // will get called in page constructor
@@ -32,11 +31,6 @@ function createPageResources(currentPath: string) {
   const pageForm = new Form(formData);
   return { pageForm };
 }
-
-// const currentPath = '/';
-// if (window.location.pathname === currentPath) {
-//   checkUserState('/chat_list'); // if Store has user, go to chat_list
-// }
 
 export class LoginPage extends Page {
   constructor(props: PageProps) {

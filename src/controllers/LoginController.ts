@@ -6,6 +6,7 @@ import { inputData, validatorOptions } from '../constants/loginForm';
 import { getFormData } from '../utils/getFormData';
 import { Router } from '../classes/Router';
 import { setUser } from '../store/actions';
+import { userStruct } from '../store/Store';
 import { WithUserController } from '../classes/WithUserController';
 import { UserController } from './UserController';
 
@@ -18,6 +19,7 @@ export class LoginController extends WithUserController {
   public formName;
   constructor(currentPath: string) {
     super(currentPath);
+    this.escapeRoute = '/chat_list';
     if (LoginController._loginController) {
       return LoginController._loginController;
     }
@@ -34,7 +36,7 @@ export class LoginController extends WithUserController {
     const data = getFormData(form) as LoginRequest;
     try {
       const { status, response } = await loginApi.request(data);
-      let errorMessage, responseObj;
+      let errorMessage;
       switch (status - (status % 100)) {
         case 200:
           // response is just a string 'OK'
@@ -45,10 +47,7 @@ export class LoginController extends WithUserController {
             console.log('unauthorized');
           }
           // show error message in login field
-          responseObj = JSON.parse(response);
-
-          errorMessage =
-            responseObj.reason && typeof responseObj.reason === 'string' ? responseObj.reason : 'Unknown error';
+          errorMessage = response.reason && typeof response.reason === 'string' ? response.reason : 'Unknown error';
           appBus.emit(EVENTS.INPUT_ERROR, { name: 'login', errorMessage });
           break;
         case 500:
@@ -66,7 +65,7 @@ export class LoginController extends WithUserController {
       // TODO show 500 with response ??
       return false;
     } else {
-      setUser(null);
+      setUser(userStruct);
       return true;
     }
   }
