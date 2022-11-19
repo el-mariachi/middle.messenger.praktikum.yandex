@@ -17,7 +17,7 @@ const userController = new UserController();
 export class LoginController extends WithUserController {
   static _loginController: LoginController;
   public formName;
-  constructor(currentPath: string) {
+  constructor(currentPath = '/') {
     super(currentPath);
     this.escapeRoute = '/chat_list';
     if (LoginController._loginController) {

@@ -1,8 +1,8 @@
 import { ValidatorOptions } from '../controllers/FormValidator';
 import { goToURL } from '../utils/goToURL';
-import { LoginController } from '../controllers/LoginController';
-
-const loginController = new LoginController();
+import { EventBusSingl } from '../controllers/EventBusSingl';
+import { EVENTS } from './events';
+const appBus = new EventBusSingl();
 
 export const inputData = [
   {
@@ -110,18 +110,12 @@ export const buttonsData = [
   {
     attributes: {
       type: 'button',
-      'data-url': '/',
     },
     text: 'Сменить аккаунт',
     classList: ['Link', 'PageLink', 'PageLink_to_login'],
     events: {
-      click: (e: Event) => {
-        const target = e.target as HTMLElement;
-        loginController.logout().then((result) => {
-          if (result) {
-            goToURL.call(target);
-          }
-        });
+      click: () => {
+        appBus.emit(EVENTS.REQUEST_LOGOUT);
       },
     },
   },

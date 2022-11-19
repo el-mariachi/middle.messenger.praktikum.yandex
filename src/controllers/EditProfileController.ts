@@ -5,13 +5,14 @@ import { inputData, validatorOptions } from '../constants/profileForm';
 import { WithUserController } from '../classes/WithUserController';
 import { getFormData } from '../utils/getFormData';
 import { ProfileAPI, ChangePasswordRequest, UpdateProfileRequest } from '../api/ProfileAPI';
+import { LoginController } from './LoginController';
 // import { UserController } from './UserController';
-// import { Router } from '../classes/Router';
+import { Router } from '../classes/Router';
 
 const appBus = new EventBusSingl();
-// const appRouter = new Router();
+const appRouter = new Router();
 // const userController = new UserController();
-
+const loginController = new LoginController();
 export class EditProfileController extends WithUserController {
   static _editProfileController: EditProfileController;
   public formName;
@@ -25,7 +26,7 @@ export class EditProfileController extends WithUserController {
     this.userRequired = true;
     this.escapeRoute = '/';
     appBus.on(EVENTS.FORM_VALID, this.editProfile.bind(this));
-
+    appBus.on(EVENTS.REQUEST_LOGOUT, this.logout.bind(this));
     // Validator receives the inputs at this stage
     // The avatar image file input is technically also an input
     // but is added and handled independently. It doesn't get it's InputGroup
@@ -40,5 +41,11 @@ export class EditProfileController extends WithUserController {
   }
   public async changePassword(form: HTMLFormElement) {
     //
+  }
+  public async logout() {
+    const success = await loginController.logout();
+    if (success) {
+      appRouter.go('/');
+    }
   }
 }

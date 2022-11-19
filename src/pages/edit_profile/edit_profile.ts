@@ -1,4 +1,4 @@
-import Page, { IProps } from '../../components/Page';
+import Page, { IProps, PageProps } from '../../components/Page';
 import Form from '../../components/ProfileForm';
 import addInputHandlers from '../../utils/addInputHandlers';
 import createInput from '../../utils/createInput';
@@ -11,35 +11,41 @@ import Link from '../../components/Link';
 import { inputData, buttonsData, chatListLinkData } from '../../constants/profileForm';
 import { EditProfileController } from '../../controllers/EditProfileController';
 
-const profileName = 'Александр Новиков';
+function createPageResources(currentPath: string) {
+  const profileName = 'Александр Новиков';
 
-const inputs = inputData.map(addInputHandlers).map(createInput);
-const buttons = buttonsData.map((button) => new Button(button));
-const chatListLink = new Link(chatListLinkData);
+  const inputs = inputData.map(addInputHandlers).map(createInput);
+  const buttons = buttonsData.map((button) => new Button(button));
+  const chatListLink = new Link(chatListLinkData);
 
-new EditProfileController();
+  new EditProfileController(currentPath);
 
-const avatar = new Avatar({ imageUrl: profileAvatar });
+  const avatar = new Avatar({ imageUrl: profileAvatar });
 
-const formData: IProps = {
-  formTitle: profileName,
-  avatar,
-  inputs,
-  buttons,
-  events: {
-    submit: submitForm,
-  },
-  attributes: {
-    name: 'edit_profile_form',
-  },
-};
+  const userInfoSet: IProps = {
+    formTitle: profileName,
+    avatar,
+    inputs,
+    buttons,
+    events: {
+      submit: submitForm,
+    },
+    attributes: {
+      name: 'edit_profile_form',
+    },
+  };
 
-const pageForm = new Form(formData);
+  const userInfo = new Form(userInfoSet);
+  return { pageForm: userInfo, chatListLink };
+}
 
 export class EditProfilePage extends Page {
-  constructor(props: IProps) {
+  constructor(props: PageProps) {
+    // setup root element
     const tagName = 'main';
     const classList = EditProfilePage.appendClassList(['Page', 'Page_type_profile'], props);
+    // setup children
+    const { pageForm, chatListLink } = createPageResources(props.currentPath);
     super({ ...props, tagName, classList, pageForm, chatListLink });
   }
   render(): DocumentFragment {
