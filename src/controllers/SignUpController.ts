@@ -5,23 +5,22 @@ import { FormValidator } from './FormValidator';
 import { inputData, validatorOptions } from '../constants/signupForm';
 import { getFormData } from '../utils/getFormData';
 import { Router } from '../classes/Router';
-import { loadUser } from '../utils/loadUser';
+import { WithUserController } from '../classes/WithUserController';
+import { UserController } from './UserController';
 
 const appBus = new EventBusSingl();
 const appRouter = new Router();
 const signUpApi = new SignUpAPI();
+const userController = new UserController();
 
-export class SignUpController {
+export class SignUpController extends WithUserController {
   public formName;
-  constructor(private currentPath: string) {
+  constructor(currentPath: string) {
+    super(currentPath);
     const { formName } = validatorOptions;
     this.formName = formName;
     appBus.on(EVENTS.FORM_VALID, this.signup.bind(this));
     new FormValidator(inputData, validatorOptions);
-    if (window.location.pathname === this.currentPath) {
-      // try to load user and maybe go to '/chat_list'
-      loadUser('/chat_list');
-    }
   }
   public async signup(form: HTMLFormElement) {
     if (form.name !== this.formName) {
@@ -33,7 +32,7 @@ export class SignUpController {
       const { status, response } = await signUpApi.request(data);
       switch (status - (status % 100)) {
         case 200:
-          loadUser('/chat_list');
+          userController.loadUser();
           break;
         case 400:
           if (status === 401) {

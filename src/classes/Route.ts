@@ -1,4 +1,5 @@
-import { Block } from './Block';
+// import { Block } from './Block';
+import Page from '../components/Page';
 import { renderDOM } from '../utils/renderDOM';
 
 type RouteProps = {
@@ -9,10 +10,10 @@ export type Constructable<T = any> = new (...args: any[]) => T;
 
 export default class Route {
   protected _pathname: string;
-  protected _blockClass: Constructable<Block>;
-  protected _block: Block | null = null;
+  protected _blockClass: Constructable<Page>;
+  protected _block: Page | null = null;
   protected _props: RouteProps;
-  constructor(pathname: string, view: Constructable<Block>, props: RouteProps) {
+  constructor(pathname: string, view: Constructable<Page>, props: RouteProps) {
     this._pathname = pathname;
     this._blockClass = view;
     this._props = props;
@@ -33,7 +34,7 @@ export default class Route {
   }
   render() {
     if (!this._block) {
-      this._block = new this._blockClass({});
+      this._block = new this._blockClass({ currentPath: this._pathname });
       renderDOM(this._props.rootQuery, this._block);
       return;
     }

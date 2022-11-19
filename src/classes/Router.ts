@@ -1,4 +1,5 @@
-import { Block } from './Block';
+// import { Block } from './Block';
+import Page from '../components/Page';
 import Route, { Constructable } from './Route';
 import Page404 from '../../src/pages/404';
 
@@ -16,7 +17,7 @@ export class Router {
     Router._route404 = new Route('', Page404, { rootQuery: this._rootQuery });
   }
 
-  use(pathname: string, block: Constructable<Block>) {
+  use(pathname: string, block: Constructable<Page>) {
     const route = new Route(pathname, block, { rootQuery: this._rootQuery });
 
     this.routes.push(route);

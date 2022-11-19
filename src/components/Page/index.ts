@@ -1,5 +1,5 @@
 import './Page.scss';
-import { Page, IProps } from './Page';
+import { Page, PageProps, IProps } from './Page';
 
 export default Page;
-export { IProps };
+export { PageProps, IProps };

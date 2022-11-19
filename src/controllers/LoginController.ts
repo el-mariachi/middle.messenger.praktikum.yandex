@@ -6,17 +6,18 @@ import { inputData, validatorOptions } from '../constants/loginForm';
 import { getFormData } from '../utils/getFormData';
 import { Router } from '../classes/Router';
 import { setUser } from '../store/actions';
-import { loadUser } from '../utils/loadUser';
+import { WithUserController } from '../classes/WithUserController';
+import { UserController } from './UserController';
 
 const appBus = new EventBusSingl();
 const appRouter = new Router();
-
 const loginApi = new LoginAPI();
-
-export class LoginController {
+const userController = new UserController();
+export class LoginController extends WithUserController {
   static _loginController: LoginController;
   public formName;
-  constructor(private currentPath: string) {
+  constructor(currentPath: string) {
+    super(currentPath);
     if (LoginController._loginController) {
       return LoginController._loginController;
     }
@@ -24,10 +25,6 @@ export class LoginController {
     this.formName = formName;
     appBus.on(EVENTS.FORM_VALID, this.login.bind(this));
     new FormValidator(inputData, validatorOptions);
-    if (window.location.pathname === this.currentPath) {
-      // try to load user and maybe go to '/chat_list'
-      loadUser('/chat_list');
-    }
     LoginController._loginController = this;
   }
   public async login(form: HTMLFormElement) {
@@ -40,9 +37,8 @@ export class LoginController {
       let errorMessage, responseObj;
       switch (status - (status % 100)) {
         case 200:
-          console.log('LoginController received', response);
           // response is just a string 'OK'
-          loadUser('/chat_list');
+          userController.loadUser();
           break;
         case 400:
           if (status === 401) {
