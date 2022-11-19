@@ -1,3 +1,5 @@
+import queryStringify from './queryString';
+
 enum METHOD {
   GET = 'GET',
   POST = 'POST',
@@ -35,18 +37,13 @@ function parseOptions(options: Options) {
   return { method, headers, data };
 }
 
-function queryStringify(data: IRequestBody) {
-  return Object.entries(data)
-    .map(([key, value]) => `${key}=${encodeURIComponent(String(value))}`)
-    .join('&');
-}
 export class HTTPTransport {
   constructor(protected _baseURL: string = '') {}
   protected buildURL(targetURL: string) {
     return this._baseURL === '' ? targetURL : `${this._baseURL}${targetURL}`;
   }
   get(url: string, options: OptionsWithoutMethod = {}): Promise<XMLHttpRequest> {
-    const data = parseOptions({ ...options, method: METHOD.GET });
+    const { data } = parseOptions({ ...options, method: METHOD.GET });
     if (data) {
       url = `${url}?${queryStringify(data)}`;
     }

@@ -1,17 +1,7 @@
+import { isArray, isPlainObject } from './typeGuardFuncs';
+
 type StringIndexed = Record<string, any>; // eslint-disable-line @typescript-eslint/no-explicit-any
 
-function isArray(value: unknown): value is [] {
-  return Array.isArray(value);
-}
-
-function isPlainObject(value: unknown): value is StringIndexed {
-  return (
-    typeof value === 'object' &&
-    value !== null &&
-    value.constructor === Object &&
-    Object.prototype.toString.call(value) === '[object Object]'
-  );
-}
 /* eslint-disable-next-line @typescript-eslint/no-explicit-any */
 function nestedArrayStringify(outerKey: string, value: any[]): string {
   return value
