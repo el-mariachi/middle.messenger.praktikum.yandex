@@ -1,6 +1,7 @@
 import { EventBus } from '../controllers/EventBusExt';
 import { EVENTS } from '../constants/events';
 import set from '../utils/set';
+import defaultAvatar from '../../static/images/chuvak130.png';
 
 export type UserData = {
   id: number | null;
@@ -21,7 +22,7 @@ export const userStruct: UserData = {
   login: '',
   email: '',
   phone: '',
-  avatar: '',
+  avatar: defaultAvatar,
 };
 
 export type State = {

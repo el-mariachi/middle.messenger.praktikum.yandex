@@ -1,52 +1,124 @@
 import Page, { IProps, PageProps } from '../../components/Page';
 import Form from '../../components/ProfileForm';
+import { EventBusSingl } from '../../controllers/EventBusSingl';
+import { EVENTS } from '../../constants/events';
 import addInputHandlers from '../../utils/addInputHandlers';
+import { makeDisabled } from '../../utils/makeDisabled';
 import createInput from '../../utils/createInput';
 import Button from '../../components/Button';
 import submitForm from '../../controllers/submitForm';
 import pageTemplate from './edit_profile.hbs';
 import Avatar from '../../components/Avatar';
-import profileAvatar from '../../../static/images/chat_avatar.png';
 import Link from '../../components/Link';
-import { inputData, buttonsData, chatListLinkData } from '../../constants/profileForm';
-import { EditProfileController } from '../../controllers/EditProfileController';
+import {
+  userInfoInputData,
+  changePasswordInputData,
+  userInfoButtonsData,
+  updateProfileButtonsData,
+  chatListLinkData,
+  updateProfileValidatorOptions,
+  changePasswordValidatorOptions,
+  MODE,
+} from '../../constants/profileForm';
+import { UserInfoController } from '../../controllers/UserInfoController';
+import { UpdateProfileController } from '../../controllers/UpdateProfileController';
+import { ChangePasswordController } from '../../controllers/ChangePasswordController';
+import { setUser } from '../../store/actions';
+import { userStruct } from '../../store/Store';
+import { getUserState } from '../../store/actions';
+import store from '../../store/Store';
+
+const appBus = new EventBusSingl();
 
 function createPageResources(currentPath: string) {
-  const profileName = 'Александр Новиков';
-
-  const inputs = inputData.map(addInputHandlers).map(createInput);
-  const buttons = buttonsData.map((button) => new Button(button));
+  const userInfoInputs = userInfoInputData.map(addInputHandlers).map(makeDisabled).map(createInput);
+  const updateProfileInputs = userInfoInputData.map(addInputHandlers).map(createInput);
+  const changePasswordInputs = changePasswordInputData.map(addInputHandlers).map(createInput);
+  const userInfoButtons = userInfoButtonsData.map((button) => new Button(button));
+  const updateProfileButtons = updateProfileButtonsData.map((button) => new Button(button));
+  const changePasswordButtons = updateProfileButtonsData.map((button) => new Button(button));
   const chatListLink = new Link(chatListLinkData);
 
-  new EditProfileController(currentPath);
+  new UserInfoController(currentPath);
+  new UpdateProfileController(currentPath);
+  new ChangePasswordController(currentPath);
 
-  const avatar = new Avatar({ imageUrl: profileAvatar });
+  const avatar = new Avatar({});
+  const editAvatar = new Avatar({ editable: true });
+  const chPasswAvatar = new Avatar({});
 
   const userInfoSet: IProps = {
-    formTitle: profileName,
     avatar,
-    inputs,
-    buttons,
+    inputs: userInfoInputs,
+    buttons: userInfoButtons,
+    attributes: {
+      name: 'user_info_form',
+    },
+  };
+
+  const updateProfileSet: IProps = {
+    avatar: editAvatar,
+    inputs: updateProfileInputs,
+    buttons: updateProfileButtons,
     events: {
       submit: submitForm,
     },
     attributes: {
-      name: 'edit_profile_form',
+      name: updateProfileValidatorOptions.formName,
+    },
+  };
+
+  const changePasswordSet: IProps = {
+    avatar: chPasswAvatar,
+    inputs: changePasswordInputs,
+    buttons: changePasswordButtons,
+    events: {
+      submit: submitForm,
+    },
+    attributes: {
+      name: changePasswordValidatorOptions.formName,
     },
   };
 
   const userInfo = new Form(userInfoSet);
-  return { pageForm: userInfo, chatListLink };
+  const updateProfile = new Form(updateProfileSet);
+  const changePassword = new Form(changePasswordSet);
+
+  return { userInfo, updateProfile, changePassword, chatListLink };
 }
 
 export class EditProfilePage extends Page {
+  public userInfo;
+  public updateProfile;
+  public changePassword;
   constructor(props: PageProps) {
     // setup root element
     const tagName = 'main';
     const classList = EditProfilePage.appendClassList(['Page', 'Page_type_profile'], props);
     // setup children
-    const { pageForm, chatListLink } = createPageResources(props.currentPath);
-    super({ ...props, tagName, classList, pageForm, chatListLink });
+    const { userInfo, updateProfile, changePassword, chatListLink } = createPageResources(props.currentPath);
+    super({ ...props, tagName, classList, pageForm: userInfo, chatListLink });
+    this.userInfo = userInfo;
+    this.updateProfile = updateProfile;
+    this.changePassword = changePassword;
+    appBus.on(EVENTS.SET_MODE, this.setMode.bind(this));
+  }
+  setMode(mode: MODE) {
+    switch (mode) {
+      case MODE.INFO:
+        this.setProps({ pageForm: this.userInfo });
+        break;
+      case MODE.UPDATE:
+        this.setProps({ pageForm: this.updateProfile });
+        break;
+      case MODE.PASSWORD:
+        this.setProps({ pageForm: this.changePassword });
+        break;
+      default:
+        this.setProps({ pageForm: this.userInfo });
+        break;
+    }
+    this.dispatchComponentDidMount();
   }
   render(): DocumentFragment {
     this.setPageTitle('Edit Profile');

@@ -3,7 +3,7 @@ import store, { State } from '../store/Store';
 import { EVENTS } from '../constants/events';
 import isEqual from './isEqual';
 
-export function connect(mapStateToProps: (state: State) => State) {
+function connect(mapStateToProps: (state: State) => State) {
   return function (Component: typeof Block) {
     return class extends Component {
       constructor(props: IProps) {
@@ -21,3 +21,7 @@ export function connect(mapStateToProps: (state: State) => State) {
     };
   };
 }
+
+const withUser = connect(({ user }) => ({ user: { ...user } }));
+
+export { withUser };

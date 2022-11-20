@@ -11,6 +11,7 @@ export type InputProps = IProps & {
   placeholder: string;
   test?: RegExp;
   valid?: boolean;
+  disabled?: boolean;
 };
 
 const appBus = new EventBusSingl();

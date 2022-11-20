@@ -1,4 +1,5 @@
 import './Avatar.scss';
 import { Avatar } from './Avatar';
+import { withUser } from '../../utils/connect';
 
-export default Avatar;
+export default withUser(Avatar);

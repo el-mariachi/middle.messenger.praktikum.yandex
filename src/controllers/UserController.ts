@@ -18,19 +18,10 @@ export class UserController {
         case 200:
           setUser(response);
           return true;
-        case 400:
-          if (status === 401) {
-            // TODO remove
-            console.log('unauthorized get user');
-          }
-          return false;
-        case 500:
         default:
           return false;
       }
     } catch (error) {
-      // TODO show 500 with error
-      console.error('Unble to load user.', error);
       return false;
     }
   }

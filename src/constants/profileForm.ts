@@ -4,7 +4,13 @@ import { EventBusSingl } from '../controllers/EventBusSingl';
 import { EVENTS } from './events';
 const appBus = new EventBusSingl();
 
-export const inputData = [
+export enum MODE {
+  INFO,
+  UPDATE,
+  PASSWORD,
+}
+
+export const userInfoInputData = [
   {
     name: 'first_name',
     label: 'Имя',
@@ -65,6 +71,9 @@ export const inputData = [
     value: '',
     test: /^\+?\d{10,15}$/i,
   },
+];
+
+export const changePasswordInputData = [
   {
     name: 'newPassword',
     label: 'Новый пароль',
@@ -97,7 +106,46 @@ export const inputData = [
   },
 ];
 
-export const buttonsData = [
+export const userInfoButtonsData = [
+  {
+    attributes: {
+      type: 'button',
+    },
+    text: 'Редактировать профиль',
+    classList: ['Link', 'FormLink'],
+    events: {
+      click: () => {
+        appBus.emit(EVENTS.SET_MODE, MODE.UPDATE);
+      },
+    },
+  },
+  {
+    attributes: {
+      type: 'button',
+    },
+    text: 'Изменить пароль',
+    classList: ['Link', 'FormLink'],
+    events: {
+      click: () => {
+        appBus.emit(EVENTS.SET_MODE, MODE.PASSWORD);
+      },
+    },
+  },
+  {
+    attributes: {
+      type: 'button',
+    },
+    text: 'Сменить аккаунт',
+    classList: ['Link', 'FormLink', 'PageLink_to_logout'],
+    events: {
+      click: () => {
+        appBus.emit(EVENTS.REQUEST_LOGOUT);
+      },
+    },
+  },
+];
+
+export const updateProfileButtonsData = [
   {
     tagName: 'input',
     attributes: {
@@ -111,11 +159,11 @@ export const buttonsData = [
     attributes: {
       type: 'button',
     },
-    text: 'Сменить аккаунт',
+    text: 'Отменить',
     classList: ['Link', 'PageLink', 'PageLink_to_login'],
     events: {
       click: () => {
-        appBus.emit(EVENTS.REQUEST_LOGOUT);
+        appBus.emit(EVENTS.SET_MODE, MODE.INFO);
       },
     },
   },
@@ -138,8 +186,12 @@ export const chatListLinkData = {
   },
 };
 
-export const validatorOptions: ValidatorOptions = {
-  formName: 'edit_profile_form',
+export const updateProfileValidatorOptions: ValidatorOptions = {
+  formName: 'update_profile_form',
+};
+
+export const changePasswordValidatorOptions: ValidatorOptions = {
+  formName: 'change_password_form',
   password: {
     source: 'newPassword',
     target: 'newPassword2',

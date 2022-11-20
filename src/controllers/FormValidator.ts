@@ -31,13 +31,17 @@ export class FormValidator {
     appBus.on(EVENTS.FORM_SUBMIT, this.validateForm.bind(this));
   }
   passwordEqual(eventData: EventData) {
+    const { name, value, formName } = eventData;
+    if (formName !== this.formName) {
+      return true;
+    }
     /* eslint-disable-next-line @typescript-eslint/no-non-null-assertion */
     const password = this.options!.password!.source;
     /* eslint-disable-next-line @typescript-eslint/no-non-null-assertion */
     const password2 = this.options!.password!.target;
-    if (eventData.name === password) {
+    if (name === password) {
       // Prepare validation string for password equality
-      const reString = eventData.value.replace(/([$()*+.?[^{|\\])/g, '\\$1');
+      const reString = value.replace(/([$()*+.?[^{|\\])/g, '\\$1');
       // Crate RE and set it for password2
       this.inputs[password2].test = new RegExp(`^${reString}$`);
     }
