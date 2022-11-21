@@ -10,7 +10,16 @@ export enum MODE {
   PASSWORD,
 }
 
-export const userInfoInputData = [
+const changeAvatarInputData = [
+  {
+    name: 'avatar',
+    type: 'file',
+    placeholder: '',
+    test: /.+/,
+  },
+];
+
+const userInfoInputData = [
   {
     name: 'first_name',
     label: 'Имя',
@@ -73,7 +82,7 @@ export const userInfoInputData = [
   },
 ];
 
-export const changePasswordInputData = [
+const changePasswordInputData = [
   {
     name: 'newPassword',
     label: 'Новый пароль',
@@ -106,7 +115,7 @@ export const changePasswordInputData = [
   },
 ];
 
-export const userInfoButtonsData = [
+const userInfoButtonsData = [
   {
     attributes: {
       type: 'button',
@@ -145,7 +154,7 @@ export const userInfoButtonsData = [
   },
 ];
 
-export const updateProfileButtonsData = [
+const updateProfileButtonsData = [
   {
     tagName: 'input',
     attributes: {
@@ -169,7 +178,7 @@ export const updateProfileButtonsData = [
   },
 ];
 
-export const chatListLinkData = {
+const chatListLinkData = {
   text: 'Назад к чатам',
   classList: ['PageLink', 'PageLink_to_list', 'Profile-PageLink'],
   attributes: {
@@ -186,14 +195,40 @@ export const chatListLinkData = {
   },
 };
 
-export const updateProfileValidatorOptions: ValidatorOptions = {
+const changeAvatarValidatorOptions: ValidatorOptions = {
+  formName: 'user_info_form',
+};
+
+const updateProfileValidatorOptions: ValidatorOptions = {
   formName: 'update_profile_form',
 };
 
-export const changePasswordValidatorOptions: ValidatorOptions = {
+const changePasswordValidatorOptions: ValidatorOptions = {
   formName: 'change_password_form',
   password: {
     source: 'newPassword',
     target: 'newPassword2',
   },
+};
+
+const avatarInputProps = {
+  events: {}, // triggers addEvents() in component
+  editable: true,
+  imageLoadHandler: (e: Event) => {
+    const target = e.target as HTMLInputElement;
+    appBus.emit(EVENTS.FORM_SUBMIT, target.form);
+  },
+};
+
+export {
+  changeAvatarInputData,
+  userInfoInputData,
+  changePasswordInputData,
+  userInfoButtonsData,
+  updateProfileButtonsData,
+  chatListLinkData,
+  changeAvatarValidatorOptions,
+  updateProfileValidatorOptions,
+  changePasswordValidatorOptions,
+  avatarInputProps,
 };

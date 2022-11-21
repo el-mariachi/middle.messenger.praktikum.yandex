@@ -18,15 +18,12 @@ import {
   chatListLinkData,
   updateProfileValidatorOptions,
   changePasswordValidatorOptions,
+  avatarInputProps,
   MODE,
 } from '../../constants/profileForm';
 import { UserInfoController } from '../../controllers/UserInfoController';
 import { UpdateProfileController } from '../../controllers/UpdateProfileController';
 import { ChangePasswordController } from '../../controllers/ChangePasswordController';
-import { setUser } from '../../store/actions';
-import { userStruct } from '../../store/Store';
-import { getUserState } from '../../store/actions';
-import store from '../../store/Store';
 
 const appBus = new EventBusSingl();
 
@@ -44,11 +41,11 @@ function createPageResources(currentPath: string) {
   new ChangePasswordController(currentPath);
 
   const avatar = new Avatar({});
-  const editAvatar = new Avatar({ editable: true });
+  const editAvatar = new Avatar(avatarInputProps);
   const chPasswAvatar = new Avatar({});
 
   const userInfoSet: IProps = {
-    avatar,
+    avatar: editAvatar,
     inputs: userInfoInputs,
     buttons: userInfoButtons,
     attributes: {
@@ -57,7 +54,7 @@ function createPageResources(currentPath: string) {
   };
 
   const updateProfileSet: IProps = {
-    avatar: editAvatar,
+    avatar,
     inputs: updateProfileInputs,
     buttons: updateProfileButtons,
     events: {

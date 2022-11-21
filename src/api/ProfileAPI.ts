@@ -34,15 +34,7 @@ export class ProfileAPI extends BaseAPI {
     };
     return profileAPITransport.put('/password', { headers, data: passwords }).then((response) => response);
   }
-  setAvatar(avatar: any) {
-    throw 'unimplemented';
+  setAvatar(form: FormData) {
+    return profileAPITransport.put('/profile/avatar', { data: form }).then((response) => response);
   }
-  // userInfo(): Promise<XMLHttpRequest> {
-  //   // sends cookie
-  //   const headers = {
-  //     'X-Requested-With': 'XMLHttpRequest',
-  //     'Access-Control-Allow-Origin': '*',
-  //   };
-  //   return profileAPITransport.get('/user', { headers }).then((response) => response);
-  // }
 }

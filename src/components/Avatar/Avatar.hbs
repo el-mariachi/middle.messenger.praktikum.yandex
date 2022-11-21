@@ -1,2 +1,4 @@
-<img class="Picture Picture_for_profile" src="{{user.avatar}}" alt="{{user.first_name}} {{user.second_name}}">
+<img class="Picture Picture_for_profile" src="{{avatarUrl}}" alt="{{user.first_name}} {{user.second_name}}">
+{{#if editable}}
 <input class="Input-File" id="avatar" name="avatar" type="file" accept="image/jpeg, image/png, image/gif">
+{{/if}}

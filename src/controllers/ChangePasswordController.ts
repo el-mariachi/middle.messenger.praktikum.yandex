@@ -6,7 +6,6 @@ import { WithUserController } from '../classes/WithUserController';
 import { getFormData } from '../utils/getFormData';
 import { ProfileAPI, ChangePasswordRequest } from '../api/ProfileAPI';
 import { Router } from '../classes/Router';
-import { setUser } from '../store/actions';
 
 const appBus = new EventBusSingl();
 const appRouter = new Router();
@@ -36,7 +35,7 @@ export class ChangePasswordController extends WithUserController {
           // setUser(response);
           appBus.emit(EVENTS.SET_MODE, MODE.INFO);
           alert('Пароль успешно изменен');
-          // TODO show success
+          // TODO show success some other way
           break;
         case 400:
           // show error message in login field

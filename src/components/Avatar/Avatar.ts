@@ -3,11 +3,16 @@ import avatarTemplate from './Avatar.hbs';
 import { UserData } from '../../store/Store';
 import defaultAvatar from '../../../static/images/chuvak130.png';
 
+type AvatarProps = IProps & {
+  imageLoadHandler: EventListener;
+};
+
 export class Avatar extends Block {
-  constructor(props: IProps) {
+  private imageLoadHandler?: EventListener;
+  constructor(props: AvatarProps) {
     const tagName = 'label';
     let classList;
-    const { editable } = props;
+    const { editable, imageLoadHandler } = props;
     if (editable) {
       classList = Avatar.appendClassList(['Avatar', 'Avatar-Edit'], props);
     } else {
@@ -16,12 +21,34 @@ export class Avatar extends Block {
     const settings = { hasID: true };
     const attributes = { for: 'avatar' };
     super({ ...props, tagName, classList, settings, attributes });
+    if (imageLoadHandler) {
+      this.imageLoadHandler = imageLoadHandler;
+    }
+  }
+  addEvents(): void {
+    if (this.imageLoadHandler) {
+      const imageInput = this._element.querySelector('.Input-File');
+      if (imageInput) {
+        imageInput.addEventListener('change', this.imageLoadHandler);
+      }
+    }
+  }
+  removeEvents(): void {
+    if (this.imageLoadHandler) {
+      const imageInput = this._element.querySelector('.Input-File');
+      if (imageInput) {
+        imageInput.removeEventListener('change', this.imageLoadHandler);
+      }
+    }
   }
   render(): DocumentFragment {
+    let avatarUrl: string;
     const user = this.props.user as UserData;
     if (user && (user.avatar === '' || user.avatar === null)) {
-      user.avatar = defaultAvatar;
+      avatarUrl = defaultAvatar;
+    } else {
+      avatarUrl = `https://ya-praktikum.tech/api/v2/resources/${user.avatar}`;
     }
-    return this.compile(avatarTemplate, this.props);
+    return this.compile(avatarTemplate, { ...this.props, avatarUrl });
   }
 }

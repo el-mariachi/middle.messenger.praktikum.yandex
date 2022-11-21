@@ -185,6 +185,11 @@ export abstract class Block {
         }
       });
     });
+    this.addEvents();
+  }
+
+  addEvents(): void {
+    // can be used in descendants
   }
 
   _removeEvents() {
@@ -199,6 +204,11 @@ export abstract class Block {
         }
       });
     });
+    this.removeEvents();
+  }
+
+  removeEvents(): void {
+    // can be used in descendants
   }
 
   // we will generate markup in this method and then call it from render()

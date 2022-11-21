@@ -20,7 +20,7 @@ type Options = {
   method: METHOD;
   headers?: IHeaders;
   timeout?: number;
-  data?: IRequestBody;
+  data?: IRequestBody | FormData;
 };
 
 export type OptionsWithoutMethod = Omit<Options, 'method'>;
@@ -31,7 +31,8 @@ function parseOptions(options: Options) {
   if (!headers || Object.keys(headers).length === 0) {
     headers = undefined;
   }
-  if (!data || Object.keys(data).length === 0) {
+  // data may be FormData, so no Object.keys() check
+  if (!data) {
     data = undefined;
   }
   return { method, headers, data };
@@ -102,6 +103,8 @@ export class HTTPTransport {
 
       if (method === METHOD.GET || !data) {
         xhr.send();
+      } else if (data instanceof FormData) {
+        xhr.send(data);
       } else {
         xhr.send(JSON.stringify(data));
       }

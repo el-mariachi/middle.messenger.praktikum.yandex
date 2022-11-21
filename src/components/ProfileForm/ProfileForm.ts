@@ -22,11 +22,10 @@ export class ProfileForm extends Form {
   componentDidMount(): void {
     super.componentDidMount();
     const user = getUserState();
-    // const formTitle = user.display_name ? user.display_name : `${user.first_name} ${user.second_name}`;
     this.setProps({ user });
     this.fillForm();
   }
-  componentDidUpdate(oldProps: IProps, newProps: IProps): boolean {
+  componentDidUpdate(): boolean {
     this.fillForm();
     return true;
   }

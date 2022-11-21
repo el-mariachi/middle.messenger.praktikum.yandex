@@ -4,12 +4,13 @@
   display: block;
   width: max-content;
   margin: 0 auto;
-  cursor: pointer;
   background-color: vars.$greyInput;
   border-radius: 50%;
 }
 
 .Avatar-Edit {
+  cursor: pointer;
+
   &::after {
     content: 'Поменять\Aаватар';
     white-space: pre-wrap;
@@ -18,7 +19,7 @@
     height: 130px;
     font-size: 1.6em;
     color: vars.$white;
-    line-height: 18px;
+    line-height: 20px;
     box-sizing: border-box;
     padding: 43px 0;
     text-align: center;
@@ -32,5 +33,5 @@
 }
 
 .Avatar-Edit:hover .Picture {
-  opacity: 0.5;
+  opacity: 0.3;
 }
