@@ -220,6 +220,21 @@ const avatarInputProps = {
   },
 };
 
+const avatarModalButtonData = [
+  {
+    attributes: {
+      type: 'button',
+    },
+    text: 'Принято!',
+    classList: ['Modal-Button', 'Modal_type_ok'],
+    events: {
+      click: () => {
+        appBus.emit(EVENTS.MODAL_HIDE);
+      },
+    },
+  },
+];
+
 export {
   changeAvatarInputData,
   userInfoInputData,
@@ -231,4 +246,5 @@ export {
   updateProfileValidatorOptions,
   changePasswordValidatorOptions,
   avatarInputProps,
+  avatarModalButtonData,
 };

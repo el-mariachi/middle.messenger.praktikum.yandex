@@ -33,6 +33,10 @@
   border: 1px solid vars.$greyText;
 }
 
+.Modal_type_error {
+  color: vars.$errMsg;
+}
+
 .Modal-Dialog {
   background-color: vars.$white;
   padding: 30px;
@@ -50,6 +54,13 @@
   font-size: 1.8em;
   font-weight: 600;
   color: vars.$darkText;
+}
+
+.Modal-Message {
+  width: 100%;
+  text-align: center;
+  font-size: 1.6em;
+  margin-top: 0;
 }
 
 .Modal-Form {

@@ -24,6 +24,7 @@ import {
 import { UserInfoController } from '../../controllers/UserInfoController';
 import { UpdateProfileController } from '../../controllers/UpdateProfileController';
 import { ChangePasswordController } from '../../controllers/ChangePasswordController';
+import Modal from '../../components/Modal';
 
 const appBus = new EventBusSingl();
 
@@ -35,8 +36,10 @@ function createPageResources(currentPath: string) {
   const updateProfileButtons = updateProfileButtonsData.map((button) => new Button(button));
   const changePasswordButtons = updateProfileButtonsData.map((button) => new Button(button));
   const chatListLink = new Link(chatListLinkData);
+  const pageModal = new Modal({});
+  pageModal.dispatchComponentDidMount();
 
-  new UserInfoController(currentPath);
+  new UserInfoController(currentPath, pageModal);
   new UpdateProfileController(currentPath);
   new ChangePasswordController(currentPath);
 
@@ -81,7 +84,7 @@ function createPageResources(currentPath: string) {
   const updateProfile = new Form(updateProfileSet);
   const changePassword = new Form(changePasswordSet);
 
-  return { userInfo, updateProfile, changePassword, chatListLink };
+  return { userInfo, updateProfile, changePassword, chatListLink, pageModal };
 }
 
 export class EditProfilePage extends Page {
@@ -93,8 +96,8 @@ export class EditProfilePage extends Page {
     const tagName = 'main';
     const classList = EditProfilePage.appendClassList(['Page', 'Page_type_profile'], props);
     // setup children
-    const { userInfo, updateProfile, changePassword, chatListLink } = createPageResources(props.currentPath);
-    super({ ...props, tagName, classList, pageForm: userInfo, chatListLink });
+    const { userInfo, updateProfile, changePassword, chatListLink, pageModal } = createPageResources(props.currentPath);
+    super({ ...props, tagName, classList, pageForm: userInfo, chatListLink, pageModal });
     this.userInfo = userInfo;
     this.updateProfile = updateProfile;
     this.changePassword = changePassword;
