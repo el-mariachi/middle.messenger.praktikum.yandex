@@ -228,8 +228,14 @@ const avatarModalButtonData = [
     text: 'Принято!',
     classList: ['Modal-Button', 'Modal_type_ok'],
     events: {
-      click: () => {
-        appBus.emit(EVENTS.MODAL_HIDE);
+      click: (e: Event) => {
+        const target = e.target as HTMLButtonElement;
+        const container = target.closest('div.Modal-Dialog') as HTMLDivElement;
+        let formName;
+        if (container) {
+          formName = container.dataset.formName;
+        }
+        appBus.emit(EVENTS.MODAL_HIDE, formName);
       },
     },
   },

@@ -40,8 +40,8 @@ function createPageResources(currentPath: string) {
   pageModal.dispatchComponentDidMount();
 
   new UserInfoController(currentPath, pageModal);
-  new UpdateProfileController(currentPath);
-  new ChangePasswordController(currentPath);
+  new UpdateProfileController(currentPath, pageModal);
+  new ChangePasswordController(currentPath, pageModal);
 
   const avatar = new Avatar({});
   const editAvatar = new Avatar(avatarInputProps);

@@ -9,6 +9,7 @@ import { setUser } from '../store/actions';
 import { userStruct } from '../store/Store';
 import { WithUserController } from '../classes/WithUserController';
 import { UserController } from './UserController';
+import Modal from '../components/Modal';
 
 const appBus = new EventBusSingl();
 const appRouter = new Router();
@@ -16,15 +17,13 @@ const loginApi = new LoginAPI();
 const userController = new UserController();
 export class LoginController extends WithUserController {
   static _loginController: LoginController;
-  public formName;
   constructor(currentPath = '/') {
-    super(currentPath);
+    const { formName } = validatorOptions;
+    super(currentPath, formName, new Modal({}));
     this.escapeRoute = '/chat_list';
     if (LoginController._loginController) {
       return LoginController._loginController;
     }
-    const { formName } = validatorOptions;
-    this.formName = formName;
     appBus.on(EVENTS.FORM_VALID, this.login.bind(this));
     new FormValidator(inputData, validatorOptions);
     LoginController._loginController = this;

@@ -7,6 +7,7 @@ import { getFormData } from '../utils/getFormData';
 import { Router } from '../classes/Router';
 import { WithUserController } from '../classes/WithUserController';
 import { UserController } from './UserController';
+import Modal from '../components/Modal';
 
 const appBus = new EventBusSingl();
 const appRouter = new Router();
@@ -14,12 +15,10 @@ const signUpApi = new SignUpAPI();
 const userController = new UserController();
 
 export class SignUpController extends WithUserController {
-  public formName;
   constructor(currentPath: string) {
-    super(currentPath);
-    this.escapeRoute = '/chat_list';
     const { formName } = validatorOptions;
-    this.formName = formName;
+    super(currentPath, formName, new Modal({}));
+    this.escapeRoute = '/chat_list';
     appBus.on(EVENTS.FORM_VALID, this.signup.bind(this));
     new FormValidator(inputData, validatorOptions);
   }

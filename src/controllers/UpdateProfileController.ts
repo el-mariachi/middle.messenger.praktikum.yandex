@@ -7,17 +7,16 @@ import { getFormData } from '../utils/getFormData';
 import { ProfileAPI, UpdateProfileRequest } from '../api/ProfileAPI';
 import { Router } from '../classes/Router';
 import { setUser } from '../store/actions';
+import { Block } from '../classes/Block';
 
 const appBus = new EventBusSingl();
 const appRouter = new Router();
 const profileAPI = new ProfileAPI();
 
 export class UpdateProfileController extends WithUserController {
-  public formName;
-  constructor(currentPath: string) {
-    super(currentPath);
+  constructor(currentPath: string, pageModal: Block) {
     const { formName } = updateProfileValidatorOptions;
-    this.formName = formName;
+    super(currentPath, formName, pageModal);
     this.userRequired = true;
     this.escapeRoute = '/';
     appBus.on(EVENTS.FORM_VALID, this.updateProfile.bind(this));
@@ -34,15 +33,17 @@ export class UpdateProfileController extends WithUserController {
       switch (status - (status % 100)) {
         case 200:
           setUser(response);
+          appBus.emit(EVENTS.MODAL_SHOW_OK, 'Профиль успешно изменен!', form.name);
           appBus.emit(EVENTS.SET_MODE, MODE.INFO);
           break;
         case 400:
-          // show error message in login field
           errorMessage = response.reason && typeof response.reason === 'string' ? response.reason : 'Unknown error';
-          appBus.emit(EVENTS.INPUT_ERROR, { name: 'login', errorMessage });
+          appBus.emit(EVENTS.MODAL_SHOW_ERROR, errorMessage, form.name);
+          // appBus.emit(EVENTS.INPUT_ERROR, { name: 'login', errorMessage });
           break;
         case 500:
-          appRouter.go('/500');
+          errorMessage = response.reason && typeof response.reason === 'string' ? response.reason : 'Unknown error';
+          appBus.emit(EVENTS.MODAL_SHOW_ERROR, errorMessage, form.name);
       }
     } catch (error) {
       console.log('UpdateProfileController catch', error);

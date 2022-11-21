@@ -6,17 +6,16 @@ import { WithUserController } from '../classes/WithUserController';
 import { getFormData } from '../utils/getFormData';
 import { ProfileAPI, ChangePasswordRequest } from '../api/ProfileAPI';
 import { Router } from '../classes/Router';
+import { Block } from '../classes/Block';
 
 const appBus = new EventBusSingl();
 const appRouter = new Router();
 const profileAPI = new ProfileAPI();
 
 export class ChangePasswordController extends WithUserController {
-  public formName;
-  constructor(currentPath: string) {
-    super(currentPath);
+  constructor(currentPath: string, pageModal: Block) {
     const { formName } = changePasswordValidatorOptions;
-    this.formName = formName;
+    super(currentPath, formName, pageModal);
     this.userRequired = true;
     this.escapeRoute = '/';
     appBus.on(EVENTS.FORM_VALID, this.changePassword.bind(this));
@@ -32,21 +31,20 @@ export class ChangePasswordController extends WithUserController {
       const { status, response } = await profileAPI.changePassword(data);
       switch (status - (status % 100)) {
         case 200:
-          // setUser(response);
+          appBus.emit(EVENTS.MODAL_SHOW_OK, 'Пароль успешно изменен!', form.name);
           appBus.emit(EVENTS.SET_MODE, MODE.INFO);
-          alert('Пароль успешно изменен');
-          // TODO show success some other way
           break;
         case 400:
-          // show error message in login field
           errorMessage = response.reason && typeof response.reason === 'string' ? response.reason : 'Unknown error';
-          appBus.emit(EVENTS.INPUT_ERROR, { name: 'newPassword', errorMessage });
+          appBus.emit(EVENTS.MODAL_SHOW_ERROR, errorMessage, form.name);
+          // appBus.emit(EVENTS.INPUT_ERROR, { name: 'newPassword', errorMessage });
           break;
         case 500:
-          appRouter.go('/500');
+          errorMessage = response.reason && typeof response.reason === 'string' ? response.reason : 'Unknown error';
+          appBus.emit(EVENTS.MODAL_SHOW_ERROR, errorMessage);
       }
     } catch (error) {
-      console.log('ChangePasswordController catch', error);
+      console.log('ChangePasswordController catch', error, form.name);
       appRouter.go('/500');
     }
   }
