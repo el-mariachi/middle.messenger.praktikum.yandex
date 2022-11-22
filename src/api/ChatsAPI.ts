@@ -12,7 +12,7 @@ const headers = {
 };
 export class ChatsAPI extends BaseAPI {
   create(chat: CreateChatRequest): Promise<XMLHttpRequest> {
-    return chatAPITransport.post('/', { data: chat });
+    return chatAPITransport.post('/', { headers, data: chat });
   }
   loadAll(options: OptionsWithoutMethod): Promise<XMLHttpRequest> {
     return chatAPITransport.get('/', options);

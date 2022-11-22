@@ -10,7 +10,9 @@ import { ChatsAPI, CreateChatRequest } from '../api/ChatsAPI';
 import { getFormData } from '../utils/getFormData';
 import { Router } from '../classes/Router';
 import Button from '../components/Button';
+import { ChatListController } from './ChatListController';
 
+const chatListController = new ChatListController();
 const appBus = new EventBusSingl();
 const appRouter = new Router();
 const chatsAPI = new ChatsAPI();
@@ -38,7 +40,7 @@ export class CreateChatController {
       switch (status - (status % 100)) {
         case 200:
           console.log(response);
-          // TODO update store
+          chatListController.loadChats();
           break;
         case 400:
           message = response.reason && typeof response.reason === 'string' ? response.reason : 'Unknown error';

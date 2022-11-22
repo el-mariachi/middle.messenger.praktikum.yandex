@@ -49,7 +49,7 @@ const createChatFormInputsData = [
     label: 'Название чата',
     errorMessage: 'Поле заполнено некорректно',
     type: 'text',
-    placeholder: 'Название чата',
+    placeholder: 'Назовите новый чат',
     accept: '',
     value: '',
     test: /^.+$/,

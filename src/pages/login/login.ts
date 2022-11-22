@@ -1,5 +1,5 @@
 import Page, { IProps, PageProps } from '../../components/Page';
-import Form from '../../components/ProfileForm';
+import Form from '../../components/Form';
 import addInputHandlers from '../../utils/addInputHandlers';
 import createInput from '../../utils/createInput';
 import Button from '../../components/Button';
@@ -23,6 +23,7 @@ function createPageResources(currentPath: string) {
     events: {
       submit: submitForm,
     },
+    classList: ['Profile-Form'],
     attributes: {
       name: 'login_form',
     },
