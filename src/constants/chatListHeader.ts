@@ -43,6 +43,52 @@ const profileLinkData = {
   },
 };
 
+const createChatFormInputsData = [
+  {
+    name: 'title',
+    label: 'Название чата',
+    errorMessage: 'Поле заполнено некорректно',
+    type: 'text',
+    placeholder: 'Название чата',
+    accept: '',
+    value: '',
+    test: /^.+$/,
+  },
+];
+const createChatFormButtonsData = [
+  {
+    tagName: 'input',
+    attributes: {
+      type: 'submit',
+      name: 'submit',
+      value: 'Создать чат',
+    },
+    text: 'Создать чат',
+    classList: ['Modal-Button', 'Modal_type_ok'],
+    events: {
+      click: hideModal,
+    },
+  },
+  {
+    attributes: {
+      type: 'button',
+    },
+    text: 'Отменить!',
+    classList: ['Modal-Button', 'Modal_type_cancel'],
+    events: {
+      click: hideModal,
+    },
+  },
+];
+
 const modalID = uniqueID();
 
-export { renameLinkData, deleteLinkData, newChatButtonData, profileLinkData, modalID };
+export {
+  renameLinkData,
+  deleteLinkData,
+  newChatButtonData,
+  profileLinkData,
+  modalID,
+  createChatFormInputsData,
+  createChatFormButtonsData,
+};

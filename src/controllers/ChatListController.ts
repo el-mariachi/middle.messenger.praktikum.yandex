@@ -5,12 +5,31 @@ import { WithUserController } from '../classes/WithUserController';
 import { ChatsAPI } from '../api/ChatsAPI';
 import { setChats } from '../store/actions';
 import { Router } from '../classes/Router';
-import { modalID } from '../constants/chatListHeader';
+import { modalID, createChatFormInputsData, createChatFormButtonsData } from '../constants/chatListHeader';
+import Button from '../components/Button';
+import createInput from '../utils/createInput';
+import submitForm from './submitForm';
+import Form from '../components/Form';
 
 const chatsApi = new ChatsAPI();
 const appRouter = new Router();
 const appBus = new EventBusSingl();
-
+const modalInputs = createChatFormInputsData.map(createInput);
+const modalButtons = createChatFormButtonsData.map((button) => new Button(button));
+const formData = {
+  formTitle: 'Создать чат',
+  inputs: modalInputs,
+  buttons: modalButtons,
+  classList: ['Modal-Form'],
+  attributes: {
+    name: 'create_chat',
+  },
+  events: {
+    submit: submitForm,
+  },
+};
+const modalForm = new Form(formData);
+modalForm.dispatchComponentDidMount();
 export class ChatListController extends WithUserController {
   constructor(currentPath = '/chat_list', pageModal: Block) {
     super(currentPath, 'chat_list', pageModal, modalID);
@@ -38,7 +57,8 @@ export class ChatListController extends WithUserController {
     }
   }
   public requestCreateChat() {
-    // build form and ask for chat name
-    console.log('chat created');
+    const modalProps = { modalID: this.modalID, modalForm };
+    this.pageModal.setProps(modalProps);
+    this.pageModal.show();
   }
 }

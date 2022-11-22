@@ -69,11 +69,15 @@
   flex-flow: wrap;
 }
 
+.Modal-Form .Form-Name {
+  margin-bottom: 10px;
+}
+
 .Modal-Button {
   padding: 0;
   cursor: pointer;
   flex: 1 0 155px;
-  margin: 16px 5px;
+  margin: 16px 5px 5px;
   font-size: 1.3em;
   line-height: 2.8em;
   height: auto;
@@ -101,5 +105,9 @@
 
   .Modal-Button {
     width: 38.75%;
+
+    &:nth-last-child(2) {
+      order: 22;
+    }
   }
 }
