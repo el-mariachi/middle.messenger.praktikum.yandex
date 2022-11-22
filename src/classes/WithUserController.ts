@@ -1,16 +1,16 @@
 import { EVENTS } from '../constants/events';
-import store, { UserData, userStruct } from '../store/Store';
+import store from '../store/Store';
 import { UserController } from '../controllers/UserController';
 import { Router } from './Router';
 import { Block } from './Block';
 import { EventBusSingl } from '../controllers/EventBusSingl';
-import { avatarModalButtonData } from '../constants/profileForm';
+import { modalButtonData } from '../constants/profileForm';
 import Button from '../components/Button';
 
 const appRouter = new Router();
 const userController = new UserController();
 const appBus = new EventBusSingl();
-const modalButtons = avatarModalButtonData.map((button) => new Button(button));
+const modalButtons = modalButtonData.map((button) => new Button(button));
 
 export class WithUserController {
   protected userRequired = false;
@@ -19,10 +19,14 @@ export class WithUserController {
     protected currentPath: string,
     public formName: string,
     protected pageModal: Block,
-    protected user: UserData = userStruct
+    protected modalID: string
   ) {
     store.on(EVENTS.STORE_UPDATED, this.switchRoute.bind(this));
-    userController.loadUser();
+    userController.loadUser().then((userLoaded) => {
+      if (!userLoaded) {
+        this.switchRoute();
+      }
+    });
     appBus.on(EVENTS.MODAL_SHOW_OK, this.showModalOK.bind(this));
     appBus.on(EVENTS.MODAL_SHOW_ERROR, this.showModalError.bind(this));
     appBus.on(EVENTS.MODAL_HIDE, this.hideModal.bind(this));
@@ -36,24 +40,24 @@ export class WithUserController {
       appRouter.go(this.escapeRoute);
     }
   }
-  public showModalOK(message: string, formName: string) {
-    if (formName !== this.formName) {
+  public showModalOK(message: string, modalID: string) {
+    if (modalID !== this.modalID) {
       return;
     }
-    const modalProps = { formName, header: message, buttons: modalButtons, error: false };
+    const modalProps = { modalID, header: message, buttons: modalButtons, error: false };
     this.pageModal.setProps(modalProps);
     this.pageModal.show();
   }
-  public showModalError(message: string, formName: string) {
-    if (formName !== this.formName) {
+  public showModalError(message: string, modalID: string) {
+    if (modalID !== this.modalID) {
       return;
     }
-    const modalProps = { formName, header: 'Ошибка!', message, buttons: modalButtons, error: true };
+    const modalProps = { modalID, header: 'Ошибка!', message, buttons: modalButtons, error: true };
     this.pageModal.setProps(modalProps);
     this.pageModal.show();
   }
-  public hideModal(formName: string) {
-    if (formName !== this.formName) {
+  public hideModal(modalID: string) {
+    if (modalID !== this.modalID) {
       return;
     }
     this.pageModal.hide();

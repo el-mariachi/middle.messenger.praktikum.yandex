@@ -2,6 +2,9 @@ import { ValidatorOptions } from '../controllers/FormValidator';
 import { goToURL } from '../utils/goToURL';
 import { EventBusSingl } from '../controllers/EventBusSingl';
 import { EVENTS } from './events';
+import { hideModal } from '../utils/hideModal';
+import { v4 as uniqueID } from 'uuid';
+
 const appBus = new EventBusSingl();
 
 export enum MODE {
@@ -220,7 +223,7 @@ const avatarInputProps = {
   },
 };
 
-const avatarModalButtonData = [
+const modalButtonData = [
   {
     attributes: {
       type: 'button',
@@ -228,18 +231,12 @@ const avatarModalButtonData = [
     text: 'Принято!',
     classList: ['Modal-Button', 'Modal_type_ok'],
     events: {
-      click: (e: Event) => {
-        const target = e.target as HTMLButtonElement;
-        const container = target.closest('div.Modal-Dialog') as HTMLDivElement;
-        let formName;
-        if (container) {
-          formName = container.dataset.formName;
-        }
-        appBus.emit(EVENTS.MODAL_HIDE, formName);
-      },
+      click: hideModal,
     },
   },
 ];
+
+const modalID = uniqueID();
 
 export {
   changeAvatarInputData,
@@ -252,5 +249,6 @@ export {
   updateProfileValidatorOptions,
   changePasswordValidatorOptions,
   avatarInputProps,
-  avatarModalButtonData,
+  modalButtonData,
+  modalID,
 };

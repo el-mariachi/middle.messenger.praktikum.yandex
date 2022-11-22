@@ -18,6 +18,8 @@ export class UserController {
         case 200:
           setUser(response);
           return true;
+        case 400:
+          return false;
         default:
           return false;
       }

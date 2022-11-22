@@ -1,7 +1,7 @@
 import { EventBusSingl } from './EventBusSingl';
 import { EVENTS } from '../constants/events';
 import { FormValidator } from './FormValidator';
-import { changePasswordInputData, changePasswordValidatorOptions, MODE } from '../constants/profileForm';
+import { changePasswordInputData, changePasswordValidatorOptions, MODE, modalID } from '../constants/profileForm';
 import { WithUserController } from '../classes/WithUserController';
 import { getFormData } from '../utils/getFormData';
 import { ProfileAPI, ChangePasswordRequest } from '../api/ProfileAPI';
@@ -15,7 +15,7 @@ const profileAPI = new ProfileAPI();
 export class ChangePasswordController extends WithUserController {
   constructor(currentPath: string, pageModal: Block) {
     const { formName } = changePasswordValidatorOptions;
-    super(currentPath, formName, pageModal);
+    super(currentPath, formName, pageModal, modalID);
     this.userRequired = true;
     this.escapeRoute = '/';
     appBus.on(EVENTS.FORM_VALID, this.changePassword.bind(this));
@@ -31,12 +31,12 @@ export class ChangePasswordController extends WithUserController {
       const { status, response } = await profileAPI.changePassword(data);
       switch (status - (status % 100)) {
         case 200:
-          appBus.emit(EVENTS.MODAL_SHOW_OK, 'Пароль успешно изменен!', form.name);
+          appBus.emit(EVENTS.MODAL_SHOW_OK, 'Пароль успешно изменен!', this.modalID);
           appBus.emit(EVENTS.SET_MODE, MODE.INFO);
           break;
         case 400:
           errorMessage = response.reason && typeof response.reason === 'string' ? response.reason : 'Unknown error';
-          appBus.emit(EVENTS.MODAL_SHOW_ERROR, errorMessage, form.name);
+          appBus.emit(EVENTS.MODAL_SHOW_ERROR, errorMessage, this.modalID);
           // appBus.emit(EVENTS.INPUT_ERROR, { name: 'newPassword', errorMessage });
           break;
         case 500:
@@ -44,7 +44,7 @@ export class ChangePasswordController extends WithUserController {
           appBus.emit(EVENTS.MODAL_SHOW_ERROR, errorMessage);
       }
     } catch (error) {
-      console.log('ChangePasswordController catch', error, form.name);
+      console.log('ChangePasswordController catch', error, this.modalID);
       appRouter.go('/500');
     }
   }

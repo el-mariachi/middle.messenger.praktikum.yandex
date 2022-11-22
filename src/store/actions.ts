@@ -1,4 +1,4 @@
-import store, { UserData, userStruct } from './Store';
+import store, { UserData, userStruct, ChatData } from './Store';
 
 const getUserState = () => {
   const state = store.getState();
@@ -6,13 +6,12 @@ const getUserState = () => {
   return Object.assign(userStruct, user);
 };
 
-// const getUser = () => {
-//   const { user } = store.getState();
-//   return user;
-// };
-
 const setUser = (userData: UserData) => {
   store.set('user', userData);
 };
 
-export { setUser, getUserState };
+const setChats = (chatsData: ChatData[]) => {
+  store.set('chats', chatsData);
+};
+
+export { setUser, getUserState, setChats };

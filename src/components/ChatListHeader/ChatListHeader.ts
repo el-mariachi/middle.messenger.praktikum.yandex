@@ -1,61 +1,32 @@
 import { Block, IProps } from '../../classes/Block';
 import headerTemplate from './ChatListHeader.hbs';
+import { renameLinkData, deleteLinkData, newChatButtonData, profileLinkData } from '../../constants/chatListHeader';
 import Menu from '../Menu';
 import Button from '../Button';
 import Link from '../Link';
-import { goToURL } from '../../utils/goToURL';
 
-const renameLink = new Button({
-  tagName: 'button',
-  text: 'Переименовать',
-  classList: ['Menu-Link', 'Menu_linktype_edit'],
-});
+function createComponentResources() {
+  const renameLink = new Button(renameLinkData);
+  const deleteLink = new Button(deleteLinkData);
 
-const deleteLink = new Button({
-  tagName: 'button',
-  text: 'Удалить',
-  classList: ['Menu-Link', 'Menu_linktype_delete'],
-});
+  const chatListMenuData: IProps = {
+    menuName: 'Главное меню',
+    classList: ['ChatListHeader-Menu'],
+    menuItems: [renameLink, deleteLink],
+    bodyType: 'Menu_bodytype_chatlist',
+  };
 
-const chatListMenuData: IProps = {
-  menuName: 'Главное меню',
-  classList: ['ChatListHeader-Menu'],
-  menuItems: [renameLink, deleteLink],
-  bodyType: 'Menu_bodytype_chatlist',
-};
+  const chatListMenu = new Menu(chatListMenuData);
+  const newChatButton = new Button(newChatButtonData);
+  const profileLink = new Link(profileLinkData);
 
-const chatListMenu = new Menu(chatListMenuData);
-
-const newChatButtonData = {
-  tagName: 'button',
-  attributes: {
-    type: 'button',
-  },
-  classList: ['NewChat', 'ChatListHeader-NewChat', 'Icon', 'Icon_type_newchat'],
-};
-
-const newChatButton = new Button(newChatButtonData);
-
-const profileLink = new Link({
-  text: 'Профиль',
-  classList: ['PageLink', 'PageLink_to_profile'],
-  attributes: {
-    href: '/settings',
-  },
-  events: {
-    click: (e: Event) => {
-      e.preventDefault();
-      const target = e.target as HTMLElement;
-      if (target) {
-        goToURL.call(target);
-      }
-    },
-  },
-});
+  return { chatListMenu, newChatButton, profileLink };
+}
 
 export class ChatListHeader extends Block {
   constructor(props: IProps) {
     const classList = ChatListHeader.appendClassList(['ChatListHeader'], props);
+    const { chatListMenu, newChatButton, profileLink } = createComponentResources();
     super({ ...props, classList, chatListMenu, newChatButton, profileLink });
   }
   render(): DocumentFragment {

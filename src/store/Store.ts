@@ -24,14 +24,28 @@ export const userStruct: UserData = {
   avatar: '',
 };
 
+export type ChatData = {
+  id: number;
+  title: string;
+  avatar: string;
+  unread_count: number;
+  last_message: {
+    user: UserData;
+    time: string;
+    content: string;
+  };
+};
+
 export type State = {
   [k: string]: any; // eslint-disable-line @typescript-eslint/no-explicit-any
   user: UserData;
+  chats: ChatData[];
 };
 
 class Store extends EventBus {
   private _state: State = {
     user: userStruct,
+    chats: [],
   };
 
   public getState() {

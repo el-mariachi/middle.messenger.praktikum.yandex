@@ -37,7 +37,6 @@ function createPageResources(currentPath: string) {
   const changePasswordButtons = updateProfileButtonsData.map((button) => new Button(button));
   const chatListLink = new Link(chatListLinkData);
   const pageModal = new Modal({});
-  pageModal.dispatchComponentDidMount();
 
   new UserInfoController(currentPath, pageModal);
   new UpdateProfileController(currentPath, pageModal);
@@ -98,6 +97,7 @@ export class EditProfilePage extends Page {
     // setup children
     const { userInfo, updateProfile, changePassword, chatListLink, pageModal } = createPageResources(props.currentPath);
     super({ ...props, tagName, classList, pageForm: userInfo, chatListLink, pageModal });
+    pageModal.dispatchComponentDidMount();
     this.userInfo = userInfo;
     this.updateProfile = updateProfile;
     this.changePassword = changePassword;

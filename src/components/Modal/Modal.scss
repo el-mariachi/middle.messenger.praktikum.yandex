@@ -66,13 +66,14 @@
 .Modal-Form {
   width: 100%;
   margin: 0 5px 15px;
+  flex-flow: wrap;
 }
 
 .Modal-Button {
   padding: 0;
   cursor: pointer;
   flex: 1 0 155px;
-  margin: 5px;
+  margin: 16px 5px;
   font-size: 1.3em;
   line-height: 2.8em;
   height: auto;
