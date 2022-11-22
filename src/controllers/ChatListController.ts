@@ -1,12 +1,10 @@
 import { EventBusSingl } from './EventBusSingl';
 import { EVENTS } from '../constants/events';
-import { Modal } from '../components/Modal/Modal';
 import { WithUserController } from '../classes/WithUserController';
 import { ChatsAPI } from '../api/ChatsAPI';
 import { setChats } from '../store/actions';
 import { Router } from '../classes/Router';
 import {
-  modalID,
   createChatFormInputsData,
   createChatFormButtonsData,
   createChatValidatorOtions,
@@ -37,10 +35,12 @@ const formData = {
   },
 };
 const modalForm = new Form(formData);
+const modalProps = { modalForm };
+
 modalForm.dispatchComponentDidMount();
 export class ChatListController extends WithUserController {
-  constructor(currentPath = '/chat_list', pageModal: Modal) {
-    super(currentPath, 'chat_list', pageModal, modalID);
+  constructor(currentPath = '/chat_list') {
+    super(currentPath, 'chat_list');
     this.userRequired = true;
     this.escapeRoute = '/';
     this.loadChats();
@@ -65,10 +65,6 @@ export class ChatListController extends WithUserController {
     }
   }
   public requestCreateChat() {
-    const modalProps = { modalID: this.modalID, modalForm };
-    this.pageModal.reset();
-    this.pageModal.setProps(modalProps);
-    this.pageModal.dispatchComponentDidMount();
-    this.pageModal.show();
+    appBus.emit(EVENTS.MODAL_SHOW_OK, modalProps);
   }
 }

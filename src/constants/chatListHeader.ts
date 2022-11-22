@@ -1,7 +1,6 @@
 import { goToURL } from '../utils/goToURL';
 import { requestCreateChat } from '../utils/requestCreateChat';
 import { hideModal } from '../utils/hideModal';
-import { v4 as uniqueID } from 'uuid';
 
 const renameLinkData = {
   tagName: 'button',
@@ -100,14 +99,11 @@ const notificationModalButtonData = [
   },
 ];
 
-const modalID = uniqueID();
-
 export {
   renameLinkData,
   deleteLinkData,
   newChatButtonData,
   profileLinkData,
-  modalID,
   createChatFormInputsData,
   createChatFormButtonsData,
   createChatValidatorOtions,

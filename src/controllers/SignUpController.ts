@@ -2,12 +2,11 @@ import { SignUpAPI, SignUpRequest } from '../api/SignUpAPI';
 import { EventBusSingl } from './EventBusSingl';
 import { EVENTS } from '../constants/events';
 import { FormValidator } from './FormValidator';
-import { inputData, validatorOptions, modalID } from '../constants/signupForm';
+import { inputData, validatorOptions } from '../constants/signupForm';
 import { getFormData } from '../utils/getFormData';
 import { Router } from '../classes/Router';
 import { WithUserController } from '../classes/WithUserController';
 import { UserController } from './UserController';
-import Modal from '../components/Modal';
 
 const appBus = new EventBusSingl();
 const appRouter = new Router();
@@ -17,7 +16,7 @@ const userController = new UserController();
 export class SignUpController extends WithUserController {
   constructor(currentPath: string) {
     const { formName } = validatorOptions;
-    super(currentPath, formName, new Modal({}), modalID);
+    super(currentPath, formName);
     this.escapeRoute = '/chat_list';
     appBus.on(EVENTS.FORM_VALID, this.signup.bind(this));
     new FormValidator(inputData, validatorOptions);

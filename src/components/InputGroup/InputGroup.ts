@@ -13,6 +13,7 @@ export type InputProps = IProps & {
   test?: RegExp;
   valid?: boolean;
   disabled?: boolean;
+  autofocus?: boolean;
 };
 
 const appBus = new EventBusSingl();

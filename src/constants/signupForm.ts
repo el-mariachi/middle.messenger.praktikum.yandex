@@ -1,6 +1,5 @@
 import { ValidatorOptions } from '../controllers/FormValidator';
 import { goToURL } from '../utils/goToURL';
-import { v4 as uniqueID } from 'uuid';
 
 const inputData = [
   {
@@ -107,6 +106,4 @@ const validatorOptions: ValidatorOptions = {
   },
 };
 
-const modalID = uniqueID();
-
-export { inputData, buttonsData, validatorOptions, modalID };
+export { inputData, buttonsData, validatorOptions };

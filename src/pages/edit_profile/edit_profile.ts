@@ -24,7 +24,6 @@ import {
 import { UserInfoController } from '../../controllers/UserInfoController';
 import { UpdateProfileController } from '../../controllers/UpdateProfileController';
 import { ChangePasswordController } from '../../controllers/ChangePasswordController';
-import Modal from '../../components/Modal';
 
 const appBus = new EventBusSingl();
 
@@ -36,11 +35,10 @@ function createPageResources(currentPath: string) {
   const updateProfileButtons = updateProfileButtonsData.map((button) => new Button(button));
   const changePasswordButtons = updateProfileButtonsData.map((button) => new Button(button));
   const chatListLink = new Link(chatListLinkData);
-  const pageModal = new Modal({});
 
-  new UserInfoController(currentPath, pageModal);
-  new UpdateProfileController(currentPath, pageModal);
-  new ChangePasswordController(currentPath, pageModal);
+  new UserInfoController(currentPath);
+  new UpdateProfileController(currentPath);
+  new ChangePasswordController(currentPath);
 
   const avatar = new Avatar({});
   const editAvatar = new Avatar(avatarInputProps);
@@ -83,7 +81,7 @@ function createPageResources(currentPath: string) {
   const updateProfile = new Form(updateProfileSet);
   const changePassword = new Form(changePasswordSet);
 
-  return { userInfo, updateProfile, changePassword, chatListLink, pageModal };
+  return { userInfo, updateProfile, changePassword, chatListLink };
 }
 
 export class EditProfilePage extends Page {
@@ -95,9 +93,8 @@ export class EditProfilePage extends Page {
     const tagName = 'main';
     const classList = EditProfilePage.appendClassList(['Page', 'Page_type_profile'], props);
     // setup children
-    const { userInfo, updateProfile, changePassword, chatListLink, pageModal } = createPageResources(props.currentPath);
-    super({ ...props, tagName, classList, pageForm: userInfo, chatListLink, pageModal });
-    pageModal.dispatchComponentDidMount();
+    const { userInfo, updateProfile, changePassword, chatListLink } = createPageResources(props.currentPath);
+    super({ ...props, tagName, classList, pageForm: userInfo, chatListLink });
     this.userInfo = userInfo;
     this.updateProfile = updateProfile;
     this.changePassword = changePassword;

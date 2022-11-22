@@ -9,6 +9,9 @@ import { EventBusSingl } from '../../src/controllers/EventBusSingl';
 import { EVENTS } from '../../src/constants/events';
 import { chats } from '../../src/mockData/chats';
 import { messages } from '../../src/mockData/messages';
+import Modal from '../../src/components/Modal';
+import { renderDOM } from '../../src/utils/renderDOM';
+import { ModalController } from '../../src/controllers/ModalController';
 
 const appBus = new EventBusSingl();
 
@@ -22,6 +25,10 @@ appRouter
   .use('/chat', ChatPage)
   .use('/500', Page500)
   .start();
+
+const appModal = new Modal({});
+new ModalController(appModal);
+renderDOM('#app', appModal);
 
 appBus.emit(EVENTS.CHATS_LOADED, chats);
 appBus.emit(EVENTS.MESSAGES_LOADED, messages);

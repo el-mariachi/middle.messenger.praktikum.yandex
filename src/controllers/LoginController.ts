@@ -2,14 +2,13 @@ import { LoginAPI, LoginRequest } from '../api/LoginAPI';
 import { EventBusSingl } from './EventBusSingl';
 import { EVENTS } from '../constants/events';
 import { FormValidator } from './FormValidator';
-import { inputData, validatorOptions, modalID } from '../constants/loginForm';
+import { inputData, validatorOptions } from '../constants/loginForm';
 import { getFormData } from '../utils/getFormData';
 import { Router } from '../classes/Router';
 import { setUser } from '../store/actions';
 import { userStruct } from '../store/Store';
 import { WithUserController } from '../classes/WithUserController';
 import { UserController } from './UserController';
-import Modal from '../components/Modal';
 
 const appBus = new EventBusSingl();
 const appRouter = new Router();
@@ -19,7 +18,7 @@ export class LoginController extends WithUserController {
   static _loginController: LoginController;
   constructor(currentPath = '/') {
     const { formName } = validatorOptions;
-    super(currentPath, formName, new Modal({}), modalID);
+    super(currentPath, formName);
     this.escapeRoute = '/chat_list';
     if (LoginController._loginController) {
       return LoginController._loginController;

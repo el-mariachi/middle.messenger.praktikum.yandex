@@ -3,7 +3,6 @@ import { goToURL } from '../utils/goToURL';
 import { EventBusSingl } from '../controllers/EventBusSingl';
 import { EVENTS } from './events';
 import { hideModal } from '../utils/hideModal';
-import { v4 as uniqueID } from 'uuid';
 
 const appBus = new EventBusSingl();
 
@@ -236,8 +235,6 @@ const modalButtonData = [
   },
 ];
 
-const modalID = uniqueID();
-
 export {
   changeAvatarInputData,
   userInfoInputData,
@@ -250,5 +247,4 @@ export {
   changePasswordValidatorOptions,
   avatarInputProps,
   modalButtonData,
-  modalID,
 };

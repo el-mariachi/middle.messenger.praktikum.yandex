@@ -1,21 +1,30 @@
 import { EventBusSingl } from './EventBusSingl';
 import { EVENTS } from '../constants/events';
 import { FormValidator } from './FormValidator';
-import { changePasswordInputData, changePasswordValidatorOptions, MODE, modalID } from '../constants/profileForm';
+import {
+  changePasswordInputData,
+  changePasswordValidatorOptions,
+  MODE,
+  modalButtonData,
+} from '../constants/profileForm';
 import { WithUserController } from '../classes/WithUserController';
 import { getFormData } from '../utils/getFormData';
 import { ProfileAPI, ChangePasswordRequest } from '../api/ProfileAPI';
 import { Router } from '../classes/Router';
-import { Block } from '../classes/Block';
+import Button from '../components/Button';
 
 const appBus = new EventBusSingl();
 const appRouter = new Router();
 const profileAPI = new ProfileAPI();
+const buttons = modalButtonData.map((button) => new Button(button));
+const modalProps = {
+  buttons,
+};
 
 export class ChangePasswordController extends WithUserController {
-  constructor(currentPath: string, pageModal: Block) {
+  constructor(currentPath: string) {
     const { formName } = changePasswordValidatorOptions;
-    super(currentPath, formName, pageModal, modalID);
+    super(currentPath, formName);
     this.userRequired = true;
     this.escapeRoute = '/';
     appBus.on(EVENTS.FORM_VALID, this.changePassword.bind(this));
@@ -26,25 +35,24 @@ export class ChangePasswordController extends WithUserController {
       return;
     }
     const data: ChangePasswordRequest = getFormData(form) as ChangePasswordRequest;
-    let errorMessage;
+    let message;
     try {
       const { status, response } = await profileAPI.changePassword(data);
       switch (status - (status % 100)) {
         case 200:
-          appBus.emit(EVENTS.MODAL_SHOW_OK, 'Пароль успешно изменен!', this.modalID);
+          appBus.emit(EVENTS.MODAL_SHOW_OK, { ...modalProps, header: 'Пароль успешно изменен!' });
           appBus.emit(EVENTS.SET_MODE, MODE.INFO);
           break;
         case 400:
-          errorMessage = response.reason && typeof response.reason === 'string' ? response.reason : 'Unknown error';
-          appBus.emit(EVENTS.MODAL_SHOW_ERROR, errorMessage, this.modalID);
-          // appBus.emit(EVENTS.INPUT_ERROR, { name: 'newPassword', errorMessage });
+          message = response.reason && typeof response.reason === 'string' ? response.reason : 'Unknown error';
+          appBus.emit(EVENTS.MODAL_SHOW_ERROR, { ...modalProps, message, error: true });
           break;
         case 500:
-          errorMessage = response.reason && typeof response.reason === 'string' ? response.reason : 'Unknown error';
-          appBus.emit(EVENTS.MODAL_SHOW_ERROR, errorMessage);
+          message = response.reason && typeof response.reason === 'string' ? response.reason : 'Unknown error';
+          appBus.emit(EVENTS.MODAL_SHOW_ERROR, { ...modalProps, message, error: true });
       }
     } catch (error) {
-      console.log('ChangePasswordController catch', error, this.modalID);
+      console.log('ChangePasswordController catch', error);
       appRouter.go('/500');
     }
   }
