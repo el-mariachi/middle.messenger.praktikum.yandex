@@ -9,6 +9,7 @@ export type InputProps = IProps & {
   type: string;
   name: string;
   placeholder: string;
+  id?: string;
   test?: RegExp;
   valid?: boolean;
   disabled?: boolean;

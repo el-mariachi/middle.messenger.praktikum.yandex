@@ -1,7 +1,8 @@
 import { ValidatorOptions } from '../controllers/FormValidator';
 import { goToURL } from '../utils/goToURL';
+import { v4 as uniqueID } from 'uuid';
 
-export const inputData = [
+const inputData = [
   {
     name: 'first_name',
     label: 'Имя',
@@ -74,7 +75,7 @@ export const inputData = [
   },
 ];
 
-export const buttonsData = [
+const buttonsData = [
   {
     tagName: 'input',
     attributes: {
@@ -98,10 +99,14 @@ export const buttonsData = [
   },
 ];
 
-export const validatorOptions: ValidatorOptions = {
+const validatorOptions: ValidatorOptions = {
   formName: 'sign_up_form',
   password: {
     source: 'password',
     target: 'password2',
   },
 };
+
+const modalID = uniqueID();
+
+export { inputData, buttonsData, validatorOptions, modalID };

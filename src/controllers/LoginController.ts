@@ -2,7 +2,7 @@ import { LoginAPI, LoginRequest } from '../api/LoginAPI';
 import { EventBusSingl } from './EventBusSingl';
 import { EVENTS } from '../constants/events';
 import { FormValidator } from './FormValidator';
-import { inputData, validatorOptions } from '../constants/loginForm';
+import { inputData, validatorOptions, modalID } from '../constants/loginForm';
 import { getFormData } from '../utils/getFormData';
 import { Router } from '../classes/Router';
 import { setUser } from '../store/actions';
@@ -19,7 +19,7 @@ export class LoginController extends WithUserController {
   static _loginController: LoginController;
   constructor(currentPath = '/') {
     const { formName } = validatorOptions;
-    super(currentPath, formName, new Modal({}));
+    super(currentPath, formName, new Modal({}), modalID);
     this.escapeRoute = '/chat_list';
     if (LoginController._loginController) {
       return LoginController._loginController;
@@ -38,14 +38,9 @@ export class LoginController extends WithUserController {
       let errorMessage;
       switch (status - (status % 100)) {
         case 200:
-          // response is just a string 'OK'
           userController.loadUser();
           break;
         case 400:
-          if (status === 401) {
-            console.log('unauthorized');
-          }
-          // show error message in login field
           errorMessage = response.reason && typeof response.reason === 'string' ? response.reason : 'Unknown error';
           appBus.emit(EVENTS.INPUT_ERROR, { name: 'login', errorMessage });
           break;

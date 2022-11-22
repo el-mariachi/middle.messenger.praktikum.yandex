@@ -2,7 +2,7 @@ import { EVENTS } from '../constants/events';
 import store from '../store/Store';
 import { UserController } from '../controllers/UserController';
 import { Router } from './Router';
-import { Block } from './Block';
+import { Modal } from '../components/Modal/Modal';
 import { EventBusSingl } from '../controllers/EventBusSingl';
 import { modalButtonData } from '../constants/profileForm';
 import Button from '../components/Button';
@@ -18,7 +18,7 @@ export class WithUserController {
   constructor(
     protected currentPath: string,
     public formName: string,
-    protected pageModal: Block,
+    protected pageModal: Modal,
     protected modalID: string
   ) {
     store.on(EVENTS.STORE_UPDATED, this.switchRoute.bind(this));

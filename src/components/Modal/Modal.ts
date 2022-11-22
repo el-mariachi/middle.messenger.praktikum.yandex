@@ -7,6 +7,14 @@ export class Modal extends Block {
     const settings = { hasID: true };
     super({ ...props, classList, settings });
   }
+  reset() {
+    Object.keys(this.children).forEach((key) => {
+      delete this.children[key];
+    });
+    Object.keys(this.props).forEach((key) => {
+      delete this.props[key];
+    });
+  }
   componentDidUpdate(oldProps: IProps, newProps: IProps): boolean {
     if (newProps.error) {
       this._element.classList.add('Modal_type_error');

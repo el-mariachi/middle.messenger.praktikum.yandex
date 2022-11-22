@@ -46,6 +46,7 @@ const profileLinkData = {
 const createChatFormInputsData = [
   {
     name: 'title',
+    id: 'title',
     label: 'Название чата',
     errorMessage: 'Поле заполнено некорректно',
     type: 'text',
@@ -55,6 +56,7 @@ const createChatFormInputsData = [
     test: /^.+$/,
   },
 ];
+
 const createChatFormButtonsData = [
   {
     tagName: 'input',
@@ -81,6 +83,23 @@ const createChatFormButtonsData = [
   },
 ];
 
+const createChatValidatorOtions = {
+  formName: 'create_chat',
+};
+
+const notificationModalButtonData = [
+  {
+    attributes: {
+      type: 'button',
+    },
+    text: 'Принято!',
+    classList: ['Modal-Button', 'Modal_type_ok'],
+    events: {
+      click: hideModal,
+    },
+  },
+];
+
 const modalID = uniqueID();
 
 export {
@@ -91,4 +110,6 @@ export {
   modalID,
   createChatFormInputsData,
   createChatFormButtonsData,
+  createChatValidatorOtions,
+  notificationModalButtonData,
 };
