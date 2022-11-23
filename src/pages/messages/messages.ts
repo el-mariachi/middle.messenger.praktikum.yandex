@@ -1,11 +1,24 @@
 import Page, { PageProps } from '../../components/Page';
 import pageTemplate from './messages.hbs';
-import chatList from '../../components/ChatList';
-import messageArea from '../../components/MessageArea';
+import MessageArea from '../../components/MessageArea';
+import Chats from '../../components/Chats';
+import Search from '../../components/Search';
+import ChatListHeader from '../../components/ChatListHeader';
+import selectChat from '../../utils/selectChat';
 import { EventBusSingl } from '../../controllers/EventBusSingl';
 import { EVENTS } from '../../constants/events';
 import { MODE } from '../../constants/messages';
+import ChatList from '../../components/ChatList';
 
+const messageArea = new MessageArea({});
+const chatListFrame = new Chats({
+  events: {
+    click: selectChat,
+  },
+});
+const chatSearch = new Search({});
+const chatListHeader = new ChatListHeader({});
+const chatList = new ChatList({ chatListHeader, chatSearch, chatListFrame });
 const appBus = new EventBusSingl();
 export class MessagesPage extends Page {
   constructor(props: PageProps) {
