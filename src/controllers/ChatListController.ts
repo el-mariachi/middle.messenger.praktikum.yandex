@@ -14,6 +14,7 @@ import addInputHandlers from '../utils/addInputHandlers';
 import createInput from '../utils/createInput';
 import submitForm from './submitForm';
 import Form from '../components/Form';
+import store from '../store/Store';
 
 const chatsApi = new ChatsAPI();
 const appRouter = new Router();
@@ -49,6 +50,7 @@ export class ChatListController extends WithUserController {
     this.escapeRoute = '/';
     this.loadChats();
     appBus.on(EVENTS.CHAT_CREATE_REQUEST, this.requestCreateChat.bind(this));
+    appBus.on(EVENTS.CHAT_SELECTED, this.setCurrentChat.bind(this));
     ChatListController._chatListController = this;
   }
   public async loadChats() {
@@ -71,5 +73,9 @@ export class ChatListController extends WithUserController {
   }
   public requestCreateChat() {
     appBus.emit(EVENTS.MODAL_SHOW_OK, modalProps);
+  }
+  public setCurrentChat(id: number) {
+    store.set('currentChat', id);
+    appRouter.go('/chat');
   }
 }

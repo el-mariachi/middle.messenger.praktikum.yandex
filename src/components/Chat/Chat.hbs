@@ -1,11 +1,11 @@
-<img class="Picture Chat-Picture" src="{{image}}" alt="{{ title }}">
+<img class="Picture Chat-Picture" src="{{avatar}}" alt="{{title}}">
 <div class="Chat-Info">
   <div class="Chat-Header">
     <h4 class="Chat-Title">{{title}}</h4>
     <time class="Status {{ status.state }}">{{status.time}}</time>
   </div>
   <div class="Chat-Preview">{{#if sender}}<span class="Chat-Sender">{{ sender }}</span>{{/if}}{{preview}}</div>
-  {{#if unread}}
-  <div class="Chat-UnreadCount">{{unread}}</div>
+  {{#if unread_count}}
+  <div class="Chat-UnreadCount">{{unread_count}}</div>
   {{/if}}
 </div>

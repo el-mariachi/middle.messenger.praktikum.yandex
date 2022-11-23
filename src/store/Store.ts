@@ -27,25 +27,28 @@ export const userStruct: UserData = {
 export type ChatData = {
   id: number;
   title: string;
-  avatar: string;
+  created_by: number;
+  avatar: string | null;
   unread_count: number;
   last_message: {
     user: UserData;
     time: string;
     content: string;
-  };
+  } | null;
 };
 
 export type State = {
   [k: string]: any; // eslint-disable-line @typescript-eslint/no-explicit-any
   user: UserData;
   chatsData: ChatData[];
+  currentChat: number | null;
 };
 
 class Store extends EventBus {
   private _state: State = {
     user: userStruct,
     chatsData: [],
+    currentChat: null,
   };
 
   public getState() {

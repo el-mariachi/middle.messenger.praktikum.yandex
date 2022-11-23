@@ -3,6 +3,7 @@ import store, { State } from '../store/Store';
 import { EVENTS } from '../constants/events';
 import isEqual from './isEqual';
 import { Indexed } from './merge';
+import mapChatsToProps from './mapChatsToProps';
 
 function connect(mapStateToProps: (state: State) => Indexed) {
   return function (Component: typeof Block) {
@@ -24,6 +25,6 @@ function connect(mapStateToProps: (state: State) => Indexed) {
 }
 
 const withUser = connect(({ user }) => ({ user: { ...user } }));
-const withChats = connect(({ chatsData }) => ({ chatsData: { ...chatsData } }));
+const withChats = connect(mapChatsToProps);
 
 export { withUser, withChats };

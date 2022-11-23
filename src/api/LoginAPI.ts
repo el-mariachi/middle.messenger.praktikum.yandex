@@ -13,9 +13,9 @@ const headers = {
 };
 export class LoginAPI extends BaseAPI {
   request(user: LoginRequest): Promise<XMLHttpRequest> {
-    return authAPITransport.post('/signin', { headers, data: user }).then((response) => response);
+    return authAPITransport.post('/signin', { headers, data: user });
   }
   logout() {
-    return authAPITransport.post('/logout').then((response) => response);
+    return authAPITransport.post('/logout');
   }
 }

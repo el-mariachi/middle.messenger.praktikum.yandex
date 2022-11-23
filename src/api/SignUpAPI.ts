@@ -17,7 +17,7 @@ export class SignUpAPI extends BaseAPI {
     const headers = {
       'Content-Type': 'application/json',
     };
-    return authAPITransport.post('/signup', { headers, data: user }).then((response) => response);
+    return authAPITransport.post('/signup', { headers, data: user });
   }
   userInfo(): Promise<XMLHttpRequest> {
     // sends cookie
@@ -26,6 +26,6 @@ export class SignUpAPI extends BaseAPI {
       'X-Requested-With': 'XMLHttpRequest',
       'Access-Control-Allow-Origin': '*',
     };
-    return authAPITransport.get('/user', { headers }).then((response) => response);
+    return authAPITransport.get('/user', { headers });
   }
 }

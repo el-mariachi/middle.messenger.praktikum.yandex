@@ -24,7 +24,7 @@ export class ProfileAPI extends BaseAPI {
       'X-Requested-With': 'XMLHttpRequest',
       'Access-Control-Allow-Origin': '*',
     };
-    return profileAPITransport.put('/profile', { headers, data: user }).then((response) => response);
+    return profileAPITransport.put('/profile', { headers, data: user });
   }
   changePassword(passwords: ChangePasswordRequest) {
     const headers = {
@@ -32,9 +32,9 @@ export class ProfileAPI extends BaseAPI {
       'X-Requested-With': 'XMLHttpRequest',
       'Access-Control-Allow-Origin': '*',
     };
-    return profileAPITransport.put('/password', { headers, data: passwords }).then((response) => response);
+    return profileAPITransport.put('/password', { headers, data: passwords });
   }
   setAvatar(form: FormData) {
-    return profileAPITransport.put('/profile/avatar', { data: form }).then((response) => response);
+    return profileAPITransport.put('/profile/avatar', { data: form });
   }
 }

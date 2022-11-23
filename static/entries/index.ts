@@ -13,8 +13,6 @@ import Modal from '../../src/components/Modal';
 import { renderDOM } from '../../src/utils/renderDOM';
 import { ModalController } from '../../src/controllers/ModalController';
 
-// const appBus = new EventBusSingl();
-
 const appRouter = new Router('#app');
 
 appRouter
@@ -29,6 +27,3 @@ appRouter
 const appModal = new Modal({});
 new ModalController(appModal);
 renderDOM('#app', appModal);
-
-// appBus.emit(EVENTS.CHATS_LOADED, chats);
-// appBus.emit(EVENTS.MESSAGES_LOADED, messages);
