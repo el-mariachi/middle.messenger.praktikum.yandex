@@ -19,7 +19,7 @@ export class LoginController extends WithUserController {
   constructor(currentPath = '/') {
     const { formName } = validatorOptions;
     super(currentPath, formName);
-    this.escapeRoute = '/chat_list';
+    this.escapeRoute = '/messages';
     if (LoginController._loginController) {
       return LoginController._loginController;
     }

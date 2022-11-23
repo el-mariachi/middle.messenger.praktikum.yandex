@@ -184,7 +184,7 @@ const chatListLinkData = {
   text: 'Назад к чатам',
   classList: ['PageLink', 'PageLink_to_list', 'Profile-PageLink'],
   attributes: {
-    href: '/chat_list',
+    href: '/messages',
   },
   events: {
     click: (e: Event) => {

@@ -42,11 +42,11 @@ const modalProps = { modalForm };
 modalForm.dispatchComponentDidMount();
 export class ChatListController extends WithUserController {
   static _chatListController: ChatListController;
-  constructor(currentPath = '/chat_list') {
+  constructor(currentPath = '/messages') {
     if (ChatListController._chatListController) {
       return ChatListController._chatListController;
     }
-    super(currentPath, 'chat_list');
+    super(currentPath);
     this.userRequired = true;
     this.escapeRoute = '/';
     this.loadChats();

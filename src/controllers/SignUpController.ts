@@ -17,7 +17,7 @@ export class SignUpController extends WithUserController {
   constructor(currentPath: string) {
     const { formName } = validatorOptions;
     super(currentPath, formName);
-    this.escapeRoute = '/chat_list';
+    this.escapeRoute = '/messages';
     appBus.on(EVENTS.FORM_VALID, this.signup.bind(this));
     new FormValidator(inputData, validatorOptions);
   }

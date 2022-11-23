@@ -9,7 +9,7 @@ const userController = new UserController();
 export class WithUserController {
   protected userRequired = false;
   protected escapeRoute = '/';
-  constructor(protected currentPath: string, public formName: string) {
+  constructor(protected currentPath: string, public formName = 'user_form') {
     store.on(EVENTS.STORE_UPDATED, this.switchRoute.bind(this));
     userController.loadUser().then((userLoaded) => {
       if (!userLoaded) {

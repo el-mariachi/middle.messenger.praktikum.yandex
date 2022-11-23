@@ -34,7 +34,7 @@ const chatListLink = new Link({
   text: 'Назад',
   classList: ['PageLink', 'PageLink_to_list'],
   attributes: {
-    href: '/chat_list',
+    href: '/messages',
   },
   events: {
     click: () => {

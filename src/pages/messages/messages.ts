@@ -1,5 +1,5 @@
 import Page, { PageProps } from '../../components/Page';
-import pageTemplate from './chat_list.hbs';
+import pageTemplate from './messages.hbs';
 import chatList from '../../components/ChatList';
 import messageArea from '../../components/MessageArea';
 import { EventBusSingl } from '../../controllers/EventBusSingl';
@@ -7,9 +7,9 @@ import { EVENTS } from '../../constants/events';
 import { MODE } from '../../constants/messages';
 
 const appBus = new EventBusSingl();
-export class ChatListPage extends Page {
+export class MessagesPage extends Page {
   constructor(props: PageProps) {
-    const classList = ChatListPage.appendClassList(['Page', 'Page_type_chatlist'], props);
+    const classList = MessagesPage.appendClassList(['Page', 'Page_type_chatlist'], props);
     const settings = { hasID: true };
     super({ ...props, classList, settings, chatList, messageArea });
     appBus.on(EVENTS.SET_MODE, this.setMode.bind(this));
