@@ -50,7 +50,7 @@ export class MessageAreaHeader extends Block {
     super({ ...props, classList, settings, messageAreaMenu, chatListLink });
   }
   componentDidMount(): void {
-    appBus.on(EVENTS.CHAT_SELECTED, this.setHeader.bind(this));
+    // appBus.on(EVENTS.CHAT_SELECTED, this.setHeader.bind(this));
   }
   setHeader(props: IProps) {
     const { title, image } = props;

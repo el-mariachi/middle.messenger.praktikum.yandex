@@ -14,7 +14,7 @@ import addInputHandlers from '../utils/addInputHandlers';
 import createInput from '../utils/createInput';
 import submitForm from './submitForm';
 import Form from '../components/Form';
-import store from '../store/Store';
+import { setCurrentChat } from '../store/actions';
 import { MODE } from '../constants/messages';
 
 const chatsApi = new ChatsAPI();
@@ -76,7 +76,7 @@ export class ChatListController extends WithUserController {
     appBus.emit(EVENTS.MODAL_SHOW_OK, modalProps);
   }
   public setCurrentChat(id: number) {
-    store.set('currentChat', id);
+    setCurrentChat(id);
     appBus.emit(EVENTS.SET_MODE, MODE.CHAT);
   }
 }

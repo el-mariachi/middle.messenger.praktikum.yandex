@@ -24,10 +24,6 @@ function createPageResources() {
   const click = (evt: Event) => {
     appBus.emit(EVENTS.PAGE_CLICK, evt);
   };
-  // TODO remove
-  messageAreaHeader.setProps({
-    title: 'Чат не выбран',
-  });
   return { compose, messageAreaHeader, click };
 }
 

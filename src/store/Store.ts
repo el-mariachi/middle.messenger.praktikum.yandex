@@ -37,6 +37,15 @@ export type ChatData = {
   } | null;
 };
 
+export const chatStruct: ChatData = {
+  id: 0,
+  title: 'Чат не выбран',
+  created_by: 0,
+  avatar: null,
+  unread_count: 0,
+  last_message: null,
+};
+
 export type State = {
   [k: string]: any; // eslint-disable-line @typescript-eslint/no-explicit-any
   user: UserData;

@@ -1,9 +1,14 @@
-import store, { UserData, userStruct, ChatData } from './Store';
+import store, { UserData, userStruct, ChatData, chatStruct } from './Store';
 
 const getUserState = () => {
   const state = store.getState();
   const user = state.user ?? {};
   return Object.assign(userStruct, user);
+};
+const getCurrentChat = () => {
+  const { currentChat, chatsData } = store.getState();
+  const currentChatData = chatsData.find(({ id }) => id === currentChat);
+  return currentChatData ?? chatStruct;
 };
 
 const setUser = (userData: UserData) => {
@@ -13,5 +18,8 @@ const setUser = (userData: UserData) => {
 const setChats = (chatsData: ChatData[]) => {
   store.set('chatsData', chatsData);
 };
+const setCurrentChat = (id: number) => {
+  store.set('currentChat', id);
+};
 
-export { setUser, getUserState, setChats };
+export { setUser, getCurrentChat, setCurrentChat, setChats };
