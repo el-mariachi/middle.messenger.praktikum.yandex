@@ -4,11 +4,6 @@ import Login from '../../src/pages/login';
 import SignUp from '../../src/pages/sign_up';
 import EditProfilePage from '../../src/pages/edit_profile';
 import ChatListPage from '../../src/pages/chat_list';
-import ChatPage from '../../src/pages/chat';
-// import { EventBusSingl } from '../../src/controllers/EventBusSingl';
-// import { EVENTS } from '../../src/constants/events';
-// import { chats } from '../../src/mockData/chats';
-// import { messages } from '../../src/mockData/messages';
 import Modal from '../../src/components/Modal';
 import { renderDOM } from '../../src/utils/renderDOM';
 import { ModalController } from '../../src/controllers/ModalController';
@@ -20,7 +15,6 @@ appRouter
   .use('/sign_up', SignUp)
   .use('/settings', EditProfilePage)
   .use('/chat_list', ChatListPage)
-  .use('/chat', ChatPage)
   .use('/500', Page500)
   .start();
 

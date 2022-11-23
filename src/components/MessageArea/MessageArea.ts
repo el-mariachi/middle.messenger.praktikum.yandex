@@ -18,17 +18,26 @@ type MessageType = {
   };
   status: string;
 };
-
-const compose = new Compose({});
-
-const messageAreaHeader = new MessageAreaHeader({});
+function createPageResources() {
+  const compose = new Compose({});
+  const messageAreaHeader = new MessageAreaHeader({});
+  const click = (evt: Event) => {
+    appBus.emit(EVENTS.PAGE_CLICK, evt);
+  };
+  // TODO remove
+  messageAreaHeader.setProps({
+    title: 'Чат не выбран',
+  });
+  return { compose, messageAreaHeader, click };
+}
 
 export class MessageArea extends Block {
   constructor(props: IProps) {
     const tagName = 'main';
     const classList = MessageArea.appendClassList(['MessageArea'], props);
     const settings = { hasID: true };
-    super({ ...props, tagName, classList, settings, messageAreaHeader, compose });
+    const { compose, messageAreaHeader, click } = createPageResources();
+    super({ ...props, tagName, classList, settings, messageAreaHeader, compose, events: { click } });
   }
   componentDidMount(): void {
     appBus.on(EVENTS.MESSAGES_LOADED, this.updateMessages.bind(this));
@@ -54,8 +63,3 @@ export class MessageArea extends Block {
     return this.compile(messageAreaTemplate, this.props);
   }
 }
-
-// TODO remove
-messageAreaHeader.setProps({
-  title: 'Чат не выбран',
-});

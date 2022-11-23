@@ -15,6 +15,7 @@ import createInput from '../utils/createInput';
 import submitForm from './submitForm';
 import Form from '../components/Form';
 import store from '../store/Store';
+import { MODE } from '../constants/messages';
 
 const chatsApi = new ChatsAPI();
 const appRouter = new Router();
@@ -76,6 +77,6 @@ export class ChatListController extends WithUserController {
   }
   public setCurrentChat(id: number) {
     store.set('currentChat', id);
-    appRouter.go('/chat');
+    appBus.emit(EVENTS.SET_MODE, MODE.CHAT);
   }
 }

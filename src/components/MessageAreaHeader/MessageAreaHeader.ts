@@ -5,7 +5,7 @@ import Button from '../Button';
 import { EventBusSingl } from '../../controllers/EventBusSingl';
 import { EVENTS } from '../../constants/events';
 import Link from '../Link';
-import { goToURL } from '../../utils/goToURL';
+import { MODE } from '../../constants/messages';
 
 const appBus = new EventBusSingl();
 
@@ -37,12 +37,8 @@ const chatListLink = new Link({
     href: '/chat_list',
   },
   events: {
-    click: (e: Event) => {
-      e.preventDefault();
-      const target = e.target as HTMLElement;
-      if (target) {
-        goToURL.call(target);
-      }
+    click: () => {
+      appBus.emit(EVENTS.SET_MODE, MODE.LIST);
     },
   },
 });
