@@ -1,3 +1,4 @@
 import { Chats } from './Chats';
+import { withChats } from '../../utils/connect';
 
-export default Chats;
+export default withChats(Chats);

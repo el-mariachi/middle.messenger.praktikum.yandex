@@ -15,18 +15,15 @@ export class Modal extends Block {
       delete this.props[key];
     });
   }
-  componentDidUpdate(oldProps: IProps, newProps: IProps): boolean {
-    if (newProps.error) {
-      this._element.classList.add('Modal_type_error');
-    } else {
-      this._element.classList.remove('Modal_type_error');
-    }
-    return true;
-  }
   show() {
     this.getContent().style.display = 'flex';
   }
   render(): DocumentFragment {
+    if (this.props.error) {
+      this._element.classList.add('Modal_type_error');
+    } else {
+      this._element.classList.remove('Modal_type_error');
+    }
     return this.compile(modalTemplate, this.props);
   }
 }

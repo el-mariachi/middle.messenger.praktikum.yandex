@@ -1,7 +1,6 @@
 import Form from '../Form';
 import { IProps } from '../../classes/Block';
 import formTemplate from './ProfileForm.hbs';
-import { getUserState } from '../../store/actions';
 import { UserData } from '../../store/Store';
 
 // Inherits from Form, uses own template
@@ -19,17 +18,8 @@ export class ProfileForm extends Form {
       }
     });
   }
-  componentDidMount(): void {
-    super.componentDidMount();
-    const user = getUserState();
-    this.setProps({ user });
-    this.fillForm();
-  }
-  componentDidUpdate(): boolean {
-    this.fillForm();
-    return true;
-  }
   render(): DocumentFragment {
+    this.fillForm();
     const user = this.props.user as UserData;
     let formTitle = 'Профиль';
     if (user) {

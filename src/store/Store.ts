@@ -39,13 +39,13 @@ export type ChatData = {
 export type State = {
   [k: string]: any; // eslint-disable-line @typescript-eslint/no-explicit-any
   user: UserData;
-  chats: ChatData[];
+  chatsData: ChatData[];
 };
 
 class Store extends EventBus {
   private _state: State = {
     user: userStruct,
-    chats: [],
+    chatsData: [],
   };
 
   public getState() {

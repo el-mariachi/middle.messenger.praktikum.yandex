@@ -11,6 +11,7 @@ const inputData = [
     accept: '',
     value: '',
     test: /^(?=.*[a-zA-Z])[a-zA-Z0-9_-]{3,20}$/,
+    // autofocus: true,
   },
   {
     name: 'password',

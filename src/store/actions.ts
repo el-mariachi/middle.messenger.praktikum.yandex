@@ -11,7 +11,7 @@ const setUser = (userData: UserData) => {
 };
 
 const setChats = (chatsData: ChatData[]) => {
-  store.set('chats', chatsData);
+  store.set('chatsData', chatsData);
 };
 
 export { setUser, getUserState, setChats };

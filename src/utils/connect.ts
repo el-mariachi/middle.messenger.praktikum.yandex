@@ -24,6 +24,6 @@ function connect(mapStateToProps: (state: State) => Indexed) {
 }
 
 const withUser = connect(({ user }) => ({ user: { ...user } }));
-const withChats = connect(({ chats }) => ({ chats: { ...chats } }));
+const withChats = connect(({ chatsData }) => ({ chatsData: { ...chatsData } }));
 
 export { withUser, withChats };
