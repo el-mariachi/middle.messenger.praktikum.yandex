@@ -25,10 +25,8 @@ export class WithUserController {
     }
     const user = getUserState();
     if (user.id === this.userID) {
-      console.log('same user');
       return;
     }
-    console.log('switchRoute trig', 'old', this.userID, 'new', user.id, this.currentPath);
     this.userID = user.id;
     const needToEscape =
       ((!this.userRequired && user.id) || (this.userRequired && !user.id)) &&

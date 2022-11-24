@@ -9,6 +9,7 @@ import { EventBusSingl } from '../../controllers/EventBusSingl';
 import { EVENTS } from '../../constants/events';
 import { MODE } from '../../constants/messages';
 import ChatList from '../../components/ChatList';
+import { MessagesController } from '../../controllers/MessagesController';
 
 const messageArea = new MessageArea({});
 const chatListFrame = new Chats({
@@ -20,6 +21,7 @@ const chatSearch = new Search({});
 const chatListHeader = new ChatListHeader({});
 const chatList = new ChatList({ chatListHeader, chatSearch, chatListFrame });
 const appBus = new EventBusSingl();
+new MessagesController();
 export class MessagesPage extends Page {
   constructor(props: PageProps) {
     const classList = MessagesPage.appendClassList(['Page', 'Page_type_chatlist'], props);

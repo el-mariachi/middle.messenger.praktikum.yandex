@@ -1,4 +1,5 @@
 import './MessageArea.scss';
 import { MessageArea } from './MessageArea';
+import { withCurrentChat } from '../../utils/connect';
 
-export default MessageArea;
+export default withCurrentChat(MessageArea);

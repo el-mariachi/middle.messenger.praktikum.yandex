@@ -25,6 +25,9 @@ export class ChatsAPI extends BaseAPI {
   getUsers(chatId: number): Promise<XMLHttpRequest> {
     return chatAPITransport.get(`/${chatId}/users`);
   }
+  getToken(chatId: number): Promise<XMLHttpRequest> {
+    return chatAPITransport.post(`/token/${chatId}`);
+  }
   addUsers(data: AddUsersRequest): Promise<XMLHttpRequest> {
     return chatAPITransport.put('/users', { headers, data });
   }
