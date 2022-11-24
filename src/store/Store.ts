@@ -51,6 +51,7 @@ export type State = {
   user: UserData;
   chatsData: ChatData[];
   currentChat: number | null;
+  userList: UserData[] | [];
 };
 
 class Store extends EventBus {
@@ -58,6 +59,7 @@ class Store extends EventBus {
     user: userStruct,
     chatsData: [],
     currentChat: null,
+    userList: [],
   };
 
   public getState() {

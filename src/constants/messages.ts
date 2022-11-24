@@ -1,4 +1,5 @@
 import { hideModal } from '../utils/hideModal';
+import userSearch from '../utils/userSearch';
 
 export enum MODE {
   LIST,
@@ -7,57 +8,22 @@ export enum MODE {
 
 const addUserFormInputsData = [
   {
-    name: 'userId',
-    id: 'userId',
-    label: 'ID пользователя',
+    name: 'userLogin',
+    id: 'userLogin',
+    label: 'Логин пользователя',
     errorMessage: 'Поле заполнено некорректно',
     type: 'text',
-    placeholder: 'Введите ID пользователя',
+    placeholder: 'Введите логин пользователя',
     accept: '',
     value: '',
-    test: /^\d+$/,
+    test: /^.+$/,
+    // events: {
+    //   input: userSearch,
+    // },
   },
 ];
 
-const addUserFormButtonsData = [
-  {
-    tagName: 'input',
-    attributes: {
-      type: 'submit',
-      name: 'submit',
-      value: 'Добавить',
-    },
-    text: 'Добавить',
-    classList: ['Modal-Button', 'Modal_type_ok'],
-    events: {
-      click: hideModal,
-    },
-  },
-  {
-    attributes: {
-      type: 'button',
-    },
-    text: 'Отменить!',
-    classList: ['Modal-Button', 'Modal_type_cancel'],
-    events: {
-      click: hideModal,
-    },
-  },
-];
-const deleteUserFormButtonsData = [
-  {
-    tagName: 'input',
-    attributes: {
-      type: 'submit',
-      name: 'submit',
-      value: 'Удалить',
-    },
-    text: 'Удалить',
-    classList: ['Modal-Button', 'Modal_type_ok'],
-    events: {
-      click: hideModal,
-    },
-  },
+const addUserModalButtonsData = [
   {
     attributes: {
       type: 'button',
@@ -81,8 +47,7 @@ const deleteUserFormTitle = 'Удалить пользователя';
 
 export {
   addUserFormInputsData,
-  addUserFormButtonsData,
-  deleteUserFormButtonsData,
+  addUserModalButtonsData,
   addUserValidatorOtions,
   deleteUserValidatorOtions,
   addUserFormTitle,

@@ -1,8 +1,10 @@
 import { SignUpAPI } from '../api/SignUpAPI';
-import { setUser } from '../store/actions';
+import { UsersAPI } from '../api/UsersAPI';
+import { setUser, setUserList } from '../store/actions';
+import { userStruct } from '../store/Store';
 
 const signUpApi = new SignUpAPI();
-
+const usersApi = new UsersAPI();
 export class UserController {
   static _userController: UserController;
   constructor() {
@@ -29,7 +31,19 @@ export class UserController {
       return false;
     }
   }
-  public async search(pattern: string) {
-    //
+  public async search(searchString: string) {
+    try {
+      const { status, response } = await usersApi.search(searchString);
+      switch (status - (status % 100)) {
+        case 200:
+          setUserList(response);
+          break;
+        default:
+          setUserList([Object.assign(userStruct, { login: 'Нет подходящих пользователей' })]);
+          break;
+      }
+    } catch (error) {
+      console.log('UserController catch', error);
+    }
   }
 }

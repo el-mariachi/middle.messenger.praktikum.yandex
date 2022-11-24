@@ -5,6 +5,7 @@ import isEqual from './isEqual';
 import { Indexed } from './merge';
 import mapChatsToProps from './mapChatsToProps';
 import mapCurrentChat from './mapCurrentChat';
+import mapUserListToProps from './mapUserListToProps';
 
 function connect(mapStateToProps: (state: State) => Indexed) {
   return function (Component: typeof Block) {
@@ -28,5 +29,6 @@ function connect(mapStateToProps: (state: State) => Indexed) {
 const withUser = connect(({ user }) => ({ user: { ...user } }));
 const withChats = connect(mapChatsToProps);
 const withCurrentChat = connect(mapCurrentChat);
+const withUserList = connect(mapUserListToProps);
 
-export { withUser, withChats, withCurrentChat };
+export { withUser, withChats, withCurrentChat, withUserList };

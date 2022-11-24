@@ -22,10 +22,13 @@ export class ChatsAPI extends BaseAPI {
   loadAll(options: OptionsWithoutMethod): Promise<XMLHttpRequest> {
     return chatAPITransport.get('/', options);
   }
-  addUsers(users: AddUsersRequest): Promise<XMLHttpRequest> {
-    return chatAPITransport.put('/users', { headers, data: users });
+  getUsers(chatId: number): Promise<XMLHttpRequest> {
+    return chatAPITransport.get(`/${chatId}/users`);
   }
-  deleteUsers(users: AddUsersRequest): Promise<XMLHttpRequest> {
-    return chatAPITransport.delete('/users', { headers, data: users });
+  addUsers(data: AddUsersRequest): Promise<XMLHttpRequest> {
+    return chatAPITransport.put('/users', { headers, data });
+  }
+  deleteUsers(data: AddUsersRequest): Promise<XMLHttpRequest> {
+    return chatAPITransport.delete('/users', { headers, data });
   }
 }

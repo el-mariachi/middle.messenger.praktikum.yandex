@@ -1,12 +1,6 @@
 <ul class="UserSelect-Body">
-  <li class="UserSelect-Item" data-id="125">Сергей Геннадиевич</li>
-  <li class="UserSelect-Item" data-id="125">Гор Мазманян</li>
-  <li class="UserSelect-Item" data-id="125">Николай Силкин</li>
-  <li class="UserSelect-Item" data-id="125">Сергей Иванов</li>
-  <li class="UserSelect-Item" data-id="125">Александр Новиков</li>
-  <li class="UserSelect-Item" data-id="125">Александр Новиков</li>
-  <li class="UserSelect-Item" data-id="125">Arial Helvetica</li>
-  <li class="UserSelect-Item" data-id="125">Verdana</li>
-  <li class="UserSelect-Item" data-id="125">Tahoma Geneva</li>
-  <li class="UserSelect-Item" data-id="125">Times New Roman</li>
+  {{#each userList.users}}
+  <li class="UserSelect-Item" data-event="{{../event}}" data-id="{{this.id}}">{{this.first_name}} {{this.second_name}}
+    ({{this.login}})</li>
+  {{/each}}
 </ul>

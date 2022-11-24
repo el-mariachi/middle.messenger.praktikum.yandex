@@ -25,5 +25,8 @@ const setChats = (chatsData: ChatData[]) => {
 const setCurrentChat = (id: number) => {
   store.set('currentChat', id);
 };
+const setUserList = (userList: UserData[]) => {
+  store.set('userList', userList);
+};
 
-export { setUser, getCurrentChat, setCurrentChat, setChats, getChatId };
+export { setUser, getCurrentChat, setCurrentChat, setChats, getChatId, setUserList };
