@@ -20,7 +20,6 @@ export default class Route {
   }
   navigate(pathname: string) {
     if (this.match(pathname)) {
-      // this._pathname = pathname;
       this.render();
     }
   }

@@ -4,8 +4,8 @@ import InputGroup, { InputProps } from '../components/InputGroup';
 
 export default function createInput(inputData: InputProps) {
   const { errorMessage } = inputData;
-  const { type, name, placeholder, disabled, autofocus } = inputData;
-  const attributes = disabled ? { type, name, placeholder, disabled } : { type, name, placeholder, autofocus };
+  const { type, name, placeholder, disabled } = inputData;
+  const attributes = disabled ? { type, name, placeholder, disabled } : { type, name, placeholder };
   const input = new Input({ ...inputData, attributes });
   const inputError = new InputError({ errorMessage });
   const inputGroup = new InputGroup({

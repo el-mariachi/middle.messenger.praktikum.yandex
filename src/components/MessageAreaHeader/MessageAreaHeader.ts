@@ -13,12 +13,22 @@ const addLink = new Button({
   tagName: 'button',
   text: 'Добавить пользователя',
   classList: ['Menu-Link', 'Menu_linktype_add'],
+  events: {
+    click: () => {
+      appBus.emit(EVENTS.USER_ADD_REQUEST);
+    },
+  },
 });
 
 const deleteLink = new Button({
   tagName: 'button',
   text: 'Удалить пользователя',
   classList: ['Menu-Link', 'Menu_linktype_delete'],
+  events: {
+    click: () => {
+      appBus.emit(EVENTS.USER_DELETE_REQUEST);
+    },
+  },
 });
 
 const messageAreaMenuData: IProps = {
@@ -48,16 +58,6 @@ export class MessageAreaHeader extends Block {
     const classList = MessageAreaHeader.appendClassList(['MessageArea-Header'], props);
     const settings = { hasID: true };
     super({ ...props, classList, settings, messageAreaMenu, chatListLink });
-  }
-  componentDidMount(): void {
-    // appBus.on(EVENTS.CHAT_SELECTED, this.setHeader.bind(this));
-  }
-  setHeader(props: IProps) {
-    const { title, image } = props;
-    this.setProps({
-      title,
-      image,
-    });
   }
   render(): DocumentFragment {
     return this.compile(messAreaTemplate, this.props);

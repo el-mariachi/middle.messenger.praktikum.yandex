@@ -19,12 +19,17 @@ export class UserController {
           setUser(response);
           return true;
         case 400:
+          setUser(null);
           return false;
         default:
+          setUser(null);
           return false;
       }
     } catch (error) {
       return false;
     }
+  }
+  public async search(pattern: string) {
+    //
   }
 }

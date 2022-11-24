@@ -7,6 +7,11 @@ export type CreateChatRequest = {
   title: string;
 };
 
+export type AddUsersRequest = {
+  users: number[];
+  chatId: number;
+};
+
 const headers = {
   'Content-Type': 'application/json',
 };
@@ -16,5 +21,11 @@ export class ChatsAPI extends BaseAPI {
   }
   loadAll(options: OptionsWithoutMethod): Promise<XMLHttpRequest> {
     return chatAPITransport.get('/', options);
+  }
+  addUsers(users: AddUsersRequest): Promise<XMLHttpRequest> {
+    return chatAPITransport.put('/users', { headers, data: users });
+  }
+  deleteUsers(users: AddUsersRequest): Promise<XMLHttpRequest> {
+    return chatAPITransport.delete('/users', { headers, data: users });
   }
 }

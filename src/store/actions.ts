@@ -5,14 +5,18 @@ const getUserState = () => {
   const user = state.user ?? {};
   return Object.assign(userStruct, user);
 };
+const getChatId = () => {
+  const { currentChat } = store.getState();
+  return currentChat;
+};
 const getCurrentChat = () => {
   const { currentChat, chatsData } = store.getState();
   const currentChatData = chatsData.find(({ id }) => id === currentChat);
   return currentChatData ?? chatStruct;
 };
 
-const setUser = (userData: UserData) => {
-  store.set('user', userData);
+const setUser = (userData: UserData | null) => {
+  store.set('user', userData ? userData : userStruct);
 };
 
 const setChats = (chatsData: ChatData[]) => {
@@ -22,4 +26,4 @@ const setCurrentChat = (id: number) => {
   store.set('currentChat', id);
 };
 
-export { setUser, getCurrentChat, setCurrentChat, setChats };
+export { setUser, getCurrentChat, setCurrentChat, setChats, getChatId };

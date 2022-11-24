@@ -4,12 +4,14 @@ import { ChatListController } from '../../controllers/ChatListController';
 import { EventBusSingl } from '../../controllers/EventBusSingl';
 import { EVENTS } from '../../constants/events';
 import { CreateChatController } from '../../controllers/CreateChatController';
+import { ChatController } from '../../controllers/ChatController';
 
 const appBus = new EventBusSingl();
 
 function createPageResources(currentPath: string) {
   new ChatListController(currentPath);
   new CreateChatController(currentPath);
+  new ChatController();
   const click = (evt: Event) => {
     appBus.emit(EVENTS.PAGE_CLICK, evt);
   };

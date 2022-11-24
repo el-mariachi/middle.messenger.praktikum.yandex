@@ -42,7 +42,6 @@ export class Router {
     let route = this.getRoute(pathname);
     if (!route) {
       route = Router._route404;
-      // return;
     }
 
     if (this._currentRoute) {
