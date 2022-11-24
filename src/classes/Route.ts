@@ -1,4 +1,3 @@
-// import { Block } from './Block';
 import Page from '../components/Page';
 import { renderDOM } from '../utils/renderDOM';
 
