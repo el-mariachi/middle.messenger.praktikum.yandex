@@ -1,17 +1,18 @@
 import { EventBusSingl } from './EventBusSingl';
 import { EVENTS } from '../constants/events';
 import { WithUserController } from '../classes/WithUserController';
-import { LoginController } from './LoginController';
+import { LoginAPI } from '../api/LoginAPI';
 import { FormValidator } from './FormValidator';
 import { changeAvatarInputData, changeAvatarValidatorOptions, modalButtonData } from '../constants/profileForm';
 import { Router } from '../classes/Router';
 import { ProfileAPI } from '../api/ProfileAPI';
 import { UserController } from './UserController';
 import Button from '../components/Button';
+import { setUser } from '../store/actions';
 
 const appBus = new EventBusSingl();
 const appRouter = new Router();
-const loginController = new LoginController();
+const loginApi = new LoginAPI();
 const profileApi = new ProfileAPI();
 const userController = new UserController();
 const buttons = modalButtonData.map((button) => new Button(button));
@@ -56,8 +57,9 @@ export class UserInfoController extends WithUserController {
     }
   }
   public async logout() {
-    const success = await loginController.logout();
-    if (success) {
+    const { status } = await loginApi.logout();
+    if (status === 200) {
+      setUser(null);
       appRouter.go(this.escapeRoute);
     }
   }

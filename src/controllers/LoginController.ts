@@ -5,8 +5,6 @@ import { FormValidator } from './FormValidator';
 import { inputData, validatorOptions } from '../constants/loginForm';
 import { getFormData } from '../utils/getFormData';
 import { Router } from '../classes/Router';
-import { setUser } from '../store/actions';
-import { userStruct } from '../store/Store';
 import { WithUserController } from '../classes/WithUserController';
 import { UserController } from './UserController';
 
@@ -49,17 +47,6 @@ export class LoginController extends WithUserController {
     } catch (error) {
       console.log('LoginController catch', error);
       // TODO show 500 with error ??
-    }
-  }
-  public async logout() {
-    const { status, response } = await loginApi.logout();
-    if (status === 500) {
-      response;
-      // TODO show 500 with response ??
-      return false;
-    } else {
-      setUser(userStruct);
-      return true;
     }
   }
 }
