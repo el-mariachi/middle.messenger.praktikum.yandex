@@ -9,6 +9,7 @@ import { ProfileAPI } from '../api/ProfileAPI';
 import { UserController } from './UserController';
 import Button from '../components/Button';
 import { setUser } from '../store/actions';
+import { userStruct } from '../store/Store';
 
 const appBus = new EventBusSingl();
 const appRouter = new Router();
@@ -59,7 +60,7 @@ export class UserInfoController extends WithUserController {
   public async logout() {
     const { status } = await loginApi.logout();
     if (status === 200) {
-      setUser(null);
+      setUser(userStruct);
       appRouter.go(this.escapeRoute);
     }
   }

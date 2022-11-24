@@ -21,10 +21,10 @@ export class UserController {
           setUser(response);
           return true;
         case 400:
-          setUser(null);
+          setUser(userStruct);
           return false;
         default:
-          setUser(null);
+          setUser(userStruct);
           return false;
       }
     } catch (error) {

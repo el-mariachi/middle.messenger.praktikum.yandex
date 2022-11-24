@@ -36,6 +36,7 @@ export class LoginController extends WithUserController {
       switch (status - (status % 100)) {
         case 200:
           userController.loadUser();
+          appRouter.go(this.escapeRoute);
           break;
         case 400:
           errorMessage = response.reason && typeof response.reason === 'string' ? response.reason : 'Unknown error';

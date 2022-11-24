@@ -29,4 +29,4 @@ const setUserList = (userList: UserData[]) => {
   store.set('userList', userList);
 };
 
-export { setUser, getCurrentChat, setCurrentChat, setChats, getChatId, setUserList };
+export { setUser, getCurrentChat, setCurrentChat, setChats, getChatId, setUserList, getUserState };
