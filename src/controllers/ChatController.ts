@@ -36,14 +36,12 @@ const notificationModalProps = {
 };
 
 const addUserInputs = addUserFormInputsData.map(addInputHandlers).map(createInput);
-// const deleteUserInputs = addUserFormInputsData.map(addInputHandlers).map(createInput);
 const addUserButtons = addUserModalButtonsData.map((button) => new Button(button));
 const deleteUserButtons = addUserModalButtonsData.map((button) => new Button(button));
 
 const addUserFormData = {
   formTitle: addUserFormTitle,
   inputs: addUserInputs,
-  // buttons: addUserButtons,
   classList: ['Modal-Form'],
   attributes: {
     name: addUserValidatorOtions.formName,
@@ -52,18 +50,6 @@ const addUserFormData = {
     submit: submitForm,
   },
 };
-// const deleteUserFormData = {
-//   formTitle: deleteUserFormTitle,
-//   inputs: deleteUserInputs,
-//   // buttons: deleteUserButtons,
-//   classList: ['Modal-Form'],
-//   attributes: {
-//     name: deleteUserValidatorOtions.formName,
-//   },
-//   events: {
-//     submit: submitForm,
-//   },
-// };
 
 const userSelect = new UserSelect({
   events: {
@@ -72,16 +58,12 @@ const userSelect = new UserSelect({
 });
 
 const addUserForm = new Form(addUserFormData);
-// const deleteUserForm = new Form(deleteUserFormData);
 
 const addUserModalInput = addUserForm.getContent().querySelector('input.Input') as HTMLInputElement;
 if (addUserModalInput) {
   addUserModalInput.addEventListener('input', userSearch);
 }
-// const deleteUserModalInput = deleteUserForm.getContent().querySelector('input.Input') as HTMLInputElement;
-// if (deleteUserModalInput) {
-//   deleteUserModalInput.addEventListener('input', userSearch);
-// }
+
 const addUserModalProps = { modalForm: addUserForm, content: userSelect, buttons: addUserButtons };
 const deleteUserModalProps = { header: deleteUserFormTitle, content: userSelect, buttons: deleteUserButtons };
 

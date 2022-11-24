@@ -22,20 +22,17 @@ export class Chat extends Block {
   }
   check(evt: Event) {
     if (evt.composedPath().includes(this._element)) {
-      this.select();
       const { id } = this.props as ChatProps;
       appBus.emit(EVENTS.CHAT_SELECTED, id);
-    } else {
-      this.deselect();
     }
   }
-  select() {
-    this._element.classList.add('Chat_selected');
-  }
-  deselect() {
-    this._element.classList.remove('Chat_selected');
-  }
   render(): DocumentFragment {
+    const { current } = this.props;
+    if (current) {
+      this._element.classList.add('Chat_selected');
+    } else {
+      this._element.classList.remove('Chat_selected');
+    }
     return this.compile(chatTemplate, this.props);
   }
 }
