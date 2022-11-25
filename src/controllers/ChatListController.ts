@@ -83,11 +83,11 @@ export class ChatListController extends WithUserController {
     appBus.emit(EVENTS.MODAL_SHOW_OK, modalProps);
   }
   public setCurrentChat(id: number) {
+    appBus.emit(EVENTS.SET_MODE_CHAT, MODE_CHAT.CHAT);
     if (id === this.chatId) {
       return;
     }
     this.chatId = id;
     setCurrentChat(id);
-    appBus.emit(EVENTS.SET_MODE_CHAT, MODE_CHAT.CHAT);
   }
 }
