@@ -1,4 +1,6 @@
 import { hideModal } from '../utils/hideModal';
+import { InputProps } from '../components/InputGroup';
+import { ValidatorOptions } from '../controllers/FormValidator';
 // import userSearch from '../utils/userSearch';
 
 export enum MODE {
@@ -6,7 +8,7 @@ export enum MODE {
   CHAT,
 }
 
-const addUserFormInputsData = [
+const addUserFormInputsData: InputProps[] = [
   {
     name: 'userLogin',
     id: 'userLogin',
@@ -36,14 +38,33 @@ const addUserModalButtonsData = [
   },
 ];
 
-const addUserValidatorOtions = {
+const addUserValidatorOtions: ValidatorOptions = {
   formName: 'add_user',
 };
-const deleteUserValidatorOtions = {
+const deleteUserValidatorOtions: ValidatorOptions = {
   formName: 'delete_user',
 };
 const addUserFormTitle = 'Добавить пользователя';
 const deleteUserFormTitle = 'Удалить пользователя';
+
+const newMessageInputData: InputProps = {
+  classList: ['NewMessage', 'Input_theme_grey'],
+  type: 'text',
+  name: 'message',
+  placeholder: 'Сообщение',
+  test: /.+/,
+};
+
+const sendMessageButtonData = {
+  attributes: {
+    type: 'submit',
+  },
+  classList: ['Send', 'Compose-Send', 'Icon', 'Icon_type_send'],
+};
+
+const newMessageValidatorOptions: ValidatorOptions = {
+  formName: 'compose_form',
+};
 
 export {
   addUserFormInputsData,
@@ -52,4 +73,7 @@ export {
   deleteUserValidatorOtions,
   addUserFormTitle,
   deleteUserFormTitle,
+  newMessageInputData,
+  sendMessageButtonData,
+  newMessageValidatorOptions,
 };

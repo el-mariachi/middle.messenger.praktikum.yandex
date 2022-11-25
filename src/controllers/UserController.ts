@@ -43,6 +43,7 @@ export class UserController {
           break;
       }
     } catch (error) {
+      /* eslint-disable-next-line no-console */
       console.log('UserController catch', error);
     }
   }

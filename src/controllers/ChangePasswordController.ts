@@ -52,6 +52,7 @@ export class ChangePasswordController extends WithUserController {
           appBus.emit(EVENTS.MODAL_SHOW_ERROR, { ...modalProps, message, error: true });
       }
     } catch (error) {
+      /* eslint-disable-next-line no-console */
       console.log('ChangePasswordController catch', error);
       appRouter.go('/500');
     }

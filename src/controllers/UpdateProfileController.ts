@@ -49,6 +49,7 @@ export class UpdateProfileController extends WithUserController {
           appBus.emit(EVENTS.MODAL_SHOW_ERROR, { ...modalProps, message, error: true });
       }
     } catch (error) {
+      /* eslint-disable-next-line no-console */
       console.log('UpdateProfileController catch', error);
       appRouter.go('/500');
     }

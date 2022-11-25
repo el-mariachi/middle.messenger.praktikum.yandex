@@ -53,8 +53,8 @@ export class UserInfoController extends WithUserController {
           appBus.emit(EVENTS.MODAL_SHOW_ERROR, { ...modalProps, message, error: true });
       }
     } catch (error) {
+      /* eslint-disable-next-line no-console */
       console.log('UserInfoController catch', error);
-      // TODO show 500 with error ??
     }
   }
   public async logout() {

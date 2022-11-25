@@ -39,6 +39,7 @@ export class CreateChatController {
       let message;
       switch (status - (status % 100)) {
         case 200:
+          /* eslint-disable-next-line no-console */
           console.log(response);
           chatListController.loadChats();
           break;
@@ -50,6 +51,7 @@ export class CreateChatController {
           appRouter.go('/500');
       }
     } catch (error) {
+      /* eslint-disable-next-line no-console */
       console.log('CreateChatController catch', error);
       appRouter.go('/500');
     }

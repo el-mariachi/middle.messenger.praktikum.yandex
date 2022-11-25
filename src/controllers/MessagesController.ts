@@ -4,7 +4,13 @@ import { ChatsAPI } from '../api/ChatsAPI';
 import { getUserState } from '../store/actions';
 import { MessageData } from '../store/Store';
 import { setMessages } from '../store/actions';
+import { FormValidator } from './FormValidator';
+import { newMessageInputData, newMessageValidatorOptions } from '../constants/messages';
+import { getFormData } from '../utils/getFormData';
+import { ChatListController } from './ChatListController';
 
+new FormValidator([newMessageInputData], newMessageValidatorOptions);
+const chatListController = new ChatListController();
 const appBus = new EventBusSingl();
 const chatsApi = new ChatsAPI();
 export class MessagesController {
@@ -14,8 +20,11 @@ export class MessagesController {
   protected userId: number | null = null;
   protected socket?: WebSocket;
   protected timer?: ReturnType<typeof setTimeout>;
+  protected formName: string;
   constructor() {
+    this.formName = newMessageValidatorOptions.formName;
     appBus.on(EVENTS.CHAT_SELECTED, this.setToken.bind(this));
+    appBus.on(EVENTS.FORM_VALID, this.sendMessage.bind(this));
   }
   protected async setToken(id: number) {
     if (id === this.chatId) {
@@ -35,6 +44,7 @@ export class MessagesController {
           break;
       }
     } catch (error) {
+      /* eslint-disable-next-line no-console */
       console.log('MessagesConrtroller catch', error);
       this.token = '';
     }
@@ -83,22 +93,21 @@ export class MessagesController {
     if (evt.wasClean) {
       //
     } else {
+      /* eslint-disable-next-line no-console */
       console.log('Обрыв соединения');
     }
+    /* eslint-disable-next-line no-console */
     console.log(`Код: ${evt.code} | Причина: ${evt.reason}`);
   }
   protected messageListener(evt: MessageEvent) {
-    console.log('Получено сообщение', JSON.parse(evt.data));
-    // TODO update state
     this.setMessages(JSON.parse(evt.data));
-    // TODO emit NEW_MESSAGE for preview update ???
+    chatListController.loadChats();
   }
   protected errorListener(evt: Event) {
+    /* eslint-disable-next-line no-console */
     console.log('Ошибка сокета', evt);
   }
   protected ping() {
-    console.log('ping');
-
     this.socket?.send(
       JSON.stringify({
         content: '',
@@ -130,5 +139,20 @@ export class MessagesController {
   }
   protected notEmpty(message: MessageData): boolean {
     return message.content !== '';
+  }
+  protected sendMessage(form: HTMLFormElement) {
+    if (form.name !== this.formName) {
+      return;
+    }
+    const data = getFormData(form);
+    if (!data) {
+      return;
+    }
+    this.socket?.send(
+      JSON.stringify({
+        type: 'message',
+        content: data.message,
+      })
+    );
   }
 }

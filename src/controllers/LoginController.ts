@@ -46,8 +46,8 @@ export class LoginController extends WithUserController {
           appRouter.go('/500');
       }
     } catch (error) {
+      /* eslint-disable-next-line no-console */
       console.log('LoginController catch', error);
-      // TODO show 500 with error ??
     }
   }
 }

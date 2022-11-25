@@ -74,6 +74,7 @@ export class ChatListController extends WithUserController {
           break;
       }
     } catch (error) {
+      /* eslint-disable-next-line no-console */
       console.log('ChatListController catch', error);
       appRouter.go('/500');
     }

@@ -111,6 +111,7 @@ export class ChatController {
             break;
         }
       } catch (error) {
+        /* eslint-disable-next-line no-console */
         console.log('ChatController catch', error);
       }
     }
@@ -143,6 +144,7 @@ export class ChatController {
             break;
         }
       } catch (error) {
+        /* eslint-disable-next-line no-console */
         console.log('ChatController catch', error);
       }
     }
@@ -165,6 +167,7 @@ export class ChatController {
             break;
         }
       } catch (error) {
+        /* eslint-disable-next-line no-console */
         console.log('ChatController catch', error);
       }
     }

@@ -25,6 +25,14 @@ export class MessageArea extends Block {
     super({ ...props, tagName, classList, settings, messageAreaHeader, compose, events: { click } });
   }
   render(): DocumentFragment {
+    setTimeout(() => {
+      const container = this._element.querySelector('.MessageArea-Curent');
+      if (container) {
+        const offset = container.scrollHeight - container.clientHeight;
+        container.scrollBy({ behavior: 'smooth', top: offset });
+      }
+    }, 500);
+
     return this.compile(messageAreaTemplate, this.props);
   }
 }

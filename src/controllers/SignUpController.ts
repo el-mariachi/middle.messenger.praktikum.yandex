@@ -34,9 +34,6 @@ export class SignUpController extends WithUserController {
           userController.loadUser();
           break;
         case 400:
-          if (status === 401) {
-            console.log('unauthorized');
-          }
           // show error message in login field
           errorMessage = response.reason && typeof response.reason === 'string' ? response.reason : 'Unknown error';
           appBus.emit(EVENTS.INPUT_ERROR, { name: 'login', errorMessage });
@@ -45,6 +42,7 @@ export class SignUpController extends WithUserController {
           appRouter.go('/500');
       }
     } catch (error) {
+      /* eslint-disable-next-line no-console */
       console.log('SignUpController catch', error);
       appRouter.go('/500');
     }
