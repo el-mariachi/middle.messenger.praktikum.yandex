@@ -38,34 +38,36 @@ function parseOptions(options: Options) {
   return { method, headers, data };
 }
 
+type HTTPMethod = (url: string, options?: OptionsWithoutMethod) => Promise<XMLHttpRequest>;
+
 export class HTTPTransport {
   constructor(protected _baseURL: string = '') {}
   protected buildURL(targetURL: string) {
     return this._baseURL === '' ? targetURL : `${this._baseURL}${targetURL}`;
   }
-  get(url: string, options: OptionsWithoutMethod = {}): Promise<XMLHttpRequest> {
+  get: HTTPMethod = (url, options = {}) => {
     const { data } = parseOptions({ ...options, method: METHOD.GET });
     if (data) {
       url = `${url}?${queryStringify(data)}`;
     }
     return this.request(url, { ...options, method: METHOD.GET }, options.timeout);
-  }
+  };
 
-  post(url: string, options: OptionsWithoutMethod = {}): Promise<XMLHttpRequest> {
+  post: HTTPMethod = (url, options = {}) => {
     return this.request(url, { ...options, method: METHOD.POST }, options.timeout);
-  }
+  };
 
-  put(url: string, options: OptionsWithoutMethod = {}): Promise<XMLHttpRequest> {
+  put: HTTPMethod = (url, options = {}) => {
     return this.request(url, { ...options, method: METHOD.PUT }, options.timeout);
-  }
+  };
 
-  patch(url: string, options: OptionsWithoutMethod = {}): Promise<XMLHttpRequest> {
+  patch: HTTPMethod = (url, options = {}) => {
     return this.request(url, { ...options, method: METHOD.PATCH }, options.timeout);
-  }
+  };
 
-  delete(url: string, options: OptionsWithoutMethod = {}): Promise<XMLHttpRequest> {
+  delete: HTTPMethod = (url, options = {}) => {
     return this.request(url, { ...options, method: METHOD.DELETE }, options.timeout);
-  }
+  };
 
   request(
     url: string,

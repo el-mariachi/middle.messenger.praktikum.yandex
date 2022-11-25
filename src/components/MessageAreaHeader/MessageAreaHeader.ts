@@ -6,6 +6,8 @@ import { EventBusSingl } from '../../controllers/EventBusSingl';
 import { EVENTS } from '../../constants/events';
 import Link from '../Link';
 import { MODE_CHAT } from '../../constants/messages';
+import defaultAvatar from '../../../static/images/chuvak130.png';
+import { BASE_URL } from '../../constants/api';
 
 const appBus = new EventBusSingl();
 
@@ -61,6 +63,11 @@ export class MessageAreaHeader extends Block {
     super({ ...props, classList, settings, messageAreaMenu, chatListLink });
   }
   render(): DocumentFragment {
+    if (this.props.avatar === null) {
+      this.props.avatar = defaultAvatar;
+    } else {
+      this.props.avatar = `${BASE_URL}/resources${this.props.avatar}`;
+    }
     return this.compile(messAreaTemplate, this.props);
   }
 }

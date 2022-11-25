@@ -60,6 +60,7 @@ export class MessagesController {
       this.startPing();
     }
   }
+
   protected closeSocket() {
     if (!this.socket) {
       return;
@@ -68,22 +69,12 @@ export class MessagesController {
     this.removeSocketListeners();
     this.socket.close();
   }
-  protected addSocketLiteners() {
-    this.socket?.addEventListener('open', this.openListener.bind(this));
-    this.socket?.addEventListener('close', this.closeListener.bind(this));
-    this.socket?.addEventListener('message', this.messageListener.bind(this));
-    this.socket?.addEventListener('error', this.errorListener.bind(this));
-  }
-  protected removeSocketListeners() {
-    this.socket?.removeEventListener('open', this.openListener.bind(this));
-    this.socket?.removeEventListener('close', this.closeListener.bind(this));
-    this.socket?.removeEventListener('message', this.messageListener.bind(this));
-    this.socket?.removeEventListener('error', this.errorListener.bind(this));
-  }
-  protected openListener() {
+
+  openListener = () => {
     this.read20Messages(0);
-  }
-  protected closeListener(evt: CloseEvent) {
+  };
+
+  closeListener = (evt: CloseEvent) => {
     if (evt.wasClean) {
       //
     } else {
@@ -92,14 +83,35 @@ export class MessagesController {
     }
     /* eslint-disable-next-line no-console */
     console.log(`Код: ${evt.code} | Причина: ${evt.reason}`);
-  }
-  protected messageListener(evt: MessageEvent) {
-    this.setMessages(JSON.parse(evt.data));
-    chatListController.loadChats();
-  }
-  protected errorListener(evt: Event) {
+  };
+
+  messageListener = (evt: MessageEvent) => {
+    try {
+      const message = JSON.parse(evt.data);
+      this.setMessages(message);
+      chatListController.loadChats();
+    } catch (error) {
+      /* eslint-disable-next-line no-console */
+      console.log('MessgeListener catch', error);
+    }
+  };
+
+  errorListener = (evt: Event) => {
     /* eslint-disable-next-line no-console */
     console.log('Ошибка сокета', evt);
+  };
+
+  protected addSocketLiteners() {
+    this.socket?.addEventListener('open', this.openListener);
+    this.socket?.addEventListener('close', this.closeListener);
+    this.socket?.addEventListener('message', this.messageListener);
+    this.socket?.addEventListener('error', this.errorListener);
+  }
+  protected removeSocketListeners() {
+    this.socket?.removeEventListener('open', this.openListener);
+    this.socket?.removeEventListener('close', this.closeListener);
+    this.socket?.removeEventListener('message', this.messageListener);
+    this.socket?.removeEventListener('error', this.errorListener);
   }
   protected ping() {
     this.socket?.send(

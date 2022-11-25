@@ -1,7 +1,8 @@
 import { HTTPTransport } from '../utils/HTTPTransport';
 import { BaseAPI } from '../classes/BaseAPI';
+import { BASE_URL } from '../constants/api';
 
-const profileAPITransport = new HTTPTransport('https://ya-praktikum.tech/api/v2/user');
+const profileAPITransport = new HTTPTransport(`${BASE_URL}/user`);
 
 export type UpdateProfileRequest = {
   first_name: string;

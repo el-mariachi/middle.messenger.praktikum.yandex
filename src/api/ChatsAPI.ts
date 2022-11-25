@@ -1,7 +1,8 @@
 import { HTTPTransport, OptionsWithoutMethod } from '../utils/HTTPTransport';
 import { BaseAPI } from '../classes/BaseAPI';
+import { BASE_URL } from '../constants/api';
 
-const chatAPITransport = new HTTPTransport('https://ya-praktikum.tech/api/v2/chats');
+const chatAPITransport = new HTTPTransport(`${BASE_URL}/chats`);
 
 export type CreateChatRequest = {
   title: string;

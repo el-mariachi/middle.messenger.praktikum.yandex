@@ -2,6 +2,7 @@ import { Block, IProps } from '../../classes/Block';
 import avatarTemplate from './Avatar.hbs';
 import { UserData } from '../../store/Store';
 import defaultAvatar from '../../../static/images/chuvak130.png';
+import { BASE_URL } from '../../constants/api';
 
 type AvatarProps = IProps & {
   imageLoadHandler: EventListener;
@@ -47,7 +48,7 @@ export class Avatar extends Block {
     if (user && (user.avatar === '' || user.avatar === null)) {
       avatarUrl = defaultAvatar;
     } else {
-      avatarUrl = `https://ya-praktikum.tech/api/v2/resources/${user.avatar}`;
+      avatarUrl = `${BASE_URL}/resources/${user.avatar}`;
     }
     return this.compile(avatarTemplate, { ...this.props, avatarUrl });
   }

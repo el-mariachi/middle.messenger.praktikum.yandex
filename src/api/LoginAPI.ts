@@ -1,7 +1,8 @@
 import { HTTPTransport } from '../utils/HTTPTransport';
 import { BaseAPI } from '../classes/BaseAPI';
+import { BASE_URL } from '../constants/api';
 
-const authAPITransport = new HTTPTransport('https://ya-praktikum.tech/api/v2/auth');
+const authAPITransport = new HTTPTransport(`${BASE_URL}/auth`);
 
 export type LoginRequest = {
   login: string;
