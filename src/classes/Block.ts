@@ -329,7 +329,7 @@ export abstract class Block {
   }
 
   show(param?: unknown) {
-    this.getContent().style.display = 'block';
+    this.getContent().style.display = 'flex';
     1 && param;
   }
 

@@ -47,7 +47,8 @@ const chatListLink = new Link({
     href: '/messages',
   },
   events: {
-    click: () => {
+    click: (e: Event) => {
+      e.preventDefault();
       appBus.emit(EVENTS.SET_MODE_CHAT, MODE_CHAT.LIST);
     },
   },
