@@ -1,6 +1,8 @@
 # Messenger
 
-## Учебный проект
+[Ссылка на Pull Request Sprint 3](https://github.com/el-mariachi/middle.messenger.praktikum.yandex/pull/3#issue-1464793428)
+
+## Обновленный README лежит в ветке sprint_3
 
 ### Алгоритм запуска проекта
 
