@@ -3,7 +3,7 @@ import { InputProps } from '../components/InputGroup';
 import { ValidatorOptions } from '../controllers/FormValidator';
 // import userSearch from '../utils/userSearch';
 
-export enum MODE {
+export enum MODE_CHAT {
   LIST,
   CHAT,
 }

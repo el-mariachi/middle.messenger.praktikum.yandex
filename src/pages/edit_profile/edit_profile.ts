@@ -19,7 +19,7 @@ import {
   updateProfileValidatorOptions,
   changePasswordValidatorOptions,
   avatarInputProps,
-  MODE,
+  MODE_PROFILE,
 } from '../../constants/profileForm';
 import { UserInfoController } from '../../controllers/UserInfoController';
 import { UpdateProfileController } from '../../controllers/UpdateProfileController';
@@ -98,17 +98,18 @@ export class EditProfilePage extends Page {
     this.userInfo = userInfo;
     this.updateProfile = updateProfile;
     this.changePassword = changePassword;
-    appBus.on(EVENTS.SET_MODE, this.setMode.bind(this));
+    appBus.on(EVENTS.SET_MODE_PROFILE, this.setMode.bind(this));
+    this.setMode(MODE_PROFILE.INFO);
   }
-  setMode(mode: MODE) {
+  setMode(mode: MODE_PROFILE) {
     switch (mode) {
-      case MODE.INFO:
+      case MODE_PROFILE.INFO:
         this.setProps({ pageForm: this.userInfo });
         break;
-      case MODE.UPDATE:
+      case MODE_PROFILE.UPDATE:
         this.setProps({ pageForm: this.updateProfile });
         break;
-      case MODE.PASSWORD:
+      case MODE_PROFILE.PASSWORD:
         this.setProps({ pageForm: this.changePassword });
         break;
       default:

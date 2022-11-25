@@ -107,7 +107,7 @@ export class ChatController {
             setUserList(response);
             break;
           default:
-            setUserList([Object.assign(userStruct, { login: 'Нет подходящих пользователей' })]);
+            setUserList([{ ...userStruct, login: 'Нет подходящих пользователей' }]);
             break;
         }
       } catch (error) {

@@ -14,6 +14,9 @@ export class WithUserController {
   constructor(protected currentPath: string, public formName = 'user_form') {
     store.on(EVENTS.STORE_UPDATED, this.switchRoute.bind(this));
     userController.loadUser().then((userLoaded) => {
+      if (window.location.pathname !== currentPath) {
+        return;
+      }
       if (!userLoaded) {
         this.switchRoute();
       }
@@ -24,10 +27,6 @@ export class WithUserController {
       return;
     }
     const user = getUserState();
-    if (user.id === this.userID) {
-      return;
-    }
-    this.userID = user.id;
     const needToEscape =
       ((!this.userRequired && user.id) || (this.userRequired && !user.id)) &&
       window.location.pathname === this.currentPath;

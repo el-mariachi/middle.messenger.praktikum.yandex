@@ -7,7 +7,7 @@ import ChatListHeader from '../../components/ChatListHeader';
 import selectChat from '../../utils/selectChat';
 import { EventBusSingl } from '../../controllers/EventBusSingl';
 import { EVENTS } from '../../constants/events';
-import { MODE } from '../../constants/messages';
+import { MODE_CHAT } from '../../constants/messages';
 import ChatList from '../../components/ChatList';
 import { MessagesController } from '../../controllers/MessagesController';
 
@@ -27,13 +27,13 @@ export class MessagesPage extends Page {
     const classList = MessagesPage.appendClassList(['Page', 'Page_type_chatlist'], props);
     const settings = { hasID: true };
     super({ ...props, classList, settings, chatList, messageArea });
-    appBus.on(EVENTS.SET_MODE, this.setMode.bind(this));
+    appBus.on(EVENTS.SET_MODE_CHAT, this.setMode.bind(this));
   }
-  setMode(mode: MODE) {
-    if (mode === MODE.LIST) {
+  setMode(mode: MODE_CHAT) {
+    if (mode === MODE_CHAT.LIST) {
       this._element.classList.remove('Page_type_chat');
       this._element.classList.add('Page_type_chatlist');
-    } else if (mode === MODE.CHAT) {
+    } else if (mode === MODE_CHAT.CHAT) {
       this._element.classList.remove('Page_type_chatlist');
       this._element.classList.add('Page_type_chat');
     }

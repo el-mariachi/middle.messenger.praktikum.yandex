@@ -1,7 +1,12 @@
 import { EventBusSingl } from './EventBusSingl';
 import { EVENTS } from '../constants/events';
 import { FormValidator } from './FormValidator';
-import { userInfoInputData, updateProfileValidatorOptions, MODE, modalButtonData } from '../constants/profileForm';
+import {
+  userInfoInputData,
+  updateProfileValidatorOptions,
+  MODE_PROFILE,
+  modalButtonData,
+} from '../constants/profileForm';
 import { WithUserController } from '../classes/WithUserController';
 import { getFormData } from '../utils/getFormData';
 import { ProfileAPI, UpdateProfileRequest } from '../api/ProfileAPI';
@@ -38,7 +43,7 @@ export class UpdateProfileController extends WithUserController {
         case 200:
           setUser(response);
           appBus.emit(EVENTS.MODAL_SHOW_OK, { ...modalProps, header: 'Профиль успешно изменен!' });
-          appBus.emit(EVENTS.SET_MODE, MODE.INFO);
+          appBus.emit(EVENTS.SET_MODE_PROFILE, MODE_PROFILE.INFO);
           break;
         case 400:
           message = response.reason && typeof response.reason === 'string' ? response.reason : 'Unknown error';

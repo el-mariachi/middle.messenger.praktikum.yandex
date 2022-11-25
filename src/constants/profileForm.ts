@@ -6,7 +6,7 @@ import { hideModal } from '../utils/hideModal';
 
 const appBus = new EventBusSingl();
 
-export enum MODE {
+export enum MODE_PROFILE {
   INFO,
   UPDATE,
   PASSWORD,
@@ -126,7 +126,7 @@ const userInfoButtonsData = [
     classList: ['Link', 'FormLink'],
     events: {
       click: () => {
-        appBus.emit(EVENTS.SET_MODE, MODE.UPDATE);
+        appBus.emit(EVENTS.SET_MODE_PROFILE, MODE_PROFILE.UPDATE);
       },
     },
   },
@@ -138,7 +138,7 @@ const userInfoButtonsData = [
     classList: ['Link', 'FormLink'],
     events: {
       click: () => {
-        appBus.emit(EVENTS.SET_MODE, MODE.PASSWORD);
+        appBus.emit(EVENTS.SET_MODE_PROFILE, MODE_PROFILE.PASSWORD);
       },
     },
   },
@@ -174,7 +174,7 @@ const updateProfileButtonsData = [
     classList: ['Link', 'PageLink', 'PageLink_to_login'],
     events: {
       click: () => {
-        appBus.emit(EVENTS.SET_MODE, MODE.INFO);
+        appBus.emit(EVENTS.SET_MODE_PROFILE, MODE_PROFILE.INFO);
       },
     },
   },

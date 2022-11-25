@@ -5,7 +5,7 @@ import Button from '../Button';
 import { EventBusSingl } from '../../controllers/EventBusSingl';
 import { EVENTS } from '../../constants/events';
 import Link from '../Link';
-import { MODE } from '../../constants/messages';
+import { MODE_CHAT } from '../../constants/messages';
 
 const appBus = new EventBusSingl();
 
@@ -48,7 +48,7 @@ const chatListLink = new Link({
   },
   events: {
     click: () => {
-      appBus.emit(EVENTS.SET_MODE, MODE.LIST);
+      appBus.emit(EVENTS.SET_MODE_CHAT, MODE_CHAT.LIST);
     },
   },
 });

@@ -1,9 +1,10 @@
 import store, { UserData, userStruct, ChatData, chatStruct, MessageData } from './Store';
+import isEqual from '../utils/isEqual';
 
 const getUserState = () => {
   const state = store.getState();
   const user = state.user ?? {};
-  return Object.assign(userStruct, user);
+  return Object.assign({ ...userStruct }, user);
 };
 const getChatId = () => {
   const { currentChat } = store.getState();
@@ -19,8 +20,11 @@ const getMessages = () => {
   return [...messagesData];
 };
 
-const setUser = (userData: UserData | null) => {
-  store.set('user', userData ? userData : userStruct);
+const setUser = (userData: UserData) => {
+  const currentUser = getUserState();
+  if (!isEqual(userData, currentUser)) {
+    store.set('user', userData);
+  }
 };
 const setChats = (chatsData: ChatData[]) => {
   store.set('chatsData', chatsData);

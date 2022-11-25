@@ -4,7 +4,7 @@ import { FormValidator } from './FormValidator';
 import {
   changePasswordInputData,
   changePasswordValidatorOptions,
-  MODE,
+  MODE_PROFILE,
   modalButtonData,
 } from '../constants/profileForm';
 import { WithUserController } from '../classes/WithUserController';
@@ -41,7 +41,7 @@ export class ChangePasswordController extends WithUserController {
       switch (status - (status % 100)) {
         case 200:
           appBus.emit(EVENTS.MODAL_SHOW_OK, { ...modalProps, header: 'Пароль успешно изменен!' });
-          appBus.emit(EVENTS.SET_MODE, MODE.INFO);
+          appBus.emit(EVENTS.SET_MODE_PROFILE, MODE_PROFILE.INFO);
           break;
         case 400:
           message = response.reason && typeof response.reason === 'string' ? response.reason : 'Unknown error';

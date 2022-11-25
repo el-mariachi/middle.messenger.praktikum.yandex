@@ -13,7 +13,7 @@ export type UserData = {
   avatar: string;
 };
 
-export const userStruct: UserData = {
+export const userStruct: UserData = Object.freeze({
   id: null,
   first_name: '',
   second_name: '',
@@ -22,7 +22,7 @@ export const userStruct: UserData = {
   email: '',
   phone: '',
   avatar: '',
-};
+});
 
 export type ChatData = {
   id: number;
@@ -68,7 +68,7 @@ export type State = {
 
 class Store extends EventBus {
   private _state: State = {
-    user: userStruct,
+    user: { ...userStruct },
     chatsData: [],
     currentChat: null,
     userList: [],

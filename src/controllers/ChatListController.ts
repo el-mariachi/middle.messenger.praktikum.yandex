@@ -15,7 +15,7 @@ import createInput from '../utils/createInput';
 import submitForm from './submitForm';
 import Form from '../components/Form';
 import { setCurrentChat } from '../store/actions';
-import { MODE } from '../constants/messages';
+import { MODE_CHAT } from '../constants/messages';
 
 const chatsApi = new ChatsAPI();
 const appRouter = new Router();
@@ -88,6 +88,6 @@ export class ChatListController extends WithUserController {
     }
     this.chatId = id;
     setCurrentChat(id);
-    appBus.emit(EVENTS.SET_MODE, MODE.CHAT);
+    appBus.emit(EVENTS.SET_MODE_CHAT, MODE_CHAT.CHAT);
   }
 }

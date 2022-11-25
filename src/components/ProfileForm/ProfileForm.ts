@@ -10,6 +10,10 @@ export class ProfileForm extends Form {
     const classList = ProfileForm.appendClassList(['Profile-Form'], props);
     super({ ...props, classList });
   }
+  componentDidMount(): void {
+    super.componentDidMount();
+    this.fillForm();
+  }
   fillForm() {
     Object.entries(this.props.user as UserData).forEach(([inputName, value]) => {
       const input = this._element.querySelector(`input[name="${inputName}"].Input`) as HTMLInputElement;
