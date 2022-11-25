@@ -8,7 +8,7 @@
 [build]
   command = "parcel build static/entries/index.handlebars"
   publish = "dist"
-#[[redirects]]
-#  from = "/*"
-#  to = "/index.html"
-#  status = 200
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
