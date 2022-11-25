@@ -46,12 +46,24 @@ export const chatStruct: ChatData = {
   last_message: null,
 };
 
+export type MessageType = 'user_connected' | 'message' | 'file';
+
+export type MessageData = {
+  id: number;
+  user_id: number;
+  chat_id: number;
+  type: MessageType;
+  time: string;
+  content: string | number;
+  file?: File;
+};
+
 export type State = {
-  [k: string]: any; // eslint-disable-line @typescript-eslint/no-explicit-any
   user: UserData;
   chatsData: ChatData[];
   currentChat: number | null;
   userList: UserData[] | [];
+  messagesData: MessageData[] | [];
 };
 
 class Store extends EventBus {
@@ -60,6 +72,7 @@ class Store extends EventBus {
     chatsData: [],
     currentChat: null,
     userList: [],
+    messagesData: [],
   };
 
   public getState() {

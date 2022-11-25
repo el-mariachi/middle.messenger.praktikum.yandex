@@ -42,6 +42,7 @@ const modalProps = { modalForm };
 modalForm.dispatchComponentDidMount();
 export class ChatListController extends WithUserController {
   static _chatListController: ChatListController;
+  protected chatId?: number;
   constructor(currentPath = '/messages') {
     if (ChatListController._chatListController) {
       return ChatListController._chatListController;
@@ -81,6 +82,10 @@ export class ChatListController extends WithUserController {
     appBus.emit(EVENTS.MODAL_SHOW_OK, modalProps);
   }
   public setCurrentChat(id: number) {
+    if (id === this.chatId) {
+      return;
+    }
+    this.chatId = id;
     setCurrentChat(id);
     appBus.emit(EVENTS.SET_MODE, MODE.CHAT);
   }

@@ -6,6 +6,7 @@ import { Indexed } from './merge';
 import mapChatsToProps from './mapChatsToProps';
 import mapCurrentChat from './mapCurrentChat';
 import mapUserListToProps from './mapUserListToProps';
+import mapMessagesToProps from './mapMessagesToProps';
 
 function connect(mapStateToProps: (state: State) => Indexed) {
   return function (Component: typeof Block) {
@@ -30,5 +31,6 @@ const withUser = connect(({ user }) => ({ user: { ...user } }));
 const withChats = connect(mapChatsToProps);
 const withCurrentChat = connect(mapCurrentChat);
 const withUserList = connect(mapUserListToProps);
+const withMessages = connect(mapMessagesToProps);
 
-export { withUser, withChats, withCurrentChat, withUserList };
+export { withUser, withChats, withCurrentChat, withUserList, withMessages };

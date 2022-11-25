@@ -2,6 +2,8 @@ import { EventBusSingl } from './EventBusSingl';
 import { EVENTS } from '../constants/events';
 import { ChatsAPI } from '../api/ChatsAPI';
 import { getUserState } from '../store/actions';
+import { MessageData } from '../store/Store';
+import { setMessages } from '../store/actions';
 
 const appBus = new EventBusSingl();
 const chatsApi = new ChatsAPI();
@@ -11,11 +13,14 @@ export class MessagesController {
   protected chatId = 0;
   protected userId: number | null = null;
   protected socket?: WebSocket;
-  protected timeout?: ReturnType<typeof setTimeout>;
+  protected timer?: ReturnType<typeof setTimeout>;
   constructor() {
     appBus.on(EVENTS.CHAT_SELECTED, this.setToken.bind(this));
   }
   protected async setToken(id: number) {
+    if (id === this.chatId) {
+      return;
+    }
     this.chatId = id;
     try {
       const { status, response } = await chatsApi.getToken(id);
@@ -40,16 +45,18 @@ export class MessagesController {
     const socket = new WebSocket(`${this.baseURL}/${this.userId}/${this.chatId}/${this.token}`);
     if (socket) {
       this.socket = socket;
+      this.setMessages([]);
       this.addSocketLiteners();
-      this.setTimeout();
+      this.startPing();
     }
   }
   protected closeSocket() {
     if (!this.socket) {
       return;
     }
-    this.clearTimeout();
+    this.stopPing();
     this.removeSocketListeners();
+    this.socket.close();
   }
   protected addSocketLiteners() {
     this.socket?.addEventListener('open', this.openListener.bind(this));
@@ -64,11 +71,11 @@ export class MessagesController {
     this.socket?.removeEventListener('error', this.errorListener.bind(this));
   }
   protected openListener() {
-    console.log('socket open');
+    this.read20Messages(0);
     this.socket?.send(
       JSON.stringify({
-        content: `User ${this.userId} connected`,
         type: 'message',
+        content: 'Hello',
       })
     );
   }
@@ -83,11 +90,15 @@ export class MessagesController {
   protected messageListener(evt: MessageEvent) {
     console.log('Получено сообщение', JSON.parse(evt.data));
     // TODO update state
+    this.setMessages(JSON.parse(evt.data));
+    // TODO emit NEW_MESSAGE for preview update ???
   }
   protected errorListener(evt: Event) {
     console.log('Ошибка сокета', evt);
   }
   protected ping() {
+    console.log('ping');
+
     this.socket?.send(
       JSON.stringify({
         content: '',
@@ -95,13 +106,29 @@ export class MessagesController {
       })
     );
   }
-  protected setTimeout() {
-    this.timeout = setTimeout(this.ping.bind(this), 30 * 1000);
+  protected startPing() {
+    this.timer = setInterval(this.ping.bind(this), 40 * 1000);
   }
-  protected clearTimeout() {
-    clearTimeout(this.timeout);
+  protected stopPing() {
+    clearInterval(this.timer);
   }
-  public loadMessages() {
-    //
+  public read20Messages(offset: number) {
+    const request = {
+      content: String(offset),
+      type: 'get old',
+    };
+    this.socket?.send(JSON.stringify(request));
+  }
+  protected setMessages(arrayOrMessage: MessageData | MessageData[]) {
+    if (Array.isArray(arrayOrMessage)) {
+      setMessages(arrayOrMessage.filter(this.notEmpty));
+    } else {
+      if (this.notEmpty(arrayOrMessage)) {
+        setMessages([arrayOrMessage]);
+      }
+    }
+  }
+  protected notEmpty(message: MessageData): boolean {
+    return message.content !== '';
   }
 }
