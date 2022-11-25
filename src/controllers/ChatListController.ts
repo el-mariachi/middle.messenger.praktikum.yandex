@@ -51,6 +51,11 @@ export class ChatListController extends WithUserController {
     this.userRequired = true;
     this.escapeRoute = '/';
     this.loadChats();
+    appBus.on(EVENTS.SWITCH_ROUTE, (route: string) => {
+      if (route === this.currentPath) {
+        this.loadChats();
+      }
+    });
     appBus.on(EVENTS.CHAT_CREATE_REQUEST, this.requestCreateChat.bind(this));
     appBus.on(EVENTS.CHAT_SELECTED, this.setCurrentChat.bind(this));
     ChatListController._chatListController = this;
