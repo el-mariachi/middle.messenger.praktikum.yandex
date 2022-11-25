@@ -1,11 +1,6 @@
-// import { Block } from './Block';
 import Page from '../components/Page';
 import Route, { Constructable } from './Route';
 import Page404 from '../../src/pages/404';
-import { EventBusSingl } from '../controllers/EventBusSingl';
-import { EVENTS } from '../constants/events';
-
-const appBus = new EventBusSingl();
 
 export class Router {
   protected static _instance: Router;
@@ -57,7 +52,6 @@ export class Router {
   go(pathname: string) {
     this.history.pushState({ page: pathname }, '', pathname);
     this._onRoute(pathname);
-    appBus.emit(EVENTS.SWITCH_ROUTE, pathname);
   }
   getRoute(pathname: string) {
     return this.routes.find((route) => route.match(pathname));

@@ -25,7 +25,6 @@ export class MessagesController {
     this.formName = newMessageValidatorOptions.formName;
     appBus.on(EVENTS.CHAT_SELECTED, this.setToken.bind(this));
     appBus.on(EVENTS.FORM_VALID, this.sendMessage.bind(this));
-    console.log('new MessagesController()');
   }
   protected async setToken(id: number) {
     if (id === this.chatId) {
