@@ -30,7 +30,6 @@ export class UserInfoController extends WithUserController {
     appBus.on(EVENTS.FORM_VALID, this.setAvatar.bind(this));
   }
   public async setAvatar(form: HTMLFormElement) {
-    console.log('ava');
     if (form.name !== this.formName) {
       return;
     }
