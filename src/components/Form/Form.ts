@@ -5,9 +5,10 @@ import formTemplate from './Form.hbs';
 // containing a label and an error message.
 export class Form extends Block {
   constructor(props: IProps) {
+    const tagName = 'form';
     const classList = Form.appendClassList(['Form'], props);
     const settings = { hasID: true };
-    super('form', { ...props, classList, settings });
+    super({ ...props, tagName, classList, settings });
   }
   componentDidMount(): void {
     this._element.querySelectorAll('.Input').forEach((input) => {

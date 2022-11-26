@@ -10,9 +10,10 @@ type ErrorProps = {
 
 export class InputError extends Block {
   constructor(props: IProps) {
+    const tagName = 'span';
     const classList = InputError.appendClassList(['Input-Error'], props);
     const settings = { hasID: true };
-    super('span', { ...props, classList, settings });
+    super({ ...props, tagName, classList, settings });
     const appBus = new EventBusSingl();
     appBus.on(EVENTS.INPUT_ERROR, this.show.bind(this));
     appBus.on(EVENTS.INPUT_OK, this.hide.bind(this));

@@ -1,9 +1,10 @@
-import { Block, IProps } from '../../classes/Block';
+import Page, { IProps } from '../../components/Page';
 import ErrorPageTemplate from '../../components/ErrorPage/ErrorPage.hbs';
 
-export class Page500 extends Block {
+export class Page500 extends Page {
   constructor(props: IProps) {
-    const classList = ['Page', 'Page_type_not-found'];
+    const tagName = 'main';
+    const classList = Page500.appendClassList(['Page', 'Page_type_not-found'], props);
     const pageData: IProps = {
       errorCode: 500,
       errorMessage: 'Ошибка сервера',
@@ -11,10 +12,11 @@ export class Page500 extends Block {
         hasID: true,
       },
     };
-    super('main', { ...props, classList, ...pageData });
+    super({ ...props, tagName, classList, ...pageData });
   }
 
   render(): DocumentFragment {
+    this.setPageTitle('500');
     return this.compile(ErrorPageTemplate, this.props);
   }
 }

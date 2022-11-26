@@ -1,8 +1,6 @@
 @use '/static/styles/vars.scss';
 @use '/src/components/Hint/Hint.scss';
 @use '/src/components/LastSeen/LastSeen.scss';
-// @use '/src/components/Menu/Menu.scss';
-// @use '/src/components/Message/Message.scss';
 @use '/src/components/Compose/Compose.scss';
 @use '/src/components/Icon/Icon.scss';
 @use '/src/components/Button/Button.scss';
@@ -43,6 +41,7 @@
   flex: 1 0 200px;
   padding: 20px;
   overflow-y: auto;
+  scroll-behavior: smooth;
   // height: calc(100vh - 102px);
 }
 

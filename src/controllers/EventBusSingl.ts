@@ -23,7 +23,7 @@ interface IEventBus {
   clear(eventName: string): void;
 }
 
-export type EventData = { name: string; value: string };
+export type EventData = { name: string; value: string; formName: string };
 
 export class EventBusSingl implements IEventBus {
   private _listeners: Ilistenres = {};

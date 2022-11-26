@@ -9,6 +9,7 @@
   justify-content: center;
   align-items: center;
   position: fixed;
+  z-index: 5;
   left: 0;
   top: 0;
   width: 100%;
@@ -33,6 +34,10 @@
   border: 1px solid vars.$greyText;
 }
 
+.Modal_type_error {
+  color: vars.$errMsg;
+}
+
 .Modal-Dialog {
   background-color: vars.$white;
   padding: 30px;
@@ -52,16 +57,28 @@
   color: vars.$darkText;
 }
 
+.Modal-Message {
+  width: 100%;
+  text-align: center;
+  font-size: 1.6em;
+  margin-top: 0;
+}
+
 .Modal-Form {
   width: 100%;
   margin: 0 5px 15px;
+  flex-flow: wrap;
+}
+
+.Modal-Form .Form-Name {
+  margin-bottom: 10px;
 }
 
 .Modal-Button {
   padding: 0;
   cursor: pointer;
   flex: 1 0 155px;
-  margin: 5px;
+  margin: 16px 5px 5px;
   font-size: 1.3em;
   line-height: 2.8em;
   height: auto;
@@ -89,5 +106,9 @@
 
   .Modal-Button {
     width: 38.75%;
+
+    &:nth-last-child(2) {
+      order: 22;
+    }
   }
 }

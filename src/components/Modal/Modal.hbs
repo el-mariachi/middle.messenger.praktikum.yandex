@@ -1,0 +1,13 @@
+<div class="Modal-Dialog">
+  {{#if header}}
+  <p class="Modal-Head">{{header}}</p>
+  {{/if}}
+  {{#if message}}
+  <p class="Modal-Message">{{message}}</p>
+  {{/if}}
+  {{{modalForm}}}
+  {{{content}}}
+  {{#each buttons}}
+  {{{this}}}
+  {{/each}}
+</div>

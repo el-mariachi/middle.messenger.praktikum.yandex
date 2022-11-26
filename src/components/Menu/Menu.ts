@@ -7,9 +7,10 @@ const appBus = new EventBusSingl();
 
 export class Menu extends Block {
   constructor(props: IProps) {
+    const tagName = 'nav';
     const classList = Menu.appendClassList(['Menu'], props);
     const settings = { hasID: true };
-    super('nav', { ...props, classList, settings });
+    super({ ...props, tagName, classList, settings });
   }
   componentDidMount(): void {
     this._element.addEventListener('click', () => {

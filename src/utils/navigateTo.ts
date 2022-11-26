@@ -1,3 +1,6 @@
+import { Router } from '../classes/Router';
+
+const appRouter = new Router();
 export function navigateTo(url: string) {
-  window.location.href = url;
+  appRouter.go(url);
 }

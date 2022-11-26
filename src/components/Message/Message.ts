@@ -1,8 +1,9 @@
 import { Block, IProps } from '../../classes/Block';
 import messageTemplate from './Message.hbs';
 
-type MessageProps = IProps & {
-  type: string;
+export type MessageProps = IProps & {
+  timestamp: string;
+  direction: string;
   image?: {
     src: string | URL;
     alt?: string;
@@ -11,10 +12,10 @@ type MessageProps = IProps & {
 
 export class Message extends Block {
   constructor(props: MessageProps) {
-    const { type } = props;
-    const classList = Message.appendClassList(['Message', 'ChatArea-Message', type], props);
+    const { direction } = props;
+    const classList = Message.appendClassList(['Message', 'ChatArea-Message', direction], props);
     const settings = { hasID: true };
-    super('div', { ...props, classList, settings });
+    super({ ...props, classList, settings });
   }
   render(): DocumentFragment {
     return this.compile(messageTemplate, this.props);

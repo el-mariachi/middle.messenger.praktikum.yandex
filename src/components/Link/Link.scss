@@ -7,6 +7,7 @@
   font-family: lato, sans-serif;
   color: vars.$greyText;
   cursor: pointer;
+  user-select: none;
 }
 
 /* PageLink */
@@ -19,6 +20,23 @@
   appearance: none;
   padding: 0;
   background-color: transparent;
+}
+
+.FormLink {
+  font-weight: 500;
+  font-size: 1.6em;
+  line-height: 2.85;
+  border: 0;
+  border-bottom: 1px solid vars.$greyLine;
+  appearance: none;
+  padding: 0;
+  background-color: transparent;
+  text-align: start;
+  color: vars.$siteBlue;
+
+  &:first-of-type {
+    margin-top: 3em;
+  }
 }
 
 .PageLink_to_profile::after {
@@ -56,4 +74,9 @@
 .PageLink_to_login {
   color: vars.$siteBlue;
   text-align: center;
+}
+
+.PageLink_to_logout {
+  color: vars.$errMsg;
+  text-align: start;
 }

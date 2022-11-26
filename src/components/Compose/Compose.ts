@@ -4,12 +4,14 @@ import NewMessage from '../NewMessage';
 import Menu from '../Menu';
 import Button from '../Button';
 
-const photoLink = new Button('button', {
+const photoLink = new Button({
+  tagName: 'button',
   text: 'Фото/Видео',
   classList: ['Menu-Link', 'Menu_linktype_photo'],
 });
 
-const fileLink = new Button('button', {
+const fileLink = new Button({
+  tagName: 'button',
   text: 'Файл',
   classList: ['Menu-Link', 'Menu_linktype_file'],
 });
@@ -28,7 +30,7 @@ const newMessage = new NewMessage({});
 export class Compose extends Block {
   constructor(props: IProps) {
     const classList = Compose.appendClassList(['Compose'], props);
-    super('div', { ...props, classList, newMessage, composeMenu });
+    super({ ...props, classList, newMessage, composeMenu });
   }
   render(): DocumentFragment {
     return this.compile(composeTemplate, this.props);

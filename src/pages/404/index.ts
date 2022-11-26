@@ -1,7 +1,4 @@
 import './404.scss';
-import { Page404 } from './404';
-import { renderDOM } from '../../utils/renderDOM';
+import { Page404 } from './Page404';
 
-const page404 = new Page404({});
-
-renderDOM('#app', page404);
+export default Page404;

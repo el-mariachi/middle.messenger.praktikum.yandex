@@ -1,4 +1,6 @@
-<h1 class="Form-Name">{{ formTitle }}</h1>
+{{#if formTitle}}
+<h1 class="Form-Name">{{formTitle}}</h1>
+{{/if}}
 {{#each inputs}}
 {{{this}}}
 {{/each}}

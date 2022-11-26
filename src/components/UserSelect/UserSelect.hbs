@@ -1,0 +1,6 @@
+<ul class="UserSelect-Body">
+  {{#each userList.users}}
+  <li class="UserSelect-Item" data-event="{{../event}}" data-id="{{this.id}}">{{this.first_name}} {{this.second_name}}
+    ({{this.login}})</li>
+  {{/each}}
+</ul>
