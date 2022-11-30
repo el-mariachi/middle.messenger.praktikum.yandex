@@ -16,5 +16,5 @@
     "forceConsistentCasingInFileNames": true
   },
   "include": ["src/**/*", "server.ts", "./typings/*.d.ts", "static/entries/*.ts"],
-  "exclude": ["node_modules", "dist", "svalka"]
+  "exclude": ["node_modules", "dist", "svalka", "build-utils"]
 }

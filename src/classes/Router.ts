@@ -12,7 +12,7 @@ export class Router {
   static _route404: Route;
   public history = window.history;
   protected _currentRoute?: Route;
-  constructor(protected _rootQuery: string = '#app') {
+  constructor(protected _rootQuery: string = 'body') {
     if (Router._instance) {
       return Router._instance;
     }
