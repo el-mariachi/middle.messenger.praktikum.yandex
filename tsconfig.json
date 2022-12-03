@@ -15,6 +15,6 @@
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true
   },
-  "include": ["src/**/*", "server.ts", "./typings/*.d.ts", "static/entries/*.ts"],
+  "include": ["src/**/*", "server.ts", "./typings/*.d.ts", "static/entries/*.ts", "./jest-setup.ts"],
   "exclude": ["node_modules", "dist", "svalka", "build-utils"]
 }
