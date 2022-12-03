@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { merge } = require('webpack-merge');
+// const path = require('path');
 
 const modeConfig = (mode) => require(`./build-utils/webpack.${mode}`)(mode);
 const presetConfig = require('./build-utils/loadPresets');
