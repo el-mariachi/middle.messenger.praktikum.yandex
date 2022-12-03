@@ -82,5 +82,10 @@
   },
   "overrides": {
     "loader-utils": "1.4.2"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm run validate"
+    }
   }
 }
