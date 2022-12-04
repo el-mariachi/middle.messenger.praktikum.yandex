@@ -1,8 +1,6 @@
 # Messenger
 
-### Проект 1-го модуля курса Яндекс Мидл фронтенд разработчик.
-
-[Ссылка на Pull Request Sprint 3](https://github.com/el-mariachi/middle.messenger.praktikum.yandex/pull/3#issue-1464793428)
+## Проект 1-го модуля курса Яндекс Мидл фронтенд разработчик.
 
 ### Алгоритм запуска проекта
 
@@ -32,8 +30,6 @@
 [Макеты в Figma](https://www.figma.com/file/H1M5wxaCathUPea8BhefaD/Messenger-proto?node-id=0%3A1)
 
 За основу взял макет Яндекс, кое-что изменено, все страницы отрисованы.
-
-[Ссылка на деплой Netlify](https://luminous-douhua-0dab3c.netlify.app/)
 
 [Ссылка на деплой Netlify](https://luminous-douhua-0dab3c.netlify.app/)
 
