@@ -10,6 +10,13 @@
       }
     },
     {
+      "files": "Makefile",
+      "options": {
+        "singleQuote": false,
+        "useTabs": true
+      }
+    },
+    {
       "files": ".json",
       "options": {
         "parser": "json5"
