@@ -2,8 +2,6 @@
 
 ## Проект 1-го модуля курса Яндекс Мидл фронтенд разработчик.
 
-[Ссылка на Pull Request Sprint 4](https://github.com/el-mariachi/middle.messenger.praktikum.yandex/pull/4#issue-1474564716)
-
 ### Алгоритм запуска проекта
 
 Проект собран с исползованием Node.js v18.3.0, `npm` 8.11.0, используется `nvm`, версия зафиксирована в `.nvmrc`.
