@@ -1,15 +1,15 @@
 <h5 class="OutlineHeader">Выбранный чат</h5>
 {{#if id}}
-{{{messageAreaHeader}}}
-<div class="MessageArea-Curent">
-  {{#each messages}}
-  {{{this}}}
-  {{/each}}
-</div>
-{{{compose}}}
+  {{{messageAreaHeader}}}
+  <div class="MessageArea-Curent">
+    {{#each messages}}
+      {{{this}}}
+    {{/each}}
+  </div>
+  {{{compose}}}
 {{else}}
-{{{messageAreaHeader}}}
-<div class="MessageArea-Curent">
-  <p class="Hint">Выберите чат</p>
-</div>
+  {{{messageAreaHeader}}}
+  <div class="MessageArea-Curent">
+    <p class="Hint">Выберите чат</p>
+  </div>
 {{/if}}

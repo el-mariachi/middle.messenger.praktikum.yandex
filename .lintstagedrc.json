@@ -1,0 +1,4 @@
+{
+  "*.ts": ["eslint", "stylelint"],
+  "**/*.{ts,js,json}": "prettier --list-different"
+}
